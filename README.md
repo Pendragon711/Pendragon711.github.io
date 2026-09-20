@@ -16,15 +16,17 @@ Analista de Cibersegurança Jr. com foco em:
 
 ---
 
-## 📁 Estrutura:
-.
-├── index.html # Página principal
-├── css/
-│ └── style.css # Estilos (tema SOC / terminal)
-├── js/
-│ └── main.js # Reveal on scroll + terminal dinâmico
-└── assets/ # Recursos estáticos
+## 📁 Estrutura
 
+```
+.
+├── index.html          # Página principal
+├── css/
+│   └── style.css       # Estilos (tema SOC / terminal)
+├── js/
+│   └── main.js         # Reveal on scroll + terminal dinâmico
+└── assets/             # Recursos estáticos
+```
 
 ---
 
