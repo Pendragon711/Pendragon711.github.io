@@ -6,6 +6,7 @@
 
   --bg:#05070a;
   --bg-2:#080b10;
+
   --surface:#0b1016;
   --surface-2:#0f151d;
 
@@ -13,17 +14,27 @@
   --muted:#8d9996;
   --faint:#4d5957;
 
-  --border:rgba(130,170,160,.14);
-  --border-hover:rgba(0,255,136,.35);
+  --border:rgba(150,165,175,.13);
+  --border-hover:rgba(255,59,48,.42);
 
+  /* OFFENSIVE */
+  --red:#ff3b30;
+  --red-soft:#ff5c57;
+  --red-dark:#b5221c;
+  --red-glow:rgba(255,59,48,.12);
+
+  /* DEFENSIVE */
   --green:#00ff88;
   --green-soft:#00c96b;
+  --green-glow:rgba(0,255,136,.12);
+
+  /* INFRA */
   --cyan:#00d9ff;
+  --cyan-glow:rgba(0,217,255,.10);
 
-  --red:#ff5266;
+  /* WARNING */
   --yellow:#ffbf47;
-
-  --glow:rgba(0,255,136,.13);
+  --yellow-glow:rgba(255,191,71,.10);
 
 }
 
@@ -47,13 +58,13 @@ body{
   background:
 
     radial-gradient(
-      circle at 80% 10%,
-      rgba(0,255,136,.055),
-      transparent 28%
+      circle at 78% 8%,
+      rgba(255,59,48,.065),
+      transparent 27%
     ),
 
     radial-gradient(
-      circle at 10% 50%,
+      circle at 12% 48%,
       rgba(0,217,255,.035),
       transparent 25%
     ),
@@ -62,7 +73,7 @@ body{
 
   color:var(--text);
 
-  font-family:'Rajdhani', sans-serif;
+  font-family:'Rajdhani',sans-serif;
 
   font-size:16px;
 
@@ -74,7 +85,7 @@ body{
 
 
 /* =========================================================
-   TECHNICAL GRID BACKGROUND
+   TECHNICAL GRID
 ========================================================= */
 
 body::before{
@@ -89,18 +100,18 @@ body::before{
 
   z-index:-2;
 
-  opacity:.22;
+  opacity:.18;
 
   background-image:
 
     linear-gradient(
-      rgba(0,255,136,.045) 1px,
+      rgba(255,59,48,.035) 1px,
       transparent 1px
     ),
 
     linear-gradient(
       90deg,
-      rgba(0,255,136,.045) 1px,
+      rgba(255,59,48,.035) 1px,
       transparent 1px
     );
 
@@ -115,6 +126,10 @@ body::before{
 
 }
 
+
+/* =========================================================
+   SCAN LINE
+========================================================= */
 
 body::after{
 
@@ -133,12 +148,12 @@ body::after{
     linear-gradient(
       90deg,
       transparent,
-      rgba(0,255,136,.22),
+      rgba(255,59,48,.30),
       transparent
     );
 
   box-shadow:
-    0 0 20px rgba(0,255,136,.15);
+    0 0 20px rgba(255,59,48,.15);
 
   opacity:.35;
 
@@ -170,19 +185,22 @@ body::after{
 
 ::selection{
 
-  background:var(--green);
+  background:var(--red);
 
-  color:#000;
+  color:#fff;
 
 }
+
 
 a{
   color:inherit;
 }
 
+
 .mono{
   font-family:'JetBrains Mono',monospace;
 }
+
 
 section{
 
@@ -193,6 +211,7 @@ section{
   padding:120px 32px 90px;
 
 }
+
 
 hr{
 
@@ -206,21 +225,23 @@ hr{
 
 }
 
+
 .label{
 
   font-family:'JetBrains Mono',monospace;
 
   font-size:12px;
 
-  color:var(--green);
+  color:var(--red);
 
   letter-spacing:.08em;
 
   margin-bottom:18px;
 
-  opacity:.8;
+  opacity:.9;
 
 }
+
 
 h1{
 
@@ -237,6 +258,7 @@ h1{
 
 }
 
+
 h2{
 
   font-size:
@@ -251,6 +273,7 @@ h2{
   margin-bottom:18px;
 
 }
+
 
 p.lead{
 
@@ -288,7 +311,7 @@ nav{
   padding:16px 32px;
 
   background:
-    rgba(5,7,10,.72);
+    rgba(5,7,10,.78);
 
   backdrop-filter:blur(18px);
 
@@ -297,17 +320,19 @@ nav{
 
 }
 
+
 .logo{
 
   font-family:'JetBrains Mono',monospace;
 
   font-size:13px;
 
-  color:var(--green);
+  color:var(--red);
 
   letter-spacing:.04em;
 
 }
+
 
 .links a{
 
@@ -325,9 +350,10 @@ nav{
 
 }
 
+
 .links a:hover{
 
-  color:var(--green);
+  color:var(--red);
 
 }
 
@@ -373,6 +399,7 @@ nav{
 
 }
 
+
 .status-dot{
 
   width:7px;
@@ -380,26 +407,34 @@ nav{
 
   border-radius:50%;
 
-  background:var(--green);
+  background:var(--red);
 
   box-shadow:
-    0 0 10px var(--green);
+    0 0 10px var(--red);
 
-  animation:pulse 1.8s infinite;
+  animation:pulse-offensive 1.8s infinite;
 
 }
 
 
-@keyframes pulse{
+@keyframes pulse-offensive{
 
   0%,100%{
+
     opacity:1;
-    box-shadow:0 0 8px var(--green);
+
+    box-shadow:
+      0 0 8px var(--red);
+
   }
 
   50%{
+
     opacity:.45;
-    box-shadow:0 0 18px var(--green);
+
+    box-shadow:
+      0 0 18px var(--red);
+
   }
 
 }
@@ -407,7 +442,7 @@ nav{
 
 .hero-role{
 
-  color:var(--green);
+  color:var(--red);
 
   font-family:'JetBrains Mono',monospace;
 
@@ -428,7 +463,7 @@ nav{
 
 
 /* =========================================================
-   HERO SOC PANEL
+   HERO OFFENSIVE PANEL
 ========================================================= */
 
 .soc-panel{
@@ -437,7 +472,7 @@ nav{
 
   margin-top:45px;
 
-  border:1px solid var(--border);
+  border:1px solid rgba(255,59,48,.20);
 
   border-radius:14px;
 
@@ -445,18 +480,48 @@ nav{
 
     linear-gradient(
       145deg,
-      rgba(15,22,29,.94),
-      rgba(7,10,14,.94)
+      rgba(18,18,23,.96),
+      rgba(7,10,14,.96)
     );
 
   box-shadow:
 
     0 25px 80px rgba(0,0,0,.35),
 
+    0 0 50px rgba(255,59,48,.035),
+
     inset 0 1px
     rgba(255,255,255,.025);
 
   overflow:hidden;
+
+  position:relative;
+
+}
+
+
+/* subtle offensive line */
+
+.soc-panel::before{
+
+  content:"";
+
+  position:absolute;
+
+  top:0;
+  left:0;
+  right:0;
+
+  height:2px;
+
+  background:
+    linear-gradient(
+      90deg,
+      var(--red),
+      transparent 70%
+    );
+
+  opacity:.7;
 
 }
 
@@ -497,7 +562,7 @@ nav{
 
   font-size:10px;
 
-  color:var(--green);
+  color:var(--red);
 
 }
 
@@ -532,6 +597,19 @@ nav{
   background:rgba(255,255,255,.015);
 
   border-radius:8px;
+
+  transition:.25s;
+
+}
+
+
+.metric:hover{
+
+  border-color:
+    rgba(255,59,48,.30);
+
+  background:
+    rgba(255,59,48,.025);
 
 }
 
@@ -587,6 +665,10 @@ nav{
   color:var(--yellow);
 }
 
+.terminal .red{
+  color:var(--red);
+}
+
 
 /* =========================================================
    SCROLL
@@ -622,9 +704,10 @@ nav{
   border-radius:12px;
 
   background:
+
     linear-gradient(
       135deg,
-      rgba(0,255,136,.025),
+      rgba(255,59,48,.025),
       transparent 60%
     );
 
@@ -679,12 +762,14 @@ nav{
 
 .stat:hover{
 
-  border-color:var(--border-hover);
+  border-color:
+    rgba(255,59,48,.32);
 
   transform:translateY(-3px);
 
   box-shadow:
-    0 10px 35px rgba(0,255,136,.06);
+    0 10px 35px
+    rgba(255,59,48,.06);
 
 }
 
@@ -703,7 +788,7 @@ nav{
 
   border-radius:50%;
 
-  background:var(--glow);
+  background:var(--red-glow);
 
   filter:blur(20px);
 
@@ -720,7 +805,7 @@ nav{
 
   font-weight:500;
 
-  color:var(--green);
+  color:var(--red);
 
 }
 
@@ -767,6 +852,7 @@ nav{
   border-radius:12px;
 
   background:
+
     linear-gradient(
       145deg,
       rgba(15,20,27,.8),
@@ -782,11 +868,14 @@ nav{
 
   transform:translateY(-3px);
 
-  border-color:var(--border-hover);
+  border-color:
+    rgba(255,59,48,.30);
 
   box-shadow:
+
     0 15px 40px rgba(0,0,0,.3),
-    0 0 30px rgba(0,255,136,.035);
+
+    0 0 30px rgba(255,59,48,.035);
 
 }
 
@@ -870,6 +959,7 @@ nav{
   border-radius:11px;
 
   background:
+
     linear-gradient(
       100deg,
       rgba(15,20,26,.85),
@@ -897,9 +987,9 @@ nav{
 
   width:2px;
 
-  background:var(--green);
+  background:var(--red);
 
-  opacity:.25;
+  opacity:.30;
 
   transition:.25s;
 
@@ -910,10 +1000,13 @@ nav{
 
   transform:translateX(5px);
 
-  border-color:var(--border-hover);
+  border-color:
+    rgba(255,59,48,.38);
 
   box-shadow:
-    -10px 0 30px rgba(0,255,136,.04);
+
+    -10px 0 30px
+    rgba(255,59,48,.05);
 
 }
 
@@ -923,7 +1016,7 @@ nav{
   opacity:1;
 
   box-shadow:
-    0 0 15px var(--green);
+    0 0 15px var(--red);
 
 }
 
@@ -978,41 +1071,273 @@ nav{
 }
 
 
-.sev.green{
+/* =========================================================
+   OFFENSIVE PROJECT BADGES
+========================================================= */
 
-  color:var(--green);
+.sev.red{
 
-  background:rgba(0,255,136,.06);
+  color:var(--red);
 
-  border:1px solid rgba(0,255,136,.12);
+  background:
+    rgba(255,59,48,.065);
 
-}
-
-
-.sev.yellow{
-
-  color:var(--yellow);
-
-  background:rgba(255,191,71,.05);
-
-  border:1px solid rgba(255,191,71,.12);
+  border:
+    1px solid rgba(255,59,48,.16);
 
 }
 
 
-.sev.cyan{
+.sev.red:hover{
 
-  color:var(--cyan);
-
-  background:rgba(0,217,255,.05);
-
-  border:1px solid rgba(0,217,255,.12);
+  background:
+    rgba(255,59,48,.10);
 
 }
 
 
 /* =========================================================
-   CERTIFICATIONS
+   DEFENSIVE PROJECT BADGES
+========================================================= */
+
+.sev.green{
+
+  color:var(--green);
+
+  background:
+    rgba(0,255,136,.06);
+
+  border:
+    1px solid rgba(0,255,136,.12);
+
+}
+
+
+/* =========================================================
+   WARNING
+========================================================= */
+
+.sev.yellow{
+
+  color:var(--yellow);
+
+  background:
+    rgba(255,191,71,.05);
+
+  border:
+    1px solid rgba(255,191,71,.12);
+
+}
+
+
+/* =========================================================
+   CYAN
+========================================================= */
+
+.sev.cyan{
+
+  color:var(--cyan);
+
+  background:
+    rgba(0,217,255,.05);
+
+  border:
+    1px solid rgba(0,217,255,.12);
+
+}
+
+
+/* =========================================================
+   OFFENSIVE SECURITY SECTION
+========================================================= */
+
+#offensive{
+
+  position:relative;
+
+}
+
+
+/* visual marker */
+
+#offensive::before{
+
+  content:"";
+
+  display:block;
+
+  position:absolute;
+
+  left:0;
+
+  width:2px;
+
+  height:130px;
+
+  background:
+    linear-gradient(
+      to bottom,
+      var(--red),
+      transparent
+    );
+
+  opacity:.65;
+
+}
+
+
+/* =========================================================
+   DEFENSIVE SECURITY SECTION
+========================================================= */
+
+#defensive{
+
+  position:relative;
+
+}
+
+
+/* green section marker */
+
+#defensive::before{
+
+  content:"";
+
+  display:block;
+
+  position:absolute;
+
+  left:0;
+
+  width:2px;
+
+  height:130px;
+
+  background:
+    linear-gradient(
+      to bottom,
+      var(--green),
+      transparent
+    );
+
+  opacity:.55;
+
+}
+
+
+/* defensive label */
+
+#defensive .label{
+
+  color:var(--green);
+
+}
+
+
+/* defensive heading */
+
+#defensive h2{
+
+  color:#e8f5ee;
+
+}
+
+
+/* defensive project list */
+
+#defensive .proj{
+
+  border-color:
+    rgba(0,255,136,.10);
+
+}
+
+
+#defensive .proj::before{
+
+  background:var(--green);
+
+}
+
+
+#defensive .proj:hover{
+
+  border-color:
+    rgba(0,255,136,.30);
+
+  box-shadow:
+    -10px 0 30px
+    rgba(0,255,136,.045);
+
+}
+
+
+#defensive .proj:hover::before{
+
+  box-shadow:
+    0 0 15px var(--green);
+
+}
+
+
+/* defensive about box */
+
+#defensive .about-box{
+
+  background:
+
+    linear-gradient(
+      135deg,
+      rgba(0,255,136,.025),
+      transparent 60%
+    );
+
+}
+
+
+/* defensive stats */
+
+#defensive .stat:hover{
+
+  border-color:
+    rgba(0,255,136,.30);
+
+  box-shadow:
+    0 10px 35px
+    rgba(0,255,136,.05);
+
+}
+
+
+#defensive .stat::after{
+
+  background:
+    var(--green-glow);
+
+}
+
+
+#defensive .stat b{
+
+  color:var(--green);
+
+}
+
+
+/* =========================================================
+   OFFENSIVE SKILL CARD
+========================================================= */
+
+.card:first-child{
+
+  border-top-color:
+    rgba(255,59,48,.25);
+
+}
+
+
+/* =========================================================
+   TIMELINE / CERTIFICATIONS
 ========================================================= */
 
 .timeline{
@@ -1055,10 +1380,10 @@ nav{
 
   border-radius:50%;
 
-  background:var(--green);
+  background:var(--red);
 
   box-shadow:
-    0 0 10px rgba(0,255,136,.4);
+    0 0 10px rgba(255,59,48,.35);
 
 }
 
@@ -1069,7 +1394,7 @@ nav{
 
   font-size:9px;
 
-  color:var(--green);
+  color:var(--red);
 
   letter-spacing:.1em;
 
@@ -1108,7 +1433,7 @@ nav{
 
   padding:28px;
 
-  border:1px solid var(--border);
+  border:1px solid rgba(255,59,48,.16);
 
   border-radius:12px;
 
@@ -1116,7 +1441,7 @@ nav{
 
     radial-gradient(
       circle at 100% 0%,
-      rgba(0,255,136,.07),
+      rgba(255,59,48,.075),
       transparent 35%
     ),
 
@@ -1159,9 +1484,9 @@ nav{
 
 .contact-links a:hover{
 
-  color:var(--green);
+  color:var(--red);
 
-  border-color:var(--green);
+  border-color:var(--red);
 
 }
 
@@ -1197,6 +1522,14 @@ footer{
 }
 
 
+footer span:last-child{
+
+  color:
+    rgba(255,59,48,.55);
+
+}
+
+
 /* =========================================================
    REVEAL
 ========================================================= */
@@ -1208,7 +1541,9 @@ footer{
   transform:translateY(20px);
 
   transition:
+
     opacity .7s ease,
+
     transform .7s ease;
 
 }
@@ -1230,40 +1565,225 @@ footer{
 @media(max-width:700px){
 
   nav{
+
     padding:14px 18px;
+
   }
+
+
+  nav .logo{
+
+    font-size:11px;
+
+  }
+
+
+  nav .links{
+
+    display:flex;
+
+    overflow-x:auto;
+
+    max-width:70%;
+
+  }
+
 
   nav .links a{
+
     margin-left:10px;
-    font-size:10px;
+
+    font-size:9px;
+
+    white-space:nowrap;
+
   }
+
 
   section{
+
     padding:95px 20px 70px;
+
   }
+
 
   .grid{
+
     grid-template-columns:1fr;
+
   }
+
 
   .stats{
+
     grid-template-columns:1fr;
+
   }
+
 
   .metrics{
-    grid-template-columns:repeat(2,1fr);
+
+    grid-template-columns:
+      repeat(2,1fr);
+
   }
+
 
   .proj{
+
     align-items:flex-start;
+
   }
+
 
   .sev{
+
     display:none;
+
   }
 
+
   h1{
+
     font-size:48px;
+
+  }
+
+
+  .hero-role{
+
+    font-size:11px;
+
+    line-height:1.7;
+
+  }
+
+
+  .hero-description{
+
+    font-size:15px;
+
+  }
+
+
+  .soc-panel{
+
+    margin-top:35px;
+
+  }
+
+
+  .panel-body{
+
+    padding:16px;
+
+  }
+
+
+  .terminal{
+
+    font-size:10px;
+
+    line-height:1.9;
+
+  }
+
+
+  #offensive::before,
+  #defensive::before{
+
+    display:none;
+
+  }
+
+
+  footer{
+
+    padding:
+      25px 20px;
+
+    flex-direction:column;
+
+  }
+
+}
+
+
+/* =========================================================
+   VERY SMALL SCREENS
+========================================================= */
+
+@media(max-width:430px){
+
+  .metrics{
+
+    grid-template-columns:1fr 1fr;
+
+    gap:7px;
+
+  }
+
+
+  .metric{
+
+    padding:11px;
+
+  }
+
+
+  .metric .value{
+
+    font-size:14px;
+
+  }
+
+
+  .metric .name{
+
+    font-size:8px;
+
+  }
+
+
+  h1{
+
+    font-size:42px;
+
+  }
+
+
+  h2{
+
+    font-size:30px;
+
+  }
+
+
+  p.lead{
+
+    font-size:15px;
+
+  }
+
+
+  .proj{
+
+    padding:18px;
+
+  }
+
+
+  .proj .t{
+
+    font-size:14px;
+
+  }
+
+
+  .proj .m{
+
+    font-size:9px;
+
   }
 
 }
@@ -1276,7 +1796,9 @@ footer{
 @media(prefers-reduced-motion:reduce){
 
   *,
+
   *::before,
+
   *::after{
 
     animation:none !important;
