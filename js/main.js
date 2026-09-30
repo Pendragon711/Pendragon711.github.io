@@ -1,98 +1,69 @@
-/* =========================================================
-   SCROLL REVEAL
-========================================================= */
+const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-const observer = new IntersectionObserver(
+/* Reveal ao rolar */
+const io = new IntersectionObserver(es => es.forEach(e => {
+  if (e.isIntersecting) { e.target.classList.add("visible"); io.unobserve(e.target); }
+}), { threshold: 0.12 });
+document.querySelectorAll(".reveal").forEach(el => io.observe(el));
 
-  entries => {
+/* Menu: destaca a seção atual */
+const links = [...document.querySelectorAll(".links a")];
+const spy = new IntersectionObserver(es => es.forEach(e => {
+  if (e.isIntersecting) links.forEach(a => a.classList.toggle("on", a.getAttribute("href") === "#" + e.target.id));
+}), { rootMargin: "-45% 0px -50% 0px" });
+document.querySelectorAll("section[id]").forEach(s => spy.observe(s));
 
-    entries.forEach(entry => {
-
-      if (entry.isIntersecting) {
-
-        entry.target.classList.add("visible");
-
-        observer.unobserve(entry.target);
-
-      }
-
-    });
-
-  },
-
-  { threshold: 0.12 }
-
-);
-
-document
-  .querySelectorAll(".reveal")
-  .forEach(el => observer.observe(el));
-
-
-/* =========================================================
-   RANDOM SECURITY EVENTS (terminal dinâmico)
-========================================================= */
-
-const terminal = document.querySelector(".terminal");
-
-const prefersReduced = window
-  .matchMedia("(prefers-reduced-motion: reduce)")
-  .matches;
-
-
-const events = [
-
-  { type: "INFO",      text: "monitoring security events..." },
-  { type: "INFO",      text: "correlating authentication logs..." },
-  { type: "ALERT",     text: "suspicious SSH authentication pattern detected" },
-  { type: "DETECTION", text: "event mapped to MITRE ATT&CK" },
-  { type: "OK",        text: "security analysis completed" }
-
-];
-
-
-let eventIndex = 0;
-
-
-function updateSecurityEvent() {
-
-  if (!terminal) return;
-
-
-  const event = events[eventIndex];
-
-
-  const color =
-    event.type === "ALERT"
-      ? "yellow"
-      : event.type === "DETECTION"
-        ? "green"
-        : "cyan";
-
-
-  const line = document.createElement("div");
-
-  line.innerHTML =
-    `<span class="${color}">[${event.type}]</span> ${event.text}`;
-
-
-  terminal.appendChild(line);
-
-
-  if (terminal.children.length > 7) {
-
-    terminal.removeChild(terminal.children[0]);
-
-  }
-
-
-  eventIndex = (eventIndex + 1) % events.length;
-
+/* Luz vermelha que segue o mouse */
+if (!reduced) {
+  window.addEventListener("pointermove", e => {
+    document.body.style.setProperty("--mx", e.clientX + "px");
+    document.body.style.setProperty("--my", e.clientY + "px");
+  }, { passive: true });
 }
 
+/* Terminal de recon (laboratório autorizado), digitado em loop */
+const term = document.getElementById("term");
+const script = [
+  ["p",  "$ nmap -sV -sC -p- lab.local"],
+  ["ok", "[+] 22/tcp ssh · 80/tcp http · 443/tcp https"],
+  ["p",  "$ ffuf -u https://lab.local/FUZZ -w common.txt"],
+  ["in", "[*] enumerando endpoints e parâmetros..."],
+  ["wr", "[!] possível IDOR em /api/user/{id} — validar"],
+  ["p",  "$ python ghost.py --scope authorized --report"],
+  ["ok", "[+] achado documentado · CWE-639 · CVSS v3.1"],
+  ["in", "[*] ambiente: laboratório autorizado"]
+];
 
-if (!prefersReduced && terminal) {
+function line(cls, text) {
+  const d = document.createElement("div");
+  d.className = cls;
+  d.textContent = text;
+  return d;
+}
 
-  setInterval(updateSecurityEvent, 4200);
+async function run() {
+  const wait = ms => new Promise(r => setTimeout(r, ms));
+  const cur = document.createElement("span");
+  cur.className = "cur";
+  while (true) {
+    term.textContent = "";
+    for (const [cls, text] of script) {
+      const d = line(cls, "");
+      term.appendChild(d);
+      d.appendChild(cur);
+      if (cls === "p") {
+        for (const ch of text) { d.insertBefore(document.createTextNode(ch), cur); await wait(28); }
+        await wait(350);
+      } else {
+        d.insertBefore(document.createTextNode(text), cur);
+        await wait(520);
+      }
+    }
+    await wait(4200);
+  }
+}
 
+if (term) {
+  if (reduced) script.forEach(([c, t]) => term.appendChild(line(c, t)));
+  else run();
 }
