@@ -1,1140 +1,171 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Daniel Widal — Pentest Jr. | Offensive Security | Web Security</title>
-
-<meta
-  name="description"
-  content="Portfólio de Daniel Widal — Pentest Jr. com foco em Offensive Security, Web Security, AppSec, Bug Bounty e Vulnerability Research."
->
-
-<link
-  rel="icon"
-  href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='18' fill='%2305070a'/%3E%3Ctext x='50' y='68' font-family='monospace' font-size='58' font-weight='700' fill='%23ff3b30' text-anchor='middle'%3E%3E_%3C/text%3E%3C/svg%3E"
->
-
+<meta name="description" content="Portfólio de Daniel Widal — Pentest Jr. com foco em Offensive Security, Web Security, AppSec, Bug Bounty e Vulnerability Research.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%2308080a'/%3E%3Ctext x='50' y='68' font-family='monospace' font-size='58' font-weight='700' fill='%23e11d2e' text-anchor='middle'%3E%3E_%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-<link
-  href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap"
-  rel="stylesheet"
->
-
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
-
 </head>
-
-
 <body>
 
-
-<!-- =======================================================
-     NAV
-======================================================== -->
-
 <nav>
-
-  <span class="logo">
-    ~/daniel-widal
-  </span>
-
+  <span class="logo">root@widal:~#</span>
   <div class="links">
-
-    <a href="#sobre">sobre</a>
-
-    <a href="#offensive">offensive</a>
-
-    <a href="#skills">skills</a>
-
-    <a href="#defensive">defensive</a>
-
-    <a href="#experiencia">experiência</a>
-
-    <a href="#formacao">formação</a>
-
-    <a href="#contato">contato</a>
-
+    <a href="#sobre">Sobre</a>
+    <a href="#offensive">Offensive</a>
+    <a href="#metodologia">Método</a>
+    <a href="#skills">Skills</a>
+    <a href="#defensive">Blue Team</a>
+    <a href="#experiencia">Experiência</a>
+    <a href="#formacao">Formação</a>
+    <a href="#contato">Contato</a>
   </div>
-
 </nav>
 
-
-
-<!-- =======================================================
-     HERO
-======================================================== -->
-
 <section id="hero">
+  <div class="status"><span class="dot"></span>Disponível para oportunidades em Pentest e AppSec</div>
+  <h1><span class="glitch" data-text="Daniel">Daniel</span><br><span class="glitch" data-text="Widal">Widal</span></h1>
+  <p class="role">Pentest Jr. · Offensive Security · Web Security</p>
+  <p class="lead">Profissional de Cibersegurança com foco em <strong>Pentest, Web Application Security, AppSec, Bug Bounty e Vulnerability Research.</strong></p>
 
-  <div class="status-line">
-
-    <span class="status-dot"></span>
-
-    offensive security · available for opportunities
-
+  <div class="term ret" aria-label="Simulação de terminal em laboratório autorizado">
+    <div class="tbar"><i></i><i></i><i></i><span>lab — escopo autorizado</span></div>
+    <div class="tbody" id="term"></div>
   </div>
-
-
-  <h1>
-
-    Daniel Widal
-
-  </h1>
-
-
-  <p class="hero-role">
-
-    PENTEST JR. · OFFENSIVE SECURITY · WEB SECURITY
-
-  </p>
-
-
-  <p class="lead hero-description">
-
-    Profissional de Cibersegurança com foco em
-    <strong>Pentest, Web Application Security,
-    AppSec, Bug Bounty e Vulnerability Research.</strong>
-
-  </p>
-
-
-  <!-- OFFENSIVE SECURITY PANEL -->
-
-  <div class="soc-panel">
-
-    <div class="panel-header">
-
-      <span class="panel-title">
-        OFFENSIVE SECURITY LAB
-      </span>
-
-      <span class="panel-status">
-        ● LAB ACTIVE
-      </span>
-
-    </div>
-
-
-    <div class="panel-body">
-
-      <div class="metrics">
-
-        <div class="metric">
-          <div class="value">WEB</div>
-          <div class="name">Security</div>
-        </div>
-
-        <div class="metric">
-          <div class="value">BURP</div>
-          <div class="name">Testing</div>
-        </div>
-
-        <div class="metric">
-          <div class="value">NMAP</div>
-          <div class="name">Recon</div>
-        </div>
-
-        <div class="metric">
-          <div class="value">PYTHON</div>
-          <div class="name">Automation</div>
-        </div>
-
-      </div>
-
-
-      <div class="terminal">
-
-        <span class="green">[OK]</span>
-        offensive security environment initialized
-        <br>
-
-        <span class="green">[OK]</span>
-        reconnaissance module ready
-        <br>
-
-        <span class="cyan">[INFO]</span>
-        enumerating attack surface...
-        <br>
-
-        <span class="yellow">[TEST]</span>
-        web application testing initialized
-        <br>
-
-        <span class="green">[FOUND]</span>
-        potential attack surface identified
-        <br>
-
-        <span class="cyan">[INFO]</span>
-        environment: authorized laboratory
-
-      </div>
-
-    </div>
-
-  </div>
-
-
-  <div class="scroll-hint">
-
-    ↓ EXPLORE SECURITY LABS
-
-  </div>
-
 </section>
-
-
-
-<hr>
-
-
-
-<!-- =======================================================
-     SOBRE
-======================================================== -->
 
 <section id="sobre">
-
-  <div class="label reveal">
-    // about
+  <h2 class="reveal">Offensive Security na prática.</h2>
+  <div class="box ret reveal">
+    <p class="lead">Meu foco está em <strong>Offensive Security, Pentest e Web Application Security</strong>, com prática em reconhecimento, enumeração, análise de superfície de ataque e investigação de vulnerabilidades em ambientes autorizados.<br><br>
+    Desenvolvo projetos próprios com <strong>Python, Burp Suite, Nmap, Playwright, Kali Linux e Metasploit</strong>, transformando conceitos de segurança em ferramentas, laboratórios e cenários práticos.<br><br>
+    Também atuo com <strong>Bug Bounty no HackerOne</strong>, e meu background em <strong>SOC e Blue Team</strong> complementa minha visão sobre detecção, investigação e as evidências que uma atividade de ataque deixa.</p>
   </div>
-
-  <h2 class="reveal">
-    Offensive Security na prática.
-  </h2>
-
-
-  <div class="about-box reveal">
-
-    <p class="lead">
-
-      Meu foco está em <strong>Offensive Security,
-      Pentest e Web Application Security</strong>,
-      com prática em reconhecimento, enumeração,
-      análise de superfície de ataque e investigação
-      de vulnerabilidades em ambientes autorizados.
-
-      <br><br>
-
-      Desenvolvo projetos próprios utilizando
-      <strong>Python, Burp Suite, Nmap, Playwright,
-      Kali Linux e Metasploit</strong>, buscando
-      transformar conceitos de segurança em ferramentas,
-      laboratórios e cenários práticos.
-
-      <br><br>
-
-      Também atuo com <strong>Bug Bounty no HackerOne</strong>,
-      enquanto meu background profissional em
-      <strong>SOC e Blue Team</strong> complementa minha
-      perspectiva sobre detecção, investigação e evidências
-      geradas durante atividades de segurança.
-
-    </p>
-
-  </div>
-
-
   <div class="stats">
-
-    <div class="stat reveal">
-
-      <b>PENTEST</b>
-
-      <span>
-        reconhecimento, enumeração e testes
-        de segurança em ambientes controlados
-      </span>
-
-    </div>
-
-
-    <div class="stat reveal">
-
-      <b>WEB SECURITY</b>
-
-      <span>
-        análise de aplicações, endpoints,
-        superfície de ataque e vulnerabilidades
-      </span>
-
-    </div>
-
-
-    <div class="stat reveal">
-
-      <b>BUG BOUNTY</b>
-
-      <span>
-        pesquisa e validação de vulnerabilidades
-        em programas autorizados
-      </span>
-
-    </div>
-
+    <div class="stat ret reveal"><b>Pentest</b><span>Reconhecimento, enumeração e testes em ambientes controlados</span></div>
+    <div class="stat ret reveal"><b>Web Security</b><span>Aplicações, endpoints, superfície de ataque e vulnerabilidades</span></div>
+    <div class="stat ret reveal"><b>Bug Bounty</b><span>Pesquisa e validação de vulnerabilidades em programas autorizados</span></div>
   </div>
-
 </section>
-
-
-
-<hr>
-
-
-
-<!-- =======================================================
-     OFFENSIVE SECURITY
-======================================================== -->
 
 <section id="offensive">
-
-  <div class="label reveal">
-    // offensive security
-  </div>
-
-  <h2 class="reveal">
-    Offensive Security Labs
-  </h2>
-
-
-  <p class="lead reveal">
-
-    Projetos voltados para <strong>Pentest,
-    Web Security, AppSec, Reconnaissance,
-    Vulnerability Research</strong> e automação
-    de testes de segurança.
-
-  </p>
-
-
-  <div class="project-list">
-
-
-    <!-- PROJECT 01 -->
-
-    <a
-      class="proj reveal"
-      href="https://github.com/Pendragon711/GHOST---Web-Pentest-Framework"
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-
-      <div>
-
-        <div class="project-number">
-          01 · OFFENSIVE SECURITY
-        </div>
-
-        <div class="t">
-          👻 GHOST — Web Pentest Framework
-        </div>
-
-        <div class="m">
-          Python · Playwright · Web Security · CWE · CVSS
-        </div>
-
-      </div>
-
-      <span class="sev red">
-        PENTEST
-      </span>
-
+  <h2 class="reveal">Offensive Security Labs</h2>
+  <p class="lead reveal">Projetos voltados para Pentest, Web Security, AppSec, Reconnaissance, Vulnerability Research e automação de testes de segurança.</p>
+  <div class="list">
+    <a class="proj reveal" href="https://github.com/Pendragon711/GHOST---Web-Pentest-Framework" target="_blank" rel="noopener noreferrer">
+      <div><div class="t">👻 GHOST — Web Pentest Framework</div><div class="m">Python · Playwright · Web Security · CWE · CVSS</div></div>
+      <span class="sev red">PENTEST</span>
     </a>
-
-
-    <!-- PROJECT 02 -->
-
-    <a
-      class="proj reveal"
-      href="https://hackerone.com/"
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-
-      <div>
-
-        <div class="project-number">
-          02 · VULNERABILITY RESEARCH
-        </div>
-
-        <div class="t">
-          🔎 Bug Bounty — HackerOne
-        </div>
-
-        <div class="m">
-          Recon · Web Security · Vulnerability Research · CWE · CVSS
-        </div>
-
-      </div>
-
-      <span class="sev red">
-        RESEARCH
-      </span>
-
+    <a class="proj reveal" href="https://hackerone.com/" target="_blank" rel="noopener noreferrer">
+      <div><div class="t">🔎 Bug Bounty — HackerOne</div><div class="m">Recon · Web Security · Vulnerability Research · CWE · CVSS</div></div>
+      <span class="sev red">RESEARCH</span>
     </a>
-
-
-    <!-- PROJECT 03 -->
-
-    <a
-      class="proj reveal"
-      href="https://github.com/Pendragon711/GHOST---Web-Pentest-Framework"
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-
-      <div>
-
-        <div class="project-number">
-          03 · SECURITY TESTING
-        </div>
-
-        <div class="t">
-          ⚔️ Pentest &amp; Exploitation Lab
-        </div>
-
-        <div class="m">
-          Kali Linux · Nmap · Metasploit · Burp Suite · VirtualBox
-        </div>
-
-      </div>
-
-      <span class="sev yellow">
-        TESTING
-      </span>
-
+    <a class="proj reveal" href="https://github.com/Pendragon711/GHOST---Web-Pentest-Framework" target="_blank" rel="noopener noreferrer">
+      <div><div class="t">⚔️ Pentest &amp; Exploitation Lab</div><div class="m">Kali Linux · Nmap · Metasploit · Burp Suite · VirtualBox</div></div>
+      <span class="sev amber">LAB</span>
     </a>
-
-
   </div>
-
-
-  <!-- WEB SECURITY -->
-
-  <div class="about-box reveal">
-
-    <div class="label">
-      // web security
-    </div>
-
-    <p class="lead">
-
-      <strong>OWASP Top 10</strong> · XSS · SQL Injection ·
-      SSRF · IDOR · LFI/RFI · SSTI · NoSQL Injection ·
-      Command Injection
-
-      <br><br>
-
-      Classificação e documentação utilizando
-      <strong>CWE</strong> e avaliação de severidade
-      com <strong>CVSS v3.1</strong>.
-
-    </p>
-
+  <div class="box ret reveal">
+    <div class="vulns"><span>OWASP Top 10</span><span>XSS</span><span>SQL Injection</span><span>SSRF</span><span>IDOR</span><span>LFI/RFI</span><span>SSTI</span><span>NoSQL Injection</span><span>Command Injection</span></div>
+    <p class="lead" style="margin-top:14px">Classificação e documentação com <strong>CWE</strong> e avaliação de severidade com <strong>CVSS v3.1</strong>.</p>
   </div>
-
 </section>
 
-
-
-<hr>
-
-
-
-<!-- =======================================================
-     SKILLS
-======================================================== -->
+<section id="metodologia">
+  <h2 class="reveal">Como eu trabalho</h2>
+  <p class="lead reveal">Do reconhecimento ao relatório, sempre dentro do escopo autorizado.</p>
+  <div class="chain reveal">
+    <div class="step"><b>01</b><h3>Recon</h3><p>Mapeamento de superfície, subdomínios e tecnologias.</p></div>
+    <div class="step"><b>02</b><h3>Enumeração</h3><p>Serviços, endpoints, parâmetros e controles de acesso.</p></div>
+    <div class="step"><b>03</b><h3>Validação</h3><p>Testes manuais e automatizados para confirmar a falha.</p></div>
+    <div class="step"><b>04</b><h3>Impacto</h3><p>Classificação com CWE e severidade com CVSS v3.1.</p></div>
+    <div class="step"><b>05</b><h3>Relatório</h3><p>Evidências, passos de reprodução e recomendação de correção.</p></div>
+  </div>
+</section>
 
 <section id="skills">
-
-  <div class="label reveal">
-    // security stack
-  </div>
-
-  <h2 class="reveal">
-    Ferramentas &amp; competências
-  </h2>
-
-
+  <h2 class="reveal">Ferramentas e competências</h2>
   <div class="grid">
-
-
-    <!-- OFFENSIVE -->
-
-    <div class="card reveal">
-
-      <h3>🔴 Offensive Security</h3>
-
-      <span class="tag">Pentest</span>
-      <span class="tag">Web Security</span>
-      <span class="tag">AppSec</span>
-      <span class="tag">Bug Bounty</span>
-      <span class="tag">Recon</span>
-      <span class="tag">Vulnerability Research</span>
-      <span class="tag">Burp Suite</span>
-      <span class="tag">Nmap</span>
-      <span class="tag">Metasploit</span>
-      <span class="tag">Kali Linux</span>
-
-      <p>
-
-        Reconhecimento, enumeração, análise de
-        superfície de ataque e testes de segurança
-        em ambientes autorizados e controlados.
-
-      </p>
-
-    </div>
-
-
-    <!-- WEB -->
-
-    <div class="card reveal">
-
-      <h3>🌐 Web Application Security</h3>
-
-      <span class="tag">OWASP Top 10</span>
-      <span class="tag">XSS</span>
-      <span class="tag">SQLi</span>
-      <span class="tag">SSRF</span>
-      <span class="tag">IDOR</span>
-      <span class="tag">LFI/RFI</span>
-      <span class="tag">SSTI</span>
-      <span class="tag">CWE</span>
-      <span class="tag">CVSS</span>
-
-      <p>
-
-        Análise de aplicações web, endpoints,
-        parâmetros, controles de acesso e
-        possíveis superfícies de exploração.
-
-      </p>
-
-    </div>
-
-
-    <!-- AUTOMATION -->
-
-    <div class="card reveal">
-
-      <h3>🐍 Security Automation</h3>
-
-      <span class="tag">Python</span>
-      <span class="tag">Bash</span>
-      <span class="tag">JavaScript</span>
-      <span class="tag">Playwright</span>
-      <span class="tag">Requests</span>
-      <span class="tag">Flask</span>
-      <span class="tag">Git</span>
-
-      <p>
-
-        Desenvolvimento de ferramentas de segurança,
-        automação de testes, crawling, processamento
-        de eventos e geração de evidências.
-
-      </p>
-
-    </div>
-
-
-    <!-- NETWORK -->
-
-    <div class="card reveal">
-
-      <h3>🌐 Network &amp; Systems</h3>
-
-      <span class="tag">TCP/IP</span>
-      <span class="tag">Nmap</span>
-      <span class="tag">Wireshark</span>
-      <span class="tag">Linux</span>
-      <span class="tag">VirtualBox</span>
-
-      <p>
-
-        Fundamentos de redes, análise de tráfego,
-        enumeração de serviços e troubleshooting
-        de infraestrutura.
-
-      </p>
-
-    </div>
-
-
+    <div class="card ret reveal"><h3>🔴 Offensive Security</h3>
+      <span class="tag">Pentest</span><span class="tag">Web Security</span><span class="tag">AppSec</span><span class="tag">Bug Bounty</span><span class="tag">Recon</span><span class="tag">Vulnerability Research</span><span class="tag">Burp Suite</span><span class="tag">Nmap</span><span class="tag">Metasploit</span><span class="tag">Kali Linux</span>
+      <p>Reconhecimento, enumeração, análise de superfície de ataque e testes em ambientes autorizados e controlados.</p></div>
+    <div class="card ret reveal"><h3>🌐 Web Application Security</h3>
+      <span class="tag">OWASP Top 10</span><span class="tag">XSS</span><span class="tag">SQLi</span><span class="tag">SSRF</span><span class="tag">IDOR</span><span class="tag">LFI/RFI</span><span class="tag">SSTI</span><span class="tag">CWE</span><span class="tag">CVSS</span>
+      <p>Análise de aplicações web, endpoints, parâmetros, controles de acesso e possíveis superfícies de exploração.</p></div>
+    <div class="card ret reveal"><h3>🐍 Security Automation</h3>
+      <span class="tag">Python</span><span class="tag">Bash</span><span class="tag">JavaScript</span><span class="tag">Playwright</span><span class="tag">Requests</span><span class="tag">Flask</span><span class="tag">Git</span>
+      <p>Ferramentas de segurança, automação de testes, crawling, processamento de eventos e geração de evidências.</p></div>
+    <div class="card ret reveal"><h3>🖧 Network &amp; Systems</h3>
+      <span class="tag">TCP/IP</span><span class="tag">Nmap</span><span class="tag">Wireshark</span><span class="tag">Linux</span><span class="tag">VirtualBox</span>
+      <p>Fundamentos de redes, análise de tráfego, enumeração de serviços e troubleshooting de infraestrutura.</p></div>
+    <div class="card ret reveal"><h3>☁️ AWS Security Lab</h3>
+      <span class="tag">AWS</span><span class="tag">EC2</span><span class="tag">S3</span><span class="tag">VPC</span><span class="tag">Security Groups</span><span class="tag">EBS</span>
+      <p>Laboratório prático de infraestrutura AWS com foco em fundamentos de cloud, rede e controles de acesso.</p>
+      <a href="https://github.com/Pendragon711/projeto-aws-s3-ec2" target="_blank" rel="noopener noreferrer">Ver projeto</a></div>
   </div>
-
 </section>
-
-
-
-<hr>
-
-
-
-<!-- =======================================================
-     DEFENSIVE SECURITY
-======================================================== -->
 
 <section id="defensive">
-
-  <div class="label reveal">
-    // defensive security
-  </div>
-
-  <h2 class="reveal">
-    Blue Team &amp; SOC
-  </h2>
-
-
-  <p class="lead reveal">
-
-    Experiência profissional e projetos voltados
-    para <strong>SOC, SIEM, Threat Detection,
-    Detection Engineering</strong> e investigação
-    de eventos.
-
-  </p>
-
-
-  <div class="project-list">
-
-
-    <!-- BLUE PROJECT 01 -->
-
-    <a
-      class="proj reveal"
-      href="https://github.com/Pendragon711/soc-lab-wazuh"
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-
-      <div>
-
-        <div class="project-number">
-          01 · BLUE TEAM
-        </div>
-
-        <div class="t">
-          🛡️ SOC Lab — Wazuh SIEM
-        </div>
-
-        <div class="m">
-          Wazuh · SIEM · Threat Detection · MITRE ATT&amp;CK
-        </div>
-
-      </div>
-
-      <span class="sev green">
-        DETECTION
-      </span>
-
+  <h2 class="reveal">Blue Team e SOC</h2>
+  <p class="lead reveal">Experiência profissional e projetos em SOC, SIEM, Threat Detection, Detection Engineering e investigação de eventos.</p>
+  <div class="list">
+    <a class="proj reveal" href="https://github.com/Pendragon711/soc-lab-wazuh" target="_blank" rel="noopener noreferrer">
+      <div><div class="t">🛡️ SOC Lab — Wazuh SIEM</div><div class="m">Wazuh · SIEM · Threat Detection · MITRE ATT&amp;CK</div></div>
+      <span class="sev green">DETECTION</span>
     </a>
-
-
-    <!-- BLUE PROJECT 02 -->
-
-    <a
-      class="proj reveal"
-      href="https://github.com/Pendragon711/ssh-honeypot-lab"
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-
-      <div>
-
-        <div class="project-number">
-          02 · DETECTION ENGINEERING
-        </div>
-
-        <div class="t">
-          🍯 SSH Honeypot — Detection Engine
-        </div>
-
-        <div class="m">
-          Python · Honeypot · Detection Rules · Flask · JSONL
-        </div>
-
-      </div>
-
-      <span class="sev green">
-        DETECTION
-      </span>
-
+    <a class="proj reveal" href="https://github.com/Pendragon711/ssh-honeypot-lab" target="_blank" rel="noopener noreferrer">
+      <div><div class="t">🍯 SSH Honeypot — Detection Engine</div><div class="m">Python · Honeypot · Detection Rules · Flask · JSONL</div></div>
+      <span class="sev green">DETECTION</span>
     </a>
-
-
   </div>
-
-
-  <div class="about-box reveal">
-
-    <p class="lead">
-
-      <strong>Experiência profissional em SOC</strong>
-      envolvendo monitoramento e triagem de eventos,
-      análise preliminar de alertas, investigação inicial,
-      classificação e escalonamento de incidentes.
-
-      <br><br>
-
-      A experiência defensiva complementa minha atuação
-      ofensiva ao permitir compreender como atividades
-      de ataque podem gerar <strong>logs, indicadores
-      e evidências detectáveis</strong> em ambientes
-      monitorados.
-
-    </p>
-
-  </div>
-
-
+  <div class="box ret reveal"><p class="lead">A experiência defensiva complementa minha atuação ofensiva: entendo como um ataque gera <strong>logs, indicadores e evidências detectáveis</strong> em ambientes monitorados.</p></div>
   <div class="stats">
-
-    <div class="stat reveal">
-
-      <b>WAZUH</b>
-
-      <span>
-        SIEM utilizado em laboratório
-        de detecção e investigação
-      </span>
-
-    </div>
-
-
-    <div class="stat reveal">
-
-      <b>MITRE ATT&amp;CK</b>
-
-      <span>
-        mapeamento de técnicas e
-        comportamentos observados
-      </span>
-
-    </div>
-
-
-    <div class="stat reveal">
-
-      <b>~10s</b>
-
-      <span>
-        detecção de brute force SSH
-        no laboratório
-      </span>
-
-    </div>
-
+    <div class="stat ret reveal"><b>Wazuh</b><span>SIEM usado em laboratório de detecção e investigação</span></div>
+    <div class="stat ret reveal"><b>MITRE ATT&amp;CK</b><span>Mapeamento de técnicas e comportamentos observados</span></div>
+    <div class="stat ret reveal"><b>~10s</b><span>Detecção de brute force SSH no laboratório</span></div>
   </div>
-
 </section>
-
-
-
-<hr>
-
-
-
-<!-- =======================================================
-     EXPERIÊNCIA PROFISSIONAL
-======================================================== -->
 
 <section id="experiencia">
-
-  <div class="label reveal">
-    // professional experience
+  <h2 class="reveal">Experiência profissional</h2>
+  <div class="tl">
+    <div class="i reveal"><div class="t">Estagiário de Segurança da Informação</div><div class="s">Multi Energisa S.A. — Ambiente SOC: monitoramento e triagem de eventos, análise preliminar de alertas e investigação inicial de ocorrências de redes, endpoints, malware, phishing e acessos suspeitos. Apoio na operação de soluções de segurança, documentação de procedimentos e playbooks, relatórios e interação com as equipes de Redes e Segurança.</div></div>
+    <div class="i reveal"><div class="t">Analista de Suporte Técnico N2</div><div class="s">Tahto — Troubleshooting, análise de redes, diagnóstico de causa-raiz e investigação de falhas em ambientes GPON, WLAN e LAN.</div></div>
   </div>
-
-  <h2 class="reveal">
-    Experiência profissional
-  </h2>
-
-
-  <div class="about-box reveal">
-
-    <p class="lead">
-
-      <strong>Estagiário de Segurança da Informação
-      — Multi Energisa S.A.</strong>
-
-      <br><br>
-
-      Atuação em ambiente <strong>SOC</strong> com
-      monitoramento e triagem de eventos de segurança,
-      análise preliminar de alertas, investigação inicial
-      de ocorrências relacionadas a redes, endpoints,
-      malware, phishing e acessos suspeitos.
-
-      <br><br>
-
-      Apoio na operação de soluções de segurança,
-      documentação de procedimentos e playbooks,
-      elaboração de relatórios e interação com equipes
-      de Redes e Segurança.
-
-      <br><br>
-
-      <strong>Analista de Suporte Técnico N2 —
-      Tahto</strong>
-
-      <br><br>
-
-      Experiência com troubleshooting, análise de redes,
-      diagnóstico de causa-raiz e investigação de falhas
-      em ambientes GPON, WLAN e LAN.
-
-    </p>
-
-  </div>
-
-
-  <div class="stats">
-
-    <div class="stat reveal">
-
-      <b>SOC</b>
-
-      <span>
-        monitoramento e investigação
-        inicial de eventos
-      </span>
-
-    </div>
-
-
-    <div class="stat reveal">
-
-      <b>NETWORK</b>
-
-      <span>
-        troubleshooting e análise
-        de infraestrutura
-      </span>
-
-    </div>
-
-
-    <div class="stat reveal">
-
-      <b>ROOT CAUSE</b>
-
-      <span>
-        investigação estruturada
-        e análise de evidências
-      </span>
-
-    </div>
-
-  </div>
-
 </section>
-
-
-
-<hr>
-
-
-
-<!-- =======================================================
-     CLOUD
-======================================================== -->
-
-<section id="cloud">
-
-  <div class="label reveal">
-    // cloud &amp; infrastructure
-  </div>
-
-  <h2 class="reveal">
-    Cloud Security
-  </h2>
-
-
-  <div class="grid">
-
-
-    <div class="card reveal">
-
-      <h3>☁️ AWS Security Lab</h3>
-
-      <span class="tag">AWS</span>
-      <span class="tag">EC2</span>
-      <span class="tag">S3</span>
-      <span class="tag">VPC</span>
-      <span class="tag">Security Groups</span>
-      <span class="tag">EBS</span>
-
-      <p>
-
-        Laboratório prático de infraestrutura
-        AWS com foco em fundamentos de cloud,
-        rede e controles de acesso.
-
-      </p>
-
-      <a
-        href="https://github.com/Pendragon711/projeto-aws-s3-ec2"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        → Ver projeto
-      </a>
-
-    </div>
-
-
-  </div>
-
-</section>
-
-
-
-<hr>
-
-
-
-<!-- =======================================================
-     FORMAÇÃO
-======================================================== -->
 
 <section id="formacao">
-
-  <div class="label reveal">
-    // education &amp; certifications
+  <h2 class="reveal">Formação</h2>
+  <div class="tl">
+    <div class="i reveal"><div class="d">EM ANDAMENTO</div><div class="t">Graduação em Cibersegurança</div><div class="s">UniCesumar</div></div>
+    <div class="i reveal"><div class="d">2026</div><div class="t">IBSEC — Analista SOC na Era da IA</div><div class="s">Operações de SOC, monitoramento, detecção e resposta a incidentes.</div></div>
+    <div class="i reveal"><div class="d">2026</div><div class="t">FIAP — Nano Course Cybersecurity</div><div class="s">Segurança, riscos, vulnerabilidades, TCP/IP, hardening, criptografia e pentest.</div></div>
+    <div class="i reveal"><div class="d">2026</div><div class="t">SOC N1 — Be Safe.inc</div><div class="s">Fundamentos de SOC e ITIL.</div></div>
+    <div class="i reveal"><div class="d">CONCLUÍDO</div><div class="t">Google Cybersecurity Professional Certificate</div><div class="s">Fundamentos de Cybersecurity.</div></div>
+    <div class="i reveal"><div class="d">CONCLUÍDO</div><div class="t">Cisco — Junior Cybersecurity Analyst</div><div class="s">Fundamentos de segurança cibernética.</div></div>
+    <div class="i reveal"><div class="d">CONCLUÍDO</div><div class="t">AWS Cloud Practitioner Essentials</div><div class="s">Fundamentos de Cloud Computing e AWS.</div></div>
   </div>
-
-  <h2 class="reveal">
-    Formação
-  </h2>
-
-
-  <div class="timeline">
-
-
-    <div class="item reveal">
-
-      <div class="d">
-        EM ANDAMENTO
-      </div>
-
-      <div class="t">
-        Graduação em Cibersegurança
-      </div>
-
-      <div class="s">
-        UniCesumar
-      </div>
-
-    </div>
-
-
-    <div class="item reveal">
-
-      <div class="d">
-        2026
-      </div>
-
-      <div class="t">
-        IBSEC — Analista SOC na Era da IA
-      </div>
-
-      <div class="s">
-        Operações de SOC, monitoramento,
-        detecção e resposta a incidentes.
-      </div>
-
-    </div>
-
-
-    <div class="item reveal">
-
-      <div class="d">
-        2026
-      </div>
-
-      <div class="t">
-        FIAP — Nano Course Cybersecurity
-      </div>
-
-      <div class="s">
-        Segurança, riscos, vulnerabilidades,
-        TCP/IP, hardening, criptografia e pentest.
-      </div>
-
-    </div>
-
-
-    <div class="item reveal">
-
-      <div class="d">
-        2026
-      </div>
-
-      <div class="t">
-        SOC N1 — Be Safe.inc
-      </div>
-
-      <div class="s">
-        Fundamentos de SOC e ITIL.
-      </div>
-
-    </div>
-
-
-    <div class="item reveal">
-
-      <div class="d">
-        CONCLUÍDO
-      </div>
-
-      <div class="t">
-        Google Cybersecurity Professional Certificate
-      </div>
-
-      <div class="s">
-        Fundamentos de Cybersecurity.
-      </div>
-
-    </div>
-
-
-    <div class="item reveal">
-
-      <div class="d">
-        CONCLUÍDO
-      </div>
-
-      <div class="t">
-        Cisco — Junior Cybersecurity Analyst
-      </div>
-
-      <div class="s">
-        Fundamentos de segurança cibernética.
-      </div>
-
-    </div>
-
-
-    <div class="item reveal">
-
-      <div class="d">
-        CONCLUÍDO
-      </div>
-
-      <div class="t">
-        AWS Cloud Practitioner Essentials
-      </div>
-
-      <div class="s">
-        Fundamentos de Cloud Computing e AWS.
-      </div>
-
-    </div>
-
-
-  </div>
-
 </section>
-
-
-
-<hr>
-
-
-
-<!-- =======================================================
-     CONTATO
-======================================================== -->
 
 <section id="contato">
-
-  <div class="contact-box reveal">
-
-    <div class="label">
-      // contact
+  <div class="contact box ret reveal">
+    <h2>Vamos conversar.</h2>
+    <p class="lead">Busco oportunidades em <strong>Pentest, Offensive Security, Web Pentest e Application Security</strong>. Também tenho experiência profissional em <strong>SOC / Blue Team</strong> e projetos práticos de segurança.</p>
+    <div class="links2">
+      <a class="btn" href="https://github.com/Pendragon711" target="_blank" rel="noopener noreferrer">github.com/Pendragon711</a>
+      <a class="btn" href="https://www.linkedin.com/in/danielwidal" target="_blank" rel="noopener noreferrer">linkedin.com/in/danielwidal</a>
+      <a class="btn" href="mailto:daniels2live666@gmail.com">daniels2live666@gmail.com</a>
     </div>
-
-    <h2>
-      Vamos conversar.
-    </h2>
-
-
-    <p class="lead">
-
-      Busco oportunidades em
-      <strong>Pentest, Offensive Security,
-      Web Pentest e Application Security</strong>.
-
-      <br><br>
-
-      Também possuo experiência profissional
-      em <strong>SOC / Blue Team</strong> e
-      desenvolvimento de projetos práticos
-      de segurança.
-
-    </p>
-
-
-    <div class="contact-links">
-
-
-      <a
-        href="https://github.com/Pendragon711"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        github.com/Pendragon711
-      </a>
-
-
-      <a
-        href="https://www.linkedin.com/in/danielwidal"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        linkedin.com/in/danielwidal
-      </a>
-
-
-      <a href="mailto:daniels2live666@gmail.com">
-        daniels2live666@gmail.com
-      </a>
-
-
-    </div>
-
   </div>
-
 </section>
 
-
-
-<!-- =======================================================
-     FOOTER
-======================================================== -->
-
-<footer>
-
-  <span>
-    © 2026 Daniel Widal
-  </span>
-
-  <span>
-    PENTEST · OFFENSIVE SECURITY · WEB SECURITY
-  </span>
-
-</footer>
-
-
+<footer><span>© 2026 Daniel Widal</span><span>Pentest · Offensive Security · Web Security</span></footer>
 
 <script src="js/main.js"></script>
-
 </body>
-
 </html>
