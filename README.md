@@ -1,22 +1,22 @@
-# Portfólio — Daniel Widal
+# 🛡️ Portfólio — Daniel Widal
 
 🌐 **Site publicado:** [pendragon711.github.io](https://pendragon711.github.io)
 
-Portfólio pessoal focado em **SOC N1 · Blue Team · Threat Detection**, com projetos práticos de cibersegurança defensiva, laboratórios com Wazuh SIEM, análise de logs e mapeamento MITRE ATT&CK.
+Portfólio pessoal focado em **Offensive Security, Web Application Security e Blue Team**, apresentando projetos práticos de Pentest, desenvolvimento de ferramentas de automação (Python/Go), laboratórios de SIEM com Wazuh e pesquisa de vulnerabilidades.
 
 ---
 
-## 🛡️ Sobre
+## ⚔️ Sobre
 
-Analista de Cibersegurança Jr. com foco em:
-- Monitoramento de eventos e análise de logs
-- Investigação de alertas e resposta a incidentes
-- Detecção de ameaças com Wazuh SIEM
-- Mapeamento de comportamentos com MITRE ATT&CK
+Profissional de Cibersegurança com atuação híbrida:
+- **Offensive Security:** Pentest Web, Bug Bounty (HackerOne), Reconnaissance automatizado e Vulnerability Research.
+- **Desenvolvimento de Ferramentas:** Criação de frameworks como **GHOST** (Python) e **ODIN** (Go) para automação de testes e mapeamento de superfície de ataque.
+- **Blue Team / SOC:** Monitoramento de eventos, análise de logs, investigação de incidentes e engenharia de detecção com Wazuh SIEM e MITRE ATT&CK.
 
 ---
 
-## 📁 Estrutura
+## 📁 Estrutura do Projeto
+
 
 ```
 .
@@ -30,28 +30,39 @@ Analista de Cibersegurança Jr. com foco em:
 
 ---
 
-## 🛠️ Stack
+## 🛠️ Stack Tecnológica
 
-- **HTML5** semântico
-- **CSS3** puro (variáveis, grid, animações)
-- **JavaScript** vanilla (IntersectionObserver, DOM)
-- **Fontes**: Rajdhani + JetBrains Mono
-- **Hospedagem**: GitHub Pages
+- **Frontend:** HTML5, CSS3 (Grid/Flexbox, Variáveis), JavaScript Vanilla.
+- **Fontes:** Chakra Petch + JetBrains Mono.
+- **Hospedagem:** GitHub Pages.
+- **Projetos Destacados no Site:**
+  - **ODIN:** Pipeline de Recon em Go.
+  - **GHOST:** Framework de Pentest Web em Python.
+  - **Wazuh SOC Lab:** Laboratório de detecção de ameaças.
 
 ---
 
-## 🔗 Links
+## 🔗 Links Oficiais
 
-- **Portfólio:** https://pendragon711.github.io
+- **Portfólio Online:** https://pendragon711.github.io
 - **GitHub:** [@Pendragon711](https://github.com/Pendragon711)
 - **LinkedIn:** [in/danielwidal](https://www.linkedin.com/in/danielwidal)
 - **Email:** daniels2live666@gmail.com
 
 ---
 
-## 📌 Projetos relacionados
+## 📌 Projetos Relacionados
 
-- [SOC Lab — Wazuh SIEM](https://github.com/Pendragon711/soc-lab-wazuh)
-- [GHOST — Web Pentest Framework](https://github.com/Pendragon711/GHOST---Web-Pentest-Framework)
-- [AWS Security Lab](https://github.com/Pendragon711/projeto-aws-s3-ec2)
-- [Network & API Security Testing](https://github.com/Pendragon711/noping-qa-api-tests)
+Confira os repositórios das ferramentas e laboratórios mencionados:
+
+- [👁️ ODIN — Advanced Web Recon Pipeline](https://github.com/Pendragon711/odin-recon) *(Go)*
+- [👻 GHOST — Web Pentest Framework](https://github.com/Pendragon711/GHOST---Web-Pentest-Framework) *(Python)*
+- [🛡️ SOC Lab — Wazuh SIEM](https://github.com/Pendragon711/soc-lab-wazuh)
+- [🍯 SSH Honeypot Lab](https://github.com/Pendragon711/ssh-honeypot-lab)
+- [☁️ AWS Security Lab](https://github.com/Pendragon711/projeto-aws-s3-ec2)
+
+---
+
+<p align="center">
+  ⚔️ <strong>Building practical offensive security skills through Pentest, Web Security, Bug Bounty and security research.</strong>
+</p>
