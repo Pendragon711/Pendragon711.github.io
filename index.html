@@ -3,170 +3,266 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Daniel Widal — Pentester Júnior | Segurança de Aplicações Web</title>
-<meta name="description" content="Portfólio de Daniel Widal — Pentester Júnior com foco em Web Application Security, Offensive Security, Bug Bounty e Vulnerability Research.">
+<script>document.documentElement.classList.add('js')</script>
+<title>Daniel Widal — Analista SOC N1 | DFIR e Resposta a Incidentes</title>
+<meta name="description" content="Portfólio de Daniel Widal: triagem de alertas em SIEM, análise de logs, DFIR e resposta a incidentes. Laboratórios de detecção com Wazuh e honeypot.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://pendragon711.github.io/">
-<meta property="og:title" content="Daniel Widal — Pentester Júnior | Segurança de Aplicações Web">
-<meta property="og:description" content="Portfólio de Daniel Widal: pentest web, Bug Bounty, Offensive Security e ferramentas próprias em Python e Go.">
+<meta property="og:title" content="Daniel Widal — Analista SOC N1 | DFIR e Resposta a Incidentes">
+<meta property="og:description" content="Triagem de alertas em SIEM, análise de logs e evidências, DFIR e laboratórios de detecção com Wazuh.">
 <meta property="og:image" content="https://pendragon711.github.io/assets/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:locale" content="pt_BR">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Daniel Widal — Pentester Júnior | Segurança de Aplicações Web">
-<meta name="twitter:description" content="Portfólio de Daniel Widal: pentest web, Bug Bounty, Offensive Security e ferramentas próprias em Python e Go.">
+<meta name="twitter:title" content="Daniel Widal — Analista SOC N1 | DFIR e Resposta a Incidentes">
+<meta name="twitter:description" content="Triagem de alertas em SIEM, análise de logs e evidências, DFIR e laboratórios de detecção com Wazuh.">
 <meta name="twitter:image" content="https://pendragon711.github.io/assets/og-image.png">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%2308080a'/%3E%3Ctext x='50' y='68' font-family='monospace' font-size='58' font-weight='700' fill='%23e11d2e' text-anchor='middle'%3E%3E_%3C/text%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%230a1016'/%3E%3Ccircle cx='50' cy='50' r='30' fill='none' stroke='%236cc7ff' stroke-width='7'/%3E%3Ccircle cx='50' cy='50' r='9' fill='%23ff9f43'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600&family=Barlow+Condensed:wght@600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-<canvas id="net" aria-hidden="true"></canvas>
+<canvas id="hex" aria-hidden="true"></canvas>
 <div id="rail" aria-hidden="true"><i></i></div>
-<div id="cur" aria-hidden="true"></div>
 
-<nav>
-  <span class="logo">root@widal:~#</span>
-  <div class="links">
+<header class="top">
+  <a class="logo" href="#topo"><span class="dot"></span>daniel.widal</a>
+  <nav class="links" aria-label="Seções">
     <a href="#sobre">Sobre</a>
-    <a href="#offensive">Projetos</a>
-    <a href="#metodologia">Método</a>
-    <a href="#skills">Skills</a>
+    <a href="#playbooks">Triagem</a>
+    <a href="#dfir">DFIR</a>
+    <a href="#projetos">Projetos</a>
     <a href="#experiencia">Experiência</a>
     <a href="#formacao">Formação</a>
     <a href="#contato">Contato</a>
+  </nav>
+  <span class="clock" id="clock" aria-hidden="true">00:00:00 UTC</span>
+</header>
+
+<main>
+
+<section id="topo" class="hero">
+  <div class="hero-copy">
+    <p class="avail"><span class="dot"></span>Disponível para vagas de Analista SOC N1 e posições júnior em DFIR</p>
+    <h1>Daniel<br>Widal</h1>
+    <p class="role">Analista de SOC N1 e DFIR</p>
+    <p class="lead">Triagem e investigação de alertas em SIEM, análise de logs e preservação de evidências. Base em suporte técnico de redes e laboratório próprio de detecção com <strong>Wazuh</strong>.</p>
+    <div class="cta">
+      <a class="btn primary" href="#contato">Falar comigo</a>
+      <a class="btn" href="#playbooks">Ver como faço a triagem</a>
+    </div>
   </div>
-</nav>
 
-<section id="hero">
-  <div class="status"><span class="dot"></span>Disponível para vagas e estágio em Pentest Web</div>
-  <h1><span class="glitch" data-text="Daniel">Daniel</span><br><span class="glitch" data-text="Widal">Widal</span></h1>
-  <p class="role">Pentester Júnior · Web Application Security · Offensive Security</p>
-  <p class="lead">Reconhecimento, análise de superfície de ataque e validação de vulnerabilidades em <strong>aplicações web e APIs</strong>, com ferramentas próprias em <strong>Python e Go</strong>.</p>
-
-  <div class="cue">role para explorar</div>
+  <aside class="console" aria-label="Simulação de uma fila de alertas de SOC">
+    <div class="con-head"><b>Fila de alertas</b><span class="sim">simulação com dados fictícios</span></div>
+    <div class="counts">
+      <div><b id="cOpen">0</b><span>em análise</span></div>
+      <div><b id="cEsc">0</b><span>escalados</span></div>
+      <div><b id="cTp">0</b><span>contidos</span></div>
+      <div><b id="cFp">0</b><span>falsos positivos</span></div>
+    </div>
+    <ul id="queue" class="queue"></ul>
+    <div id="detail" class="detail" aria-live="off"></div>
+  </aside>
 </section>
 
 <section id="sobre">
-  <h2 class="reveal">Pentest web na prática.</h2>
-  <div class="box ret reveal">
-    <p class="lead">Foco em <strong>Pentest e Web Application Security</strong>: reconhecimento, enumeração, mapeamento de superfície de ataque e validação de vulnerabilidades do <strong>OWASP Top 10</strong> em laboratórios, CTFs e programas autorizados de <strong>Bug Bounty no HackerOne</strong>.<br><br>
-    Desenvolvo o <strong>GHOST</strong> (Python/Playwright) e o <strong>ODIN</strong> (Go), frameworks que automatizam crawling, testes, orquestração de recon e geração de relatórios com classificação <strong>CWE</strong> e <strong>CVSS v3.1</strong>. Meu dia a dia usa <strong>Burp Suite, Caido, OWASP ZAP, Nmap, ffuf e Metasploit</strong>.<br><br>
-    Minha passagem por <strong>SOC</strong> me dá uma visão extra: sei quais logs e evidências um ataque deixa, o que ajuda a testar melhor e a escrever recomendações mais úteis.</p>
+  <div class="sh"><h2>Triagem, evidência e resposta.</h2></div>
+  <div class="box">
+    <p class="lead">Estou me preparando para atuar como <strong>Analista de SOC N1</strong> e na área de <strong>DFIR</strong>. No estágio na <strong>Multi Energisa</strong>, fiz a triagem e a investigação de alertas em SIEM (malware, phishing e acessos suspeitos), analisei logs e evidências e escrevi playbooks de resposta a incidentes.<br><br>
+    Antes, trabalhei com suporte técnico de redes (N1 e N2), onde aprendi a isolar falhas a partir de logs e a documentar o que encontrei. Minha base em <strong>pentest</strong> me ajuda a pensar como o atacante e a escrever detecções melhores.</p>
   </div>
   <div class="stats">
-    <div class="stat ret reveal"><b>Web Pentest</b><span>Aplicações, APIs, autenticação, autorização e superfície de ataque</span></div>
-    <div class="stat ret reveal"><b>Bug Bounty</b><span>Pesquisa e validação de vulnerabilidades em programas autorizados</span></div>
-    <div class="stat ret reveal"><b>Automação</b><span>Ferramentas próprias em Python e Go para recon, testes e relatórios</span></div>
+    <div class="stat"><b>Triagem em SIEM</b><span>Malware, phishing e acessos suspeitos, do alerta à decisão</span></div>
+    <div class="stat"><b>Logs e evidências</b><span>Análise de logs e documentação do que foi encontrado</span></div>
+    <div class="stat"><b>Playbooks e relatórios</b><span>Resposta a incidentes, relatórios e dashboards</span></div>
   </div>
 </section>
 
-<section id="offensive">
-  <h2 class="reveal">Projetos de Pentest</h2>
-  <p class="lead reveal">Ferramentas, laboratórios e pesquisa prática em Web Security, Reconnaissance e Vulnerability Research.</p>
-  <div class="list">
-    <!-- NOVO PROJETO ODIN -->
-    <a class="proj reveal" href="https://github.com/Pendragon711/odin-recon" target="_blank" rel="noopener noreferrer">
-      <div><div class="t">👁️ ODIN — Web Recon Pipeline</div><div class="m">Go · SQLite · Subfinder · Naabu · HTTPX · Detecção de WAF · SimHash</div></div>
-      <span class="sev red">TOOLING</span>
-    </a>
-    
-    <a class="proj reveal" href="https://github.com/Pendragon711/GHOST---Web-Pentest-Framework" target="_blank" rel="noopener noreferrer">
-      <div><div class="t">👻 GHOST — Web Pentest Framework</div><div class="m">Python · Playwright · Requests · CWE · CVSS v3.1 · Relatórios HTML/PDF</div></div>
-      <span class="sev red">FRAMEWORK</span>
-    </a>
-    <a class="proj reveal" href="https://hackerone.com/" target="_blank" rel="noopener noreferrer">
-      <div><div class="t">🔎 Bug Bounty — HackerOne</div><div class="m">Recon · Testes manuais · IDOR · XSS · Injeções · Documentação de achados</div></div>
-      <span class="sev red">BUG BOUNTY</span>
-    </a>
-    <a class="proj reveal" href="https://github.com/Pendragon711/soc-lab-wazuh" target="_blank" rel="noopener noreferrer">
-      <div><div class="t">⚔️ Laboratório de Pentest e Detecção</div><div class="m">Kali Linux · Metasploit · Metasploitable 2 · Nmap · Wazuh · VirtualBox</div></div>
-      <span class="sev amber">LAB</span>
-    </a>
-    <a class="proj reveal" href="https://github.com/Pendragon711/ssh-honeypot-lab" target="_blank" rel="noopener noreferrer">
-      <div><div class="t">🍯 SSH Honeypot Lab</div><div class="m">Python · Flask · Honeypot SSH e Web · 4 regras de detecção · Dashboard</div></div>
-      <span class="sev amber">LAB</span>
-    </a>
-  </div>
-  <div class="box ret reveal">
-    <div class="vulns"><span>OWASP Top 10</span><span>XSS</span><span>SQL Injection</span><span>IDOR / BOLA</span><span>SSRF</span><span>LFI/RFI</span><span>Path Traversal</span><span>CORS</span><span>Race Condition</span><span>SSTI</span><span>NoSQL Injection</span><span>Command Injection</span></div>
-    <p class="lead" style="margin-top:14px">Achados classificados com <strong>CWE</strong> e severidade avaliada com <strong>CVSS v3.1</strong>, sempre em ambientes e programas autorizados.</p>
-  </div>
-</section>
+<section id="playbooks">
+  <div class="sh"><h2>Como eu faço a triagem</h2><span class="hint">3 playbooks</span></div>
+  <p class="lead">Um roteiro por tipo de alerta, para decidir rápido e deixar o caso documentado.</p>
 
-<section id="metodologia">
-  <h2 class="reveal">Como eu trabalho</h2>
-  <p class="lead reveal">Do reconhecimento ao relatório, sempre dentro do escopo autorizado.</p>
-  <div class="chain reveal">
-    <div class="step"><b>01</b><h3>Recon</h3><p>Mapeamento de superfície, subdomínios e tecnologias.</p></div>
-    <div class="step"><b>02</b><h3>Enumeração</h3><p>Serviços, endpoints, parâmetros e controles de acesso.</p></div>
-    <div class="step"><b>03</b><h3>Validação</h3><p>Testes manuais e automatizados para confirmar a falha.</p></div>
-    <div class="step"><b>04</b><h3>Impacto</h3><p>Classificação com CWE e severidade com CVSS v3.1.</p></div>
-    <div class="step"><b>05</b><h3>Relatório</h3><p>Evidências, passos de reprodução e recomendação de correção.</p></div>
+  <div class="tabs" role="tablist" aria-label="Tipos de alerta">
+    <button role="tab" id="tab-0" aria-controls="pb-0" aria-selected="true">Phishing</button>
+    <button role="tab" id="tab-1" aria-controls="pb-1" aria-selected="false" tabindex="-1">Acesso suspeito</button>
+    <button role="tab" id="tab-2" aria-controls="pb-2" aria-selected="false" tabindex="-1">Malware</button>
   </div>
-</section>
 
-<section id="skills">
-  <h2 class="reveal">Ferramentas e competências</h2>
-  <div class="grid">
-    <div class="card ret reveal"><h3>🌐 Web &amp; API Security</h3>
-      <span class="tag">OWASP Top 10</span><span class="tag">IDOR/BOLA</span><span class="tag">Autenticação</span><span class="tag">Autorização</span><span class="tag">HTTP</span><span class="tag">CORS</span><span class="tag">Race Condition</span><span class="tag">CWE</span><span class="tag">CVSS</span>
-      <p>Análise de requests e responses, endpoints, parâmetros e controles de acesso em aplicações web e APIs.</p></div>
-    <div class="card ret reveal"><h3>🔴 Recon &amp; Enumeração</h3>
-      <span class="tag">Nmap</span><span class="tag">Amass</span><span class="tag">Subfinder</span><span class="tag">httpx</span><span class="tag">ffuf</span><span class="tag">Fuzzing</span>
-      <p>Descoberta de subdomínios, endpoints, diretórios e serviços para mapear a superfície de ataque.</p></div>
-    <div class="card ret reveal"><h3>🛠️ Ferramentas de Pentest</h3>
-      <span class="tag">Burp Suite</span><span class="tag">Caido</span><span class="tag">OWASP ZAP</span><span class="tag">Metasploit</span><span class="tag">Kali Linux</span>
-      <p>Testes manuais e semiautomatizados, exploração em laboratório e validação de achados.</p></div>
-    <div class="card ret reveal"><h3>🐍 Automação &amp; DevSecOps</h3>
-      <span class="tag">Python</span><span class="tag">Go (Golang)</span><span class="tag">Playwright</span><span class="tag">Requests</span><span class="tag">Bash</span><span class="tag">Linux</span><span class="tag">Git</span><span class="tag">SQLite</span>
-      <p>Crawlers, módulos de teste, orquestração de pipelines (ODIN), processamento de resultados e geração de evidências.</p></div>
-    <div class="card ret reveal"><h3>🛡️ Visão de detecção</h3>
-      <span class="tag">Wazuh</span><span class="tag">SIEM</span><span class="tag">Análise de logs</span><span class="tag">Firewalls</span>
-      <p>Experiência em SOC que ajuda a entender o rastro de um ataque e a recomendar correções e detecções melhores.</p></div>
+  <div class="pb" id="pb-0" role="tabpanel" aria-labelledby="tab-0">
+    <ol class="steps">
+      <li>Identificar o que chegou: remetente, assunto, anexos e links.</li>
+      <li>Analisar os cabeçalhos: SPF, DKIM, DMARC e o caminho de entrega.</li>
+      <li>Abrir links e anexos só em ambiente isolado, nunca na máquina do usuário.</li>
+      <li>Medir o alcance: quem mais recebeu, quem abriu e quem clicou.</li>
+      <li>Conter: bloquear remetente e URL, remover o e-mail e redefinir senhas de quem digitou credenciais.</li>
+      <li>Registrar o caso com as evidências e os indicadores encontrados.</li>
+    </ol>
+    <div class="side">
+      <div class="note"><h3>Evidências que eu registro</h3><p>Cabeçalhos completos, hash do anexo, URLs, lista de destinatários e logs de acesso.</p></div>
+      <div class="note warn"><h3>Quando eu escalo</h3><p>Credenciais digitadas, anexo executado, ou alvo na diretoria, financeiro ou TI.</p></div>
+    </div>
   </div>
-</section>
 
-<section id="experiencia">
-  <h2 class="reveal">Experiência profissional</h2>
-  <div class="tl">
-    <div class="i reveal"><div class="d">03/2026 – 08/2026</div><div class="t">Estagiário de Segurança da Informação</div><div class="s">Multi Energisa S.A. — Triagem e investigação de alertas em SIEM (malware, phishing, acessos suspeitos), análise de logs e evidências, apoio a firewalls e ferramentas de detecção, e criação de playbooks de resposta a incidentes, relatórios e dashboards.</div></div>
-    <div class="i reveal"><div class="d">09/2023 – 12/2024</div><div class="t">Analista de Suporte Técnico N2</div><div class="s">Tahto (Brasil Telecom S.A.) — Troubleshooting estruturado de redes GPON, WLAN e LAN, análise de latência e perda de pacotes, isolamento de falhas e documentação de evidências.</div></div>
-    <div class="i reveal"><div class="d">11/2017 – 07/2019</div><div class="t">Analista de Suporte Técnico N1</div><div class="s">BTCC (Brasil Telecom S.A.) — Análise de logs de sistemas corporativos para diagnosticar falhas de ativação e erros de provisionamento.</div></div>
+  <div class="pb" id="pb-1" role="tabpanel" aria-labelledby="tab-1" hidden>
+    <ol class="steps">
+      <li>Confirmar o que disparou: conta, horário, origem e método de autenticação.</li>
+      <li>Comparar com o histórico do usuário: local, dispositivo e horário habituais.</li>
+      <li>Procurar falhas seguidas de sucesso (Windows: evento 4625 seguido de 4624).</li>
+      <li>Validar com o usuário ou o gestor por um canal confiável.</li>
+      <li>Se for suspeito: encerrar sessões, redefinir credenciais, revisar o MFA e as ações feitas na sessão.</li>
+      <li>Registrar o caso com a linha do tempo dos acessos.</li>
+    </ol>
+    <div class="side">
+      <div class="note"><h3>Evidências que eu registro</h3><p>Logs de autenticação, IP e geolocalização, user-agent e as ações feitas depois do login.</p></div>
+      <div class="note warn"><h3>Quando eu escalo</h3><p>Login bem-sucedido que o usuário não reconhece, conta privilegiada ou sinal de movimentação lateral.</p></div>
+    </div>
   </div>
-</section>
 
-<section id="formacao">
-  <h2 class="reveal">Formação e certificações</h2>
-  <div class="tl">
-    <div class="i reveal"><div class="d">EM ANDAMENTO</div><div class="t">Graduação em Cibersegurança</div><div class="s">Unicesumar</div></div>
-    <div class="i reveal"><div class="d">2026</div><div class="t">IBSEC — Pentester na Era da IA</div><div class="s">Hacking ético, pentesting, segurança ofensiva, IA ofensiva e engenharia social.</div></div>
-    <div class="i reveal"><div class="d">2026</div><div class="t">FIAP — Nano Course Cybersecurity</div><div class="s">Segurança, riscos, vulnerabilidades, TCP/IP, hardening, criptografia e pentest.</div></div>
-    <div class="i reveal"><div class="d">2026</div><div class="t">Fundamentos de SOC N1 — Be Safe Inc.</div><div class="s">Fundamentos de SOC e ITIL.</div></div>
-    <div class="i reveal"><div class="d">CONCLUÍDO</div><div class="t">Google Cybersecurity Professional Certificate</div><div class="s">Coursera — fundamentos de cibersegurança.</div></div>
-    <div class="i reveal"><div class="d">CONCLUÍDO</div><div class="t">Cisco — Junior Cybersecurity Analyst</div><div class="s">Cisco Networking Academy — fundamentos de segurança cibernética.</div></div>
-    <div class="i reveal"><div class="d">CONCLUÍDO</div><div class="t">AWS Cloud Practitioner Essentials</div><div class="s">Fundamentos de Cloud Computing e AWS.</div></div>
-  </div>
-</section>
-
-<section id="contato">
-  <div class="contact box ret reveal">
-    <h2>Vamos conversar.</h2>
-    <p class="lead">Busco vaga ou estágio como <strong>Pentester Júnior</strong>, com foco em <strong>Web Application Security</strong> e Offensive Security. Currículo e projetos disponíveis sob pedido.</p>
-    <div class="links2">
-      <a class="btn" href="https://github.com/Pendragon711" target="_blank" rel="noopener noreferrer">github.com/Pendragon711</a>
-      <a class="btn" href="https://www.linkedin.com/in/danielwidal" target="_blank" rel="noopener noreferrer">linkedin.com/in/danielwidal</a>
-      <a class="btn" href="mailto:daniels2live666@gmail.com">daniels2live666@gmail.com</a>
+  <div class="pb" id="pb-2" role="tabpanel" aria-labelledby="tab-2" hidden>
+    <ol class="steps">
+      <li>Ler o alerta: arquivo, caminho, hash e a ação tomada (bloqueado, removido ou executado).</li>
+      <li>Consultar hash e URL em bases de reputação.</li>
+      <li>Reconstruir a árvore de processos: quem iniciou o quê (criação de processo, evento 4688).</li>
+      <li>Verificar conexões de saída e persistência, como tarefas agendadas e chaves de inicialização.</li>
+      <li>Buscar o mesmo hash em outras estações.</li>
+      <li>Se houve execução: isolar a estação e preservar as evidências antes de qualquer limpeza.</li>
+    </ol>
+    <div class="side">
+      <div class="note"><h3>Evidências que eu registro</h3><p>Hash, caminho, árvore de processos, conexões de rede e horários em UTC.</p></div>
+      <div class="note warn"><h3>Quando eu escalo</h3><p>Execução confirmada, persistência ou comunicação com IP externo suspeito.</p></div>
     </div>
   </div>
 </section>
 
-<footer><span>© 2026 Daniel Widal</span><span>Pentester Júnior · Web Application Security</span></footer>
+<section id="dfir">
+  <div class="sh"><h2>DFIR: do alerta à reconstrução do incidente</h2></div>
+  <p class="lead">Estou aprofundando a parte forense: preservar evidências com cuidado e montar a linha do tempo do que aconteceu.</p>
 
-<script src="js/net.js"></script>
+  <ol class="flow">
+    <li><h3>Identificar</h3><p>Entender o que foi afetado e qual o escopo.</p></li>
+    <li><h3>Preservar</h3><p>Evitar perda de evidências antes de qualquer limpeza.</p></li>
+    <li><h3>Coletar</h3><p>Capturar logs e arquivos registrando quem, quando e como.</p></li>
+    <li><h3>Analisar</h3><p>Correlacionar as fontes e montar a linha do tempo.</p></li>
+    <li><h3>Reportar</h3><p>Fatos, evidências e recomendações em linguagem clara.</p></li>
+  </ol>
+
+  <div class="dfir-grid">
+    <div class="evid" aria-label="Princípios de coleta de evidências">
+      <h3>Etiqueta de evidência</h3>
+      <dl>
+        <div><dt>Trabalho</dt><dd>Sempre em cópia, nunca no original</dd></div>
+        <div><dt>Integridade</dt><dd>Hash antes e depois da coleta</dd></div>
+        <div><dt>Ordem</dt><dd>Do mais volátil ao menos volátil</dd></div>
+        <div><dt>Registro</dt><dd>Quem coletou, quando (UTC) e como</dd></div>
+      </dl>
+      <p class="sign">Cadeia de custódia</p>
+    </div>
+
+    <div class="tlx-wrap">
+      <div class="tlx-head"><b>Linha do tempo de exemplo</b><span class="sim">caso didático, dados fictícios</span></div>
+      <ol class="tlx" id="tlx">
+        <li style="--i:0"><time>08:02:11</time><div><b>E-mail com anexo entregue</b><span class="src">Gateway de e-mail</span></div></li>
+        <li style="--i:1"><time>08:04:40</time><div><b>Usuário baixa e abre o arquivo</b><span class="src">Histórico do navegador</span></div></li>
+        <li style="--i:2"><time>08:05:03</time><div><b>Word cria um processo PowerShell</b><span class="src">Windows, evento 4688</span></div></li>
+        <li style="--i:3"><time>08:05:21</time><div><b>Conexão de saída para IP externo</b><span class="src">Firewall</span></div></li>
+        <li style="--i:4"><time>08:19:48</time><div><b>Tarefa agendada criada (persistência)</b><span class="src">Windows, evento 4698</span></div></li>
+        <li style="--i:5"><time>08:31:02</time><div><b>Alerta dispara e a estação é isolada</b><span class="src">EDR</span></div></li>
+      </ol>
+      <p class="tlx-foot">Cerca de 29 minutos entre a entrega do e-mail e o primeiro alerta. É nesse intervalo que a análise procura o que o atacante fez.</p>
+    </div>
+  </div>
+
+  <div class="tools">
+    <div>
+      <h3>Uso em laboratório e no trabalho</h3>
+      <span class="chip">Wazuh</span><span class="chip">SIEM</span><span class="chip">Análise de logs</span><span class="chip">Firewalls</span><span class="chip">Linux</span><span class="chip">Python</span><span class="chip">Bash</span><span class="chip">Git</span>
+    </div>
+    <div>
+      <h3>Em estudo</h3>
+      <!-- Ajuste esta lista para refletir exatamente o que você já estuda -->
+      <span class="chip study">Wireshark</span><span class="chip study">Sysmon</span><span class="chip study">Autopsy</span><span class="chip study">Volatility</span><span class="chip study">MITRE ATT&amp;CK</span>
+    </div>
+  </div>
+</section>
+
+<section id="projetos">
+  <div class="sh"><h2>Laboratórios de detecção</h2></div>
+  <p class="lead">Ambientes que eu montei para gerar ataques, ver o que aparece nos logs e escrever regras de detecção.</p>
+  <div class="list">
+    <a class="proj" href="https://github.com/Pendragon711/soc-lab-wazuh" target="_blank" rel="noopener noreferrer">
+      <div><div class="t">Laboratório SOC com Wazuh</div><div class="m">Wazuh, Kali Linux, Metasploitable 2, Metasploit, Nmap, VirtualBox. Ataques simulados e os alertas que eles geram.</div></div>
+      <span class="kind">Detecção</span>
+    </a>
+    <a class="proj" href="https://github.com/Pendragon711/ssh-honeypot-lab" target="_blank" rel="noopener noreferrer">
+      <div><div class="t">SSH Honeypot Lab</div><div class="m">Python, Flask, honeypot SSH e web, 4 regras de detecção e um dashboard para acompanhar as tentativas.</div></div>
+      <span class="kind">Detecção</span>
+    </a>
+  </div>
+
+  <div class="off">
+    <h3>Visão ofensiva</h3>
+    <p>Conhecer o ataque ajuda a escrever detecções melhores e a entender o rastro que ele deixa. Estes são meus projetos da área ofensiva.</p>
+    <ul>
+      <li><a href="https://github.com/Pendragon711/odin-recon" target="_blank" rel="noopener noreferrer"><b>ODIN</b> Pipeline de reconhecimento web em Go</a></li>
+      <li><a href="https://github.com/Pendragon711/GHOST---Web-Pentest-Framework" target="_blank" rel="noopener noreferrer"><b>GHOST</b> Framework de pentest web em Python</a></li>
+      <li><a href="https://hackerone.com/" target="_blank" rel="noopener noreferrer"><b>Bug Bounty</b> Pesquisa em programas autorizados no HackerOne</a></li>
+    </ul>
+  </div>
+</section>
+
+<section id="experiencia">
+  <div class="sh"><h2>Experiência profissional</h2></div>
+  <div class="tl">
+    <div class="i"><div class="d">03/2026 a 08/2026</div><div class="t">Estagiário de Segurança da Informação</div><div class="s">Multi Energisa S.A. Triagem e investigação de alertas em SIEM (malware, phishing, acessos suspeitos), análise de logs e evidências, apoio a firewalls e ferramentas de detecção, e criação de playbooks de resposta a incidentes, relatórios e dashboards.</div></div>
+    <div class="i"><div class="d">09/2023 a 12/2024</div><div class="t">Analista de Suporte Técnico N2</div><div class="s">Tahto (Brasil Telecom S.A.). Troubleshooting estruturado de redes GPON, WLAN e LAN, análise de latência e perda de pacotes, isolamento de falhas e documentação de evidências.</div></div>
+    <div class="i"><div class="d">11/2017 a 07/2019</div><div class="t">Analista de Suporte Técnico N1</div><div class="s">BTCC (Brasil Telecom S.A.). Análise de logs de sistemas corporativos para diagnosticar falhas de ativação e erros de provisionamento.</div></div>
+  </div>
+</section>
+
+<section id="formacao">
+  <div class="sh"><h2>Formação e certificações</h2></div>
+  <div class="edu">
+    <div>
+      <h3>Defesa e SOC</h3>
+      <div class="tl">
+        <div class="i"><div class="d">Em andamento</div><div class="t">Graduação em Cibersegurança</div><div class="s">Unicesumar</div></div>
+        <div class="i"><div class="d">2026</div><div class="t">Fundamentos de SOC N1</div><div class="s">Be Safe Inc. Fundamentos de SOC e ITIL.</div></div>
+        <div class="i"><div class="d">Concluído</div><div class="t">Google Cybersecurity Professional Certificate</div><div class="s">Coursera. Fundamentos de cibersegurança.</div></div>
+        <div class="i"><div class="d">Concluído</div><div class="t">Cisco Junior Cybersecurity Analyst</div><div class="s">Cisco Networking Academy.</div></div>
+        <div class="i"><div class="d">2026</div><div class="t">FIAP Nano Course Cybersecurity</div><div class="s">Riscos, vulnerabilidades, TCP/IP, hardening, criptografia e pentest.</div></div>
+      </div>
+    </div>
+    <div>
+      <h3>Complementar</h3>
+      <div class="tl">
+        <div class="i"><div class="d">2026</div><div class="t">IBSEC Pentester na Era da IA</div><div class="s">Hacking ético, pentesting, segurança ofensiva e engenharia social.</div></div>
+        <div class="i"><div class="d">Concluído</div><div class="t">AWS Cloud Practitioner Essentials</div><div class="s">Fundamentos de Cloud Computing e AWS.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contato">
+  <div class="contact box">
+    <h2>Vamos conversar.</h2>
+    <p class="lead">Busco vaga como <strong>Analista de SOC N1</strong> ou posição júnior em <strong>DFIR</strong> e resposta a incidentes. Currículo e projetos disponíveis sob pedido.</p>
+    <div class="links2">
+      <a class="btn primary" href="mailto:daniels2live666@gmail.com">daniels2live666@gmail.com</a>
+      <a class="btn" href="https://www.linkedin.com/in/danielwidal" target="_blank" rel="noopener noreferrer">linkedin.com/in/danielwidal</a>
+      <a class="btn" href="https://github.com/Pendragon711" target="_blank" rel="noopener noreferrer">github.com/Pendragon711</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer><span>© 2026 Daniel Widal</span><span>Analista de SOC N1 e DFIR</span></footer>
+
+<script src="js/hex.js"></script>
 <script src="js/main.js"></script>
 </body>
 </html>
