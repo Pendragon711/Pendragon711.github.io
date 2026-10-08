@@ -1,134 +1,198 @@
 const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
-const fine = matchMedia("(pointer: fine)").matches;
-const root = document.documentElement;
-const mouse = { x: -999, y: -999 };
+const $ = (s, r = document) => r.querySelector(s);
+const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+const pad = n => String(n).padStart(2, "0");
+const utc = (d = new Date()) => `${pad(d.getUTCHours())}:${pad(d.getUTCMinutes())}:${pad(d.getUTCSeconds())}`;
 
-/* Reveal ao rolar */
-const io = new IntersectionObserver(es => es.forEach(e => {
-  if (e.isIntersecting) { e.target.classList.add("visible"); io.unobserve(e.target); }
-}), { threshold: 0.12 });
-document.querySelectorAll(".reveal").forEach(el => io.observe(el));
+/* Relógio em UTC, como no turno de um SOC */
+const clock = $("#clock");
+function tick() { clock.textContent = utc() + " UTC"; }
+tick();
+setInterval(tick, 1000);
 
-/* Menu: seção atual */
-const links = [...document.querySelectorAll(".links a")];
-const secs = [...document.querySelectorAll("section[id]")];
+/* ---------- Fila de alertas (simulação com dados fictícios) ---------- */
+const ALERTS = [
+  { sev: "med", title: "E-mail com anexo .html reportado pelo usuário", src: "Gateway de e-mail",
+    steps: ["Cabeçalhos: SPF, DKIM e DMARC falharam", "Domínio do remetente registrado há poucos dias", "Anexo aberto em sandbox: formulário de login falso", "O mesmo e-mail chegou a outros destinatários"],
+    v: "esc", why: "Phishing confirmado. Bloquear o remetente, remover o e-mail das caixas e escalar." },
+  { sev: "high", title: "Muitas falhas de login SSH em poucos minutos", src: "Wazuh",
+    steps: ["IP de origem externo, sem relação com a empresa", "Mesmo IP tentando vários usuários: padrão de força bruta", "Nenhum login bem-sucedido depois das tentativas", "IP já listado em base de reputação"],
+    v: "tp", why: "Ataque real, sem acesso obtido. IP bloqueado no firewall e registrado." },
+  { sev: "med", title: "Login fora do horário vindo de outro país", src: "SIEM",
+    steps: ["Usuário em viagem de trabalho, confirmado com o gestor", "Autenticação com MFA concluída", "Dispositivo já conhecido"],
+    v: "fp", why: "Atividade legítima. Alerta encerrado, com nota para ajustar a regra." },
+  { sev: "crit", title: "PowerShell com comando codificado em estação", src: "EDR",
+    steps: ["Processo pai: documento do Office abrindo o PowerShell", "Comando decodificado baixa um arquivo de domínio externo", "Conexão de saída para IP sem reputação", "Nenhuma outra estação com o mesmo comportamento"],
+    v: "esc", why: "Comportamento malicioso. Estação isolada e caso passado ao N2 com as evidências." },
+  { sev: "low", title: "Pico de conexões bloqueadas no firewall", src: "Firewall",
+    steps: ["Origem é o IP interno do scanner de vulnerabilidades", "Horário bate com a janela de varredura agendada", "Portas alvo dentro do escopo do scan"],
+    v: "fp", why: "Varredura autorizada. Encerrado." },
+  { sev: "high", title: "Antivírus removeu arquivo malicioso em estação", src: "Antivírus",
+    steps: ["Hash consultado: malware conhecido", "Origem: download de um site comprometido", "Hash não encontrado em outras estações", "Sem execução suspeita depois da remoção"],
+    v: "tp", why: "Ameaça contida pelo antivírus. Usuário orientado e URL bloqueada." }
+];
+const LABEL = { new: "novo", triage: "em triagem", fp: "falso positivo", esc: "escalado ao N2", tp: "contido" };
+const VERDICT = { fp: "Falso positivo", esc: "Escalado ao N2", tp: "Verdadeiro positivo, contido" };
+
+const queue = $("#queue"), detail = $("#detail");
+const out = { open: $("#cOpen"), esc: $("#cEsc"), tp: $("#cTp"), fp: $("#cFp") };
+const total = { esc: 0, tp: 0, fp: 0 };
+const rows = [];
+let cursor = 0, picked = false, selected = null;
+
+function mkRow(a, time, state) {
+  const li = document.createElement("li");
+  const btn = document.createElement("button");
+  btn.type = "button";
+  btn.className = `row sev-${a.sev}`;
+  btn.setAttribute("aria-pressed", "false");
+  const t = document.createElement("span"); t.className = "t"; t.textContent = time;
+  const sv = document.createElement("span"); sv.className = "sv"; sv.setAttribute("aria-hidden", "true");
+  const ti = document.createElement("span"); ti.className = "ti";
+  const b = document.createElement("b"); b.textContent = a.title;
+  const sm = document.createElement("small"); sm.textContent = a.src;
+  ti.append(b, sm);
+  const st = document.createElement("span");
+  btn.append(t, sv, ti, st);
+  li.append(btn);
+  const row = { a, li, btn, st, state: "new" };
+  btn.addEventListener("click", () => { picked = true; show(row, true); });
+  setState(row, state, true);
+  return row;
+}
+
+function setState(row, state, silent) {
+  row.state = state;
+  row.st.className = `st st-${state}`;
+  row.st.textContent = LABEL[state];
+  if (!silent) counts();
+}
+
+function counts() {
+  out.open.textContent = rows.filter(r => r.state === "new" || r.state === "triage").length;
+  out.esc.textContent = total.esc;
+  out.tp.textContent = total.tp;
+  out.fp.textContent = total.fp;
+}
+
+function show(row, still) {
+  selected = row;
+  rows.forEach(r => r.btn.setAttribute("aria-pressed", String(r === row)));
+  const a = row.a;
+  const done = row.state === "fp" || row.state === "esc" || row.state === "tp";
+  const steps = a.steps.map((s, i) => `<li style="--i:${i}">${s}</li>`).join("");
+  const verdict = done ? `<div class="dv ${a.v}"><b>${VERDICT[a.v]}</b>${a.why}</div>` : "";
+  detail.className = "detail" + (still || reduced ? " static" : "");
+  detail.innerHTML = `<p class="dh">${a.title}</p><ul class="dl">${steps}</ul>${verdict}`;
+}
+
+function resolve(row) {
+  const v = row.a.v;
+  total[v]++;
+  setState(row, v);
+  if (selected === row) {
+    const html = detail.querySelector(".dl");
+    const keep = html ? html.outerHTML : "";
+    if (keep) {
+      detail.classList.add("static");
+      detail.insertAdjacentHTML("beforeend", `<div class="dv ${v}"><b>${VERDICT[v]}</b>${row.a.why}</div>`);
+    } else show(row, true);
+  }
+  counts();
+}
+
+function add(a, time, state) {
+  const row = mkRow(a, time, state);
+  rows.unshift(row);
+  queue.prepend(row.li);
+  while (queue.children.length > 6) { queue.lastElementChild.remove(); rows.pop(); }
+  return row;
+}
+
+/* Alertas já resolvidos para o painel não começar vazio */
+[4, 2, 5].forEach((idx, k) => {
+  const a = ALERTS[idx];
+  const t = utc(new Date(Date.now() - (11 - k * 4) * 60000));
+  total[a.v]++;
+  add(a, t, a.v);
+});
+show(rows[0], true);
+counts();
+
+/* Novos alertas chegando, sendo triados e decididos */
+function arrive() {
+  if (document.hidden) return;
+  const a = ALERTS[cursor++ % ALERTS.length];
+  const row = add(a, utc(), "new");
+  row.btn.classList.add("enter");
+  counts();
+  setTimeout(() => {
+    setState(row, "triage");
+    if (!picked) show(row);
+    counts();
+  }, 900);
+  setTimeout(() => resolve(row), 900 + 4800);
+}
+if (!reduced) {
+  setTimeout(arrive, 1800);
+  setInterval(arrive, 7500);
+}
+
+/* ---------- Playbooks (abas) ---------- */
+const tabs = $$('[role="tab"]'), panels = $$('[role="tabpanel"]');
+function pick(i) {
+  tabs.forEach((t, j) => {
+    t.setAttribute("aria-selected", String(j === i));
+    t.tabIndex = j === i ? 0 : -1;
+    panels[j].hidden = j !== i;
+  });
+}
+tabs.forEach((t, i) => {
+  t.addEventListener("click", () => pick(i));
+  t.addEventListener("keydown", e => {
+    if (e.key !== "ArrowRight" && e.key !== "ArrowLeft") return;
+    const k = (i + (e.key === "ArrowRight" ? 1 : -1) + tabs.length) % tabs.length;
+    pick(k);
+    tabs[k].focus();
+  });
+});
+
+/* ---------- Linha do tempo de exemplo e experiência ---------- */
+const tlx = $("#tlx");
+const seen = new IntersectionObserver(es => es.forEach(e => {
+  if (!e.isIntersecting) return;
+  e.target.classList.add(e.target.id === "tlx" ? "in" : "on");
+  seen.unobserve(e.target);
+}), { threshold: 0.25 });
+if (tlx) seen.observe(tlx);
+$$(".tl .i").forEach(el => seen.observe(el));
+
+/* ---------- Menu e linha de progresso ---------- */
+const links = $$(".links a");
+const secs = $$("main section[id]");
 const spy = new IntersectionObserver(es => es.forEach(e => {
   if (e.isIntersecting) links.forEach(a => a.classList.toggle("on", a.getAttribute("href") === "#" + e.target.id));
 }), { rootMargin: "-45% 0px -50% 0px" });
 secs.forEach(s => spy.observe(s));
 
-/* Rede viva (hero) */
-const cv = document.getElementById("net"), cx = cv.getContext("2d");
-let W, H, pts = [], running = false;
-
-function size() {
-  const dpr = Math.min(devicePixelRatio || 1, 2);
-  W = innerWidth; H = innerHeight;
-  cv.width = W * dpr; cv.height = H * dpr;
-  cx.setTransform(dpr, 0, 0, dpr, 0, 0);
-  const n = Math.min(100, Math.round(W * H / 16000));
-  pts = Array.from({ length: n }, () => ({
-    x: Math.random() * W, y: Math.random() * H,
-    vx: (Math.random() - .5) * .3, vy: (Math.random() - .5) * .3,
-    r: Math.random() * 1.4 + .6
-  }));
-  if (reduced) draw();
-}
-
-function line(a, b, color) {
-  cx.strokeStyle = color; cx.lineWidth = 1;
-  cx.beginPath(); cx.moveTo(a.x, a.y); cx.lineTo(b.x, b.y); cx.stroke();
-}
-
-function draw() {
-  cx.clearRect(0, 0, W, H);
-  for (const p of pts) {
-    const dx = p.x - mouse.x, dy = p.y - mouse.y, d = Math.hypot(dx, dy);
-    if (!reduced && d < 110 && d > 0) { p.x += dx / d * (110 - d) * .03; p.y += dy / d * (110 - d) * .03; }
-    if (!reduced) {
-      p.x += p.vx; p.y += p.vy;
-      if (p.x < 0 || p.x > W) p.vx *= -1;
-      if (p.y < 0 || p.y > H) p.vy *= -1;
-    }
-  }
-  for (let i = 0; i < pts.length; i++) {
-    const a = pts[i];
-    for (let j = i + 1; j < pts.length; j++) {
-      const b = pts[j], d = Math.hypot(a.x - b.x, a.y - b.y);
-      if (d < 130) line(a, b, `rgba(225,29,46,${(1 - d / 130) * .35})`);
-    }
-    const m = Math.hypot(a.x - mouse.x, a.y - mouse.y);
-    if (m < 190) line(a, mouse, `rgba(255,90,31,${(1 - m / 190) * .55})`);
-    cx.fillStyle = "rgba(255,59,71,.85)";
-    cx.beginPath(); cx.arc(a.x, a.y, a.r, 0, 7); cx.fill();
-  }
-}
-
-function loop() {
-  if (document.hidden) { running = false; return; }
-  draw(); requestAnimationFrame(loop);
-}
-function start() { if (!running && !reduced) { running = true; loop(); } }
-
-size(); start();
-addEventListener("resize", size);
-document.addEventListener("visibilitychange", start);
-
-/* Cursor, spotlight e magnetismo */
-const cur = document.getElementById("cur");
-const mag = [...document.querySelectorAll(".btn,.links a")];
-let cxp = 0, cyp = 0;
-
-addEventListener("pointermove", e => {
-  mouse.x = e.clientX; mouse.y = e.clientY;
-  if (reduced) return;
-  document.body.style.setProperty("--mx", e.clientX + "px");
-  document.body.style.setProperty("--my", e.clientY + "px");
-  if (!fine) return;
-  cur.style.opacity = 1;
-  cur.classList.toggle("big", !!e.target.closest("a,.proj,.card,.step,.stat"));
-  mag.forEach(el => {
-    const r = el.getBoundingClientRect();
-    const dx = e.clientX - (r.left + r.width / 2), dy = e.clientY - (r.top + r.height / 2);
-    const near = Math.hypot(dx, dy) < Math.max(r.width, 90) * .8;
-    el.style.transform = near ? `translate(${dx * .25}px,${dy * .25}px)` : "";
-  });
-}, { passive: true });
-document.addEventListener("pointerleave", () => { mouse.x = mouse.y = -999; cur.style.opacity = 0; });
-
-if (fine && !reduced) {
-  (function follow() {
-    cxp += (mouse.x - cxp) * .18; cyp += (mouse.y - cyp) * .18;
-    cur.style.transform = `translate(${cxp}px,${cyp}px)`;
-    requestAnimationFrame(follow);
-  })();
-}
-
-/* Linha de kill chain + atmosfera no scroll */
-const rail = document.getElementById("rail"), fill = rail.firstElementChild;
+const root = document.documentElement;
+const rail = $("#rail"), fill = rail.firstElementChild;
 const dots = secs.map(() => rail.appendChild(document.createElement("b")));
-let marks = [];
+let marks = [], ticking = false;
 function place() {
   const max = Math.max(1, root.scrollHeight - innerHeight);
   marks = secs.map(s => Math.min(1, s.offsetTop / max));
   dots.forEach((d, i) => d.style.top = marks[i] * 100 + "%");
 }
-const lerp = (a, b, t) => a.map((v, i) => Math.round(v + (b[i] - v) * t));
-const h1 = document.querySelector("h1");
-let ticking = false;
-
 function onScroll() {
   ticking = false;
   const max = Math.max(1, root.scrollHeight - innerHeight);
   const p = Math.min(1, scrollY / max);
   fill.style.height = p * 100 + "%";
   dots.forEach((d, i) => d.classList.toggle("on", p >= marks[i] - .001));
-  const c = p < .5 ? lerp([8, 8, 10], [22, 9, 12], p * 2) : lerp([22, 9, 12], [9, 11, 14], (p - .5) * 2);
-  document.body.style.backgroundColor = `rgb(${c})`;
-  cv.style.opacity = .25 + .75 * Math.max(0, 1 - scrollY / innerHeight);
-  if (!reduced) h1.style.transform = `translateY(${Math.min(scrollY, innerHeight) * .18}px)`;
 }
 addEventListener("scroll", () => { if (!ticking) { ticking = true; requestAnimationFrame(onScroll); } }, { passive: true });
 addEventListener("resize", () => { place(); onScroll(); });
 addEventListener("load", () => { place(); onScroll(); });
-place(); onScroll();
+place();
+onScroll();
