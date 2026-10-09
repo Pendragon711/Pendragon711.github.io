@@ -5,8 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Daniel Widal — Analista SOC N1 & DFIR</title>
 <meta name="description" content="Portfólio de Daniel Widal: triagem em SIEM, análise forense, DFIR e resposta a incidentes.">
-<meta property="og:title" content="Daniel Widal — SOC N1 & DFIR">
-<meta property="og:description" content="Triagem de alertas, análise de logs e resposta a incidentes.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -33,12 +31,8 @@
 </header>
 
 <main>
-
 <section id="top" class="hero reveal">
-  <div class="tag">
-    <span class="dot"></span>
-    Disponível para vagas SOC N1 e DFIR júnior
-  </div>
+  <div class="tag"><span class="dot"></span>Disponível para vagas SOC N1 e DFIR júnior</div>
   <h1>Daniel Widal</h1>
   <p class="role">Analista de SOC N1 &nbsp;·&nbsp; Digital Forensics & Incident Response</p>
   <p class="lead">Triagem e investigação de alertas em SIEM, análise de logs e evidências, resposta a incidentes e laboratórios próprios de detecção com Wazuh.</p>
@@ -57,18 +51,9 @@
       <p>Antes, trabalhei com suporte técnico de redes (N1 e N2), onde aprendi a isolar falhas a partir de logs e a documentar evidências. Minha base em pentest me ajuda a pensar como o atacante e a escrever detecções melhores.</p>
     </div>
     <div class="cards">
-      <div class="card">
-        <h3>Triagem em SIEM</h3>
-        <p>Malware, phishing e acessos suspeitos, do alerta à decisão.</p>
-      </div>
-      <div class="card">
-        <h3>Logs & evidências</h3>
-        <p>Análise técnica e documentação do que foi encontrado.</p>
-      </div>
-      <div class="card">
-        <h3>Playbooks & relatórios</h3>
-        <p>Resposta a incidentes, relatórios e dashboards.</p>
-      </div>
+      <div class="card"><h3>Triagem em SIEM</h3><p>Malware, phishing e acessos suspeitos, do alerta à decisão.</p></div>
+      <div class="card"><h3>Logs & evidências</h3><p>Análise técnica e documentação do que foi encontrado.</p></div>
+      <div class="card"><h3>Playbooks & relatórios</h3><p>Resposta a incidentes, relatórios e dashboards.</p></div>
     </div>
   </div>
 </section>
@@ -77,13 +62,11 @@
   <span class="kicker">02 · SOC N1</span>
   <h2>Como faço a triagem</h2>
   <p class="lead">Um roteiro por tipo de alerta, para decidir rápido e deixar o caso documentado.</p>
-
   <div class="tabs">
     <button class="tab active" data-tab="phishing">Phishing</button>
     <button class="tab" data-tab="acesso">Acesso suspeito</button>
     <button class="tab" data-tab="malware">Malware</button>
   </div>
-
   <div class="panel active" data-panel="phishing">
     <div class="panel-grid">
       <ol class="steps">
@@ -91,22 +74,15 @@
         <li><b>2</b><div><h4>Cabeçalhos</h4><p>SPF, DKIM, DMARC e o caminho de entrega.</p></div></li>
         <li><b>3</b><div><h4>Abrir com cuidado</h4><p>Links e anexos só em ambiente isolado.</p></div></li>
         <li><b>4</b><div><h4>Medir o alcance</h4><p>Quem recebeu, quem abriu, quem clicou.</p></div></li>
-        <li><b>5</b><div><h4>Conter</h4><p>Bloquear remetente, URL e redefinir senhas de quem digitou credenciais.</p></div></li>
+        <li><b>5</b><div><h4>Conter</h4><p>Bloquear remetente, URL e redefinir senhas.</p></div></li>
         <li><b>6</b><div><h4>Registrar</h4><p>Salvar evidências e indicadores encontrados.</p></div></li>
       </ol>
       <aside class="panel-side">
-        <div class="side-box">
-          <h5>Evidências</h5>
-          <p>Cabeçalhos completos, hash do anexo, URLs, destinatários e logs de acesso.</p>
-        </div>
-        <div class="side-box warn">
-          <h5>Quando escalar</h5>
-          <p>Credenciais digitadas, anexo executado, ou alvo em diretoria, financeiro ou TI.</p>
-        </div>
+        <div class="side-box"><h5>Evidências</h5><p>Cabeçalhos completos, hash do anexo, URLs e logs.</p></div>
+        <div class="side-box warn"><h5>Quando escalar</h5><p>Credenciais digitadas, anexo executado ou alvo crítico.</p></div>
       </aside>
     </div>
   </div>
-
   <div class="panel" data-panel="acesso">
     <div class="panel-grid">
       <ol class="steps">
@@ -118,37 +94,24 @@
         <li><b>6</b><div><h4>Registrar</h4><p>Linha do tempo dos acessos.</p></div></li>
       </ol>
       <aside class="panel-side">
-        <div class="side-box">
-          <h5>Evidências</h5>
-          <p>Logs de autenticação, IP, geolocalização, user-agent e ações pós-login.</p>
-        </div>
-        <div class="side-box warn">
-          <h5>Quando escalar</h5>
-          <p>Login que o usuário não reconhece, conta privilegiada ou sinal de movimentação lateral.</p>
-        </div>
+        <div class="side-box"><h5>Evidências</h5><p>Logs de autenticação, IP, geolocalização e user-agent.</p></div>
+        <div class="side-box warn"><h5>Quando escalar</h5><p>Login desconhecido, conta privilegiada ou movimentação lateral.</p></div>
       </aside>
     </div>
   </div>
-
   <div class="panel" data-panel="malware">
     <div class="panel-grid">
       <ol class="steps">
         <li><b>1</b><div><h4>Ler o alerta</h4><p>Arquivo, caminho, hash e ação tomada.</p></div></li>
         <li><b>2</b><div><h4>Reputação</h4><p>Consultar hash e URL em bases conhecidas.</p></div></li>
         <li><b>3</b><div><h4>Árvore de processos</h4><p>Quem iniciou o quê (evento 4688).</p></div></li>
-        <li><b>4</b><div><h4>Saída & persistência</h4><p>Conexões externas, tarefas agendadas, chaves de inicialização.</p></div></li>
+        <li><b>4</b><div><h4>Saída & persistência</h4><p>Conexões externas e tarefas agendadas.</p></div></li>
         <li><b>5</b><div><h4>Outras estações</h4><p>Procurar o mesmo hash em outros hosts.</p></div></li>
         <li><b>6</b><div><h4>Preservar</h4><p>Se houve execução: isolar a estação antes de limpar.</p></div></li>
       </ol>
       <aside class="panel-side">
-        <div class="side-box">
-          <h5>Evidências</h5>
-          <p>Hash, caminho, árvore de processos, conexões e horários em UTC.</p>
-        </div>
-        <div class="side-box warn">
-          <h5>Quando escalar</h5>
-          <p>Execução confirmada, persistência ou comunicação com IP externo suspeito.</p>
-        </div>
+        <div class="side-box"><h5>Evidências</h5><p>Hash, caminho, árvore de processos e conexões.</p></div>
+        <div class="side-box warn"><h5>Quando escalar</h5><p>Execução confirmada, persistência ou C2 ativo.</p></div>
       </aside>
     </div>
   </div>
@@ -157,8 +120,7 @@
 <section id="dfir" class="block reveal">
   <span class="kicker">03 · DFIR</span>
   <h2>Do alerta à reconstrução do incidente</h2>
-  <p class="lead">Estou aprofundando a parte forense: preservar evidências com cuidado e montar a linha do tempo do que aconteceu.</p>
-
+  <p class="lead">Estou aprofundando a parte forense: preservar evidências com cuidado e montar a linha do tempo.</p>
   <div class="flow">
     <div class="flow-item"><span>01</span><h3>Identificar</h3><p>O que foi afetado e o escopo.</p></div>
     <div class="flow-item"><span>02</span><h3>Preservar</h3><p>Evitar perda antes de qualquer limpeza.</p></div>
@@ -166,7 +128,6 @@
     <div class="flow-item"><span>04</span><h3>Analisar</h3><p>Correlacionar fontes e montar timeline.</p></div>
     <div class="flow-item"><span>05</span><h3>Reportar</h3><p>Fatos, evidências e recomendações.</p></div>
   </div>
-
   <div class="two-col">
     <div class="evid-card">
       <div class="evid-label">Etiqueta de evidência</div>
@@ -178,7 +139,6 @@
       </ul>
       <div class="sign">Cadeia de custódia</div>
     </div>
-
     <div class="timeline-card">
       <div class="tl-head">Linha do tempo <span>caso didático</span></div>
       <ol class="timeline">
@@ -189,23 +149,12 @@
         <li><time>08:19:48</time><div><b>Tarefa agendada (persistência)</b><span>Windows, evento 4698</span></div></li>
         <li><time>08:31:02</time><div><b>Alerta dispara, estação isolada</b><span>EDR</span></div></li>
       </ol>
-      <p class="tl-foot">Cerca de 29 minutos entre a entrega e o primeiro alerta — nesse intervalo, a análise procura o que o atacante fez.</p>
+      <p class="tl-foot">Cerca de 29 minutos entre a entrega e o primeiro alerta.</p>
     </div>
   </div>
-
   <div class="skills">
-    <div>
-      <h5>Uso em laboratório e trabalho</h5>
-      <div class="chips">
-        <span>Wazuh</span><span>SIEM</span><span>Análise de logs</span><span>Firewalls</span><span>Linux</span><span>Python</span><span>Bash</span><span>Git</span>
-      </div>
-    </div>
-    <div>
-      <h5>Em estudo</h5>
-      <div class="chips study">
-        <span>Wireshark</span><span>Sysmon</span><span>Autopsy</span><span>Volatility</span><span>MITRE ATT&amp;CK</span>
-      </div>
-    </div>
+    <div><h5>Uso em laboratório e trabalho</h5><div class="chips"><span>Wazuh</span><span>SIEM</span><span>Linux</span><span>Python</span><span>Bash</span><span>Git</span></div></div>
+    <div><h5>Em estudo</h5><div class="chips study"><span>Wireshark</span><span>Sysmon</span><span>Autopsy</span><span>Volatility</span><span>MITRE ATT&amp;CK</span></div></div>
   </div>
 </section>
 
@@ -213,43 +162,32 @@
   <span class="kicker">04 · Projetos</span>
   <h2>Laboratórios de detecção e forense</h2>
   <p class="lead">Ambientes que monto para gerar ataques, ver o que aparece nos logs e escrever detecções melhores.</p>
-
   <div class="projects">
     <a class="project" href="https://github.com/Pendragon711/xlmrat-dfir-investigation" target="_blank" rel="noopener">
       <span class="project-tag">DFIR</span>
       <h3>XLMRat — Network Forensics & Malware Triage</h3>
-      <p>Investigação completa de uma cadeia de entrega e execução de malware (lab CyberDefenders), feita a partir de um PCAP. Análise de tráfego HTTP, desofuscação de payload, hash SHA256, identificação do AsyncRAT, abuso do LOLBin RegSvcs.exe, extração de IOCs e mapeamento no MITRE ATT&CK (T1105, T1059.001, T1218.009, T1620).</p>
-      <div class="stack">
-        <span>Wireshark</span><span>CyberChef</span><span>VirusTotal</span><span>Python</span><span>MITRE ATT&CK</span>
-      </div>
+      <p>Investigação completa de uma cadeia de entrega e execução de malware (lab CyberDefenders), feita a partir de um PCAP. Análise de tráfego HTTP, desofuscação de payload, hash SHA256, identificação do AsyncRAT, abuso do LOLBin RegSvcs.exe, extração de IOCs e mapeamento no MITRE ATT&CK.</p>
+      <div class="stack"><span>Wireshark</span><span>CyberChef</span><span>VirusTotal</span><span>Python</span><span>MITRE ATT&CK</span></div>
     </a>
-
     <a class="project" href="https://github.com/Pendragon711/soc-lab-wazuh" target="_blank" rel="noopener">
       <span class="project-tag">Detecção</span>
       <h3>Laboratório SOC com Wazuh</h3>
       <p>Wazuh, Kali Linux, Metasploitable 2, Metasploit, Nmap, VirtualBox. Ataques simulados e os alertas que eles geram.</p>
-      <div class="stack">
-        <span>Wazuh</span><span>Metasploit</span><span>Nmap</span><span>VirtualBox</span>
-      </div>
+      <div class="stack"><span>Wazuh</span><span>Metasploit</span><span>Nmap</span><span>VirtualBox</span></div>
     </a>
-
     <a class="project" href="https://github.com/Pendragon711/ssh-honeypot-lab" target="_blank" rel="noopener">
       <span class="project-tag">Detecção</span>
       <h3>SSH Honeypot Lab</h3>
       <p>Honeypot SSH e web em Python/Flask, 4 regras de detecção e um dashboard para acompanhar as tentativas.</p>
-      <div class="stack">
-        <span>Python</span><span>Flask</span><span>Wazuh</span>
-      </div>
+      <div class="stack"><span>Python</span><span>Flask</span><span>Wazuh</span></div>
     </a>
   </div>
-
   <div class="offensive">
     <h4>Visão ofensiva</h4>
-    <p>Conhecer o ataque ajuda a escrever detecções melhores. Estes são meus projetos da área ofensiva:</p>
+    <p>Conhecer o ataque ajuda a escrever detecções melhores:</p>
     <ul>
       <li><a href="https://github.com/Pendragon711/odin-recon" target="_blank" rel="noopener"><b>ODIN</b> — Pipeline de reconhecimento web em Go</a></li>
       <li><a href="https://github.com/Pendragon711/GHOST---Web-Pentest-Framework" target="_blank" rel="noopener"><b>GHOST</b> — Framework de pentest web em Python</a></li>
-      <li><a href="https://hackerone.com/" target="_blank" rel="noopener"><b>Bug Bounty</b> — Pesquisa em programas autorizados no HackerOne</a></li>
     </ul>
   </div>
 </section>
@@ -257,7 +195,6 @@
 <section id="experiencia" class="block reveal">
   <span class="kicker">05 · Experiência</span>
   <h2>Trajetória profissional</h2>
-
   <div class="exp-list">
     <article class="exp">
       <div class="exp-date">03/2026 — 08/2026</div>
@@ -265,14 +202,12 @@
       <div class="exp-company">Multi Energisa S.A.</div>
       <p>Triagem e investigação de alertas em SIEM (malware, phishing, acessos suspeitos), análise de logs e evidências, apoio a firewalls e ferramentas de detecção, criação de playbooks, relatórios e dashboards.</p>
     </article>
-
     <article class="exp">
       <div class="exp-date">09/2023 — 12/2024</div>
       <h3>Analista de Suporte Técnico N2</h3>
       <div class="exp-company">Tahto (Brasil Telecom S.A.)</div>
       <p>Troubleshooting estruturado de redes GPON, WLAN e LAN, análise de latência e perda de pacotes, isolamento de falhas e documentação de evidências.</p>
     </article>
-
     <article class="exp">
       <div class="exp-date">11/2017 — 07/2019</div>
       <h3>Analista de Suporte Técnico N1</h3>
@@ -280,23 +215,21 @@
       <p>Análise de logs de sistemas corporativos para diagnosticar falhas de ativação e erros de provisionamento.</p>
     </article>
   </div>
-
   <div class="edu-grid">
     <div>
       <h4>Defesa e SOC</h4>
       <ul class="edu-list">
         <li><span>Em andamento</span><b>Graduação em Cibersegurança</b><em>Unicesumar</em></li>
-        <li><span>2026</span><b>Fundamentos de SOC N1</b><em>Be Safe Inc. — SOC e ITIL</em></li>
+        <li><span>2026</span><b>Fundamentos de SOC N1</b><em>Be Safe Inc.</em></li>
         <li><span>Concluído</span><b>Google Cybersecurity Professional</b><em>Coursera</em></li>
         <li><span>Concluído</span><b>Cisco Junior Cybersecurity Analyst</b><em>Cisco Networking Academy</em></li>
-        <li><span>2026</span><b>FIAP Nano Course Cybersecurity</b><em>Riscos, TCP/IP, hardening, pentest</em></li>
       </ul>
     </div>
     <div>
       <h4>Complementar</h4>
       <ul class="edu-list">
-        <li><span>2026</span><b>IBSEC Analista de SOC na Era da IA</b><em>Triagem em SIEM, análise de logs, Threat Detection</em></li>
-        <li><span>Concluído</span><b>AWS Cloud Practitioner Essentials</b><em>Fundamentos de Cloud e AWS</em></li>
+        <li><span>2026</span><b>IBSEC Analista de SOC na Era da IA</b><em>Threat Detection</em></li>
+        <li><span>Concluído</span><b>AWS Cloud Practitioner Essentials</b><em>AWS</em></li>
       </ul>
     </div>
   </div>
@@ -305,14 +238,13 @@
 <section id="contato" class="block reveal">
   <span class="kicker">06 · Contato</span>
   <h2>Vamos conversar.</h2>
-  <p class="lead">Busco vaga como <strong>Analista de SOC N1</strong> ou posição júnior em <strong>DFIR</strong>. Currículo e projetos disponíveis sob pedido.</p>
+  <p class="lead">Busco vaga como <strong>Analista de SOC N1</strong> ou posição júnior em <strong>DFIR</strong>.</p>
   <div class="contact-links">
     <a class="btn primary" href="mailto:daniels2live666@gmail.com">daniels2live666@gmail.com</a>
     <a class="btn" href="https://www.linkedin.com/in/danielwidal" target="_blank" rel="noopener">LinkedIn</a>
     <a class="btn" href="https://github.com/Pendragon711" target="_blank" rel="noopener">GitHub</a>
   </div>
 </section>
-
 </main>
 
 <footer>
