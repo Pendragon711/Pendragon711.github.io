@@ -4,199 +4,634 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>MU-TH-UR 6000 // Daniel Widal</title>
-<meta name="description" content="Terminal de acesso: Analista SOC N1 & DFIR">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css">
+
+<style>
+:root {
+  --phosphor: #ffb000;
+  --phosphor-dim: #b37400;
+  --phosphor-bright: #ffe2a8;
+  --alert: #ff5a2c;
+  --bg: #050300;
+  --font-main: 'VT323', 'Courier New', monospace;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  background: var(--bg);
+  color: var(--phosphor);
+  font-family: var(--font-main);
+  font-size: 20px;
+  line-height: 1.4;
+  padding: 20px;
+  text-shadow: 0 0 8px rgba(255,176,0,0.8);
+  position: relative;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+/* Scanlines */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(0,0,0,0.3) 0px,
+    rgba(0,0,0,0.3) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+  pointer-events: none;
+  z-index: 999;
+}
+
+/* Vinheta */
+body::after {
+  content: "";
+  position: fixed;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: radial-gradient(circle, transparent 60%, rgba(0,0,0,0.8) 100%);
+  pointer-events: none;
+  z-index: 998;
+}
+
+/* Flicker */
+@keyframes flicker {
+  0% { opacity: 0.97; }
+  5% { opacity: 0.95; }
+  10% { opacity: 0.9; }
+  15% { opacity: 0.95; }
+  20% { opacity: 0.99; }
+  50% { opacity: 0.95; }
+  80% { opacity: 0.9; }
+  100% { opacity: 0.98; }
+}
+
+body > * {
+  animation: flicker 0.15s infinite;
+}
+
+/* Header */
+.term-header {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 2px solid var(--phosphor-dim);
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+  font-size: 18px;
+  letter-spacing: 1px;
+}
+
+.status-ok {
+  color: #4ade80;
+  text-shadow: 0 0 5px #4ade80;
+  margin-left: 15px;
+}
+
+/* ASCII Art */
+.ascii-art {
+  font-size: 14px;
+  line-height: 1.2;
+  color: var(--phosphor-bright);
+  margin-bottom: 20px;
+  white-space: pre;
+}
+
+/* Botões */
+.quick-cmds {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 20px 0 30px;
+}
+
+.quick-cmds button {
+  background: transparent;
+  border: 1px solid var(--phosphor);
+  color: var(--phosphor);
+  font-family: var(--font-main);
+  font-size: 18px;
+  padding: 6px 12px;
+  cursor: pointer;
+  text-shadow: inherit;
+}
+
+.quick-cmds button:hover {
+  background: var(--phosphor);
+  color: var(--bg);
+  text-shadow: none;
+}
+
+/* Seções */
+.term-section {
+  display: none;
+  margin-bottom: 40px;
+}
+
+.term-section.active {
+  display: block;
+  animation: fadeIn 0.4s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: none; }
+}
+
+.sec-title {
+  font-size: 28px;
+  border-bottom: 1px dashed var(--phosphor-dim);
+  padding-bottom: 8px;
+  margin-bottom: 20px;
+  color: var(--phosphor-bright);
+}
+
+/* Listas */
+.term-list {
+  list-style: none;
+  padding-left: 10px;
+}
+
+.term-list li {
+  margin-bottom: 12px;
+  display: flex;
+  gap: 15px;
+}
+
+.step {
+  color: var(--phosphor-bright);
+  font-weight: bold;
+  min-width: 30px;
+}
+
+/* Warn box */
+.warn-box {
+  border-left: 3px solid var(--alert);
+  background: rgba(255, 90, 44, 0.1);
+  padding: 15px;
+  margin-top: 20px;
+  color: var(--alert);
+  text-shadow: 0 0 4px var(--alert);
+}
+
+/* Flow */
+.flow-term {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin: 20px 0;
+}
+
+.flow-step {
+  border: 1px solid var(--phosphor-dim);
+  padding: 8px 12px;
+  font-size: 18px;
+  background: rgba(255, 176, 0, 0.05);
+}
+
+/* Evidência */
+.evid-box {
+  border: 1px solid var(--phosphor);
+  padding: 20px;
+  margin: 20px 0;
+  background: rgba(255,176,0,0.03);
+}
+
+.evid-label {
+  font-size: 16px;
+  letter-spacing: 2px;
+  margin-bottom: 10px;
+  color: var(--phosphor-bright);
+}
+
+.evid-box ul {
+  list-style: none;
+}
+
+.evid-box li {
+  margin-bottom: 8px;
+}
+
+/* Chips */
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 15px;
+}
+
+.chips span {
+  border: 1px solid var(--phosphor-dim);
+  padding: 4px 10px;
+  font-size: 18px;
+  background: rgba(255, 176, 0, 0.1);
+}
+
+/* Projetos */
+.project-log {
+  border: 1px solid var(--phosphor-dim);
+  padding: 20px;
+  margin-bottom: 20px;
+  transition: border-color 0.3s;
+}
+
+.project-log:hover {
+  border-color: var(--phosphor-bright);
+  box-shadow: 0 0 15px rgba(255,176,0,0.1);
+}
+
+.project-log.offensive {
+  border-style: dashed;
+  border-color: var(--alert);
+}
+
+.log-header {
+  display: flex;
+  justify-content: space-between;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.tag {
+  background: var(--phosphor-dim);
+  color: var(--bg);
+  padding: 2px 8px;
+  font-weight: bold;
+}
+
+.tag.warn {
+  background: var(--alert);
+}
+
+.project-log h3 {
+  font-size: 24px;
+  margin-bottom: 10px;
+  color: var(--phosphor-bright);
+}
+
+.term-link {
+  display: inline-block;
+  margin-top: 10px;
+  border-bottom: 1px dashed var(--phosphor);
+  transition: all 0.2s;
+}
+
+.term-link:hover {
+  background: var(--phosphor);
+  color: var(--bg);
+  text-shadow: none;
+}
+
+/* Experiência */
+.exp-entry {
+  margin-bottom: 25px;
+  padding-left: 15px;
+  border-left: 2px solid var(--phosphor-dim);
+}
+
+.exp-date {
+  font-size: 18px;
+  color: var(--phosphor-dim);
+  margin-bottom: 5px;
+}
+
+.exp-entry h3 {
+  font-size: 24px;
+  color: var(--phosphor-bright);
+}
+
+.exp-company {
+  font-size: 20px;
+  margin-bottom: 10px;
+  font-style: italic;
+}
+
+/* Contato */
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.contact-item .label {
+  color: var(--phosphor-dim);
+  display: block;
+  font-size: 18px;
+}
+
+.contact-item a, .contact-item span {
+  font-size: 20px;
+  color: var(--phosphor-bright);
+}
+
+/* Input */
+.term-input-area {
+  display: flex;
+  align-items: center;
+  border-top: 2px solid var(--phosphor-dim);
+  padding-top: 15px;
+  margin-top: 20px;
+}
+
+.prompt {
+  color: var(--phosphor-bright);
+  margin-right: 10px;
+  white-space: nowrap;
+}
+
+#cmd-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: var(--phosphor);
+  font-family: var(--font-main);
+  font-size: 20px;
+  outline: none;
+  text-shadow: inherit;
+}
+
+.cursor {
+  display: inline-block;
+  width: 10px;
+  height: 20px;
+  background: var(--phosphor);
+  animation: blink 1s steps(1) infinite;
+  margin-left: 2px;
+}
+
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
+.hidden { display: none; }
+
+/* Responsivo */
+@media (max-width: 768px) {
+  body { font-size: 16px; padding: 10px; }
+  .contact-grid { grid-template-columns: 1fr; }
+  .ascii-art { font-size: 10px; }
+}
+</style>
 </head>
 <body>
 
-<!-- EFEITOS CRT GLOBAIS -->
-<div class="crt-overlay"></div>
-<div class="crt-flicker"></div>
-<div class="crt-vignette"></div>
+<header class="term-header">
+  <div>MU-TH-UR 6000 // USCSS NOSTROMO</div>
+  <div>
+    <span id="mission-time">MISSION TIME: 0000.000:00:00</span>
+    <span class="status-ok">SYSTEMS: NOMINAL</span>
+  </div>
+</header>
 
-<!-- TELA DE BOOT -->
-<div id="boot-screen">
-  <div id="boot-log"></div>
-</div>
-
-<!-- INTERFACE PRINCIPAL DO TERMINAL -->
-<div id="terminal" class="hidden">
-
-  <!-- CABEÇALHO FIXO -->
-  <header class="term-header">
-    <div class="term-brand">MU-TH-UR 6000 // USCSS NOSTROMO</div>
-    <div class="term-status">
-      <span id="mission-time">MISSION TIME: 0000.000:00:00</span>
-      <span class="status-ok">SYSTEMS: NOMINAL</span>
-    </div>
-  </header>
-
-  <!-- ÁREA DE SAÍDA (CONTEÚDO) -->
-  <main id="output-area">
-    <div class="welcome-msg">
-      <pre class="ascii-art">
+<main id="output-area">
+  <div class="welcome-msg">
+    <pre class="ascii-art">
   __  __ _   _ _   _ _____ ____  _   _
  |  \/  | | | | \ | |_   _|  _ \| \ | |
  | |\/| | | | |  \| | | | | |_) |  \| |
  | |  | | |_| | |\  | | | |  _ <| |\  |
  |_|  |_|\___/|_| \_| |_| |_| \_\_| \_|
-      </pre>
-      <p>BEM-VINDO AO MAINFRAME, OFICIAL DE CIÊNCIAS.</p>
-      <p>DIGITE <span class="cmd-highlight">'help'</span> PARA LISTAR OS COMANDOS DISPONÍVEIS.</p>
-      <p>OU CLIQUE NOS COMANDOS ABAIXO PARA EXECUÇÃO AUTOMÁTICA:</p>
-    </div>
+    </pre>
+    <p>BEM-VINDO AO MAINFRAME, OFICIAL DE CIÊNCIAS.</p>
+    <p>DIGITE <span style="color:var(--phosphor-bright);font-weight:bold">'help'</span> PARA LISTAR OS COMANDOS DISPONÍVEIS.</p>
+    <p>OU CLIQUE NOS COMANDOS ABAIXO:</p>
+  </div>
 
-    <!-- MENU DE COMANDOS RÁPIDOS (UX FRIENDLY) -->
-    <div class="quick-cmds">
-      <button onclick="runCmd('about')">[ about ]</button>
-      <button onclick="runCmd('soc')">[ soc ]</button>
-      <button onclick="runCmd('dfir')">[ dfir ]</button>
-      <button onclick="runCmd('projetos')">[ projetos ]</button>
-      <button onclick="runCmd('experiencia')">[ experiencia ]</button>
-      <button onclick="runCmd('contato')">[ contato ]</button>
-      <button onclick="runCmd('clear')" class="warn-cmd">[ clear ]</button>
-    </div>
+  <div class="quick-cmds">
+    <button onclick="runCmd('about')">[ about ]</button>
+    <button onclick="runCmd('soc')">[ soc ]</button>
+    <button onclick="runCmd('dfir')">[ dfir ]</button>
+    <button onclick="runCmd('projetos')">[ projetos ]</button>
+    <button onclick="runCmd('experiencia')">[ experiencia ]</button>
+    <button onclick="runCmd('contato')">[ contato ]</button>
+    <button onclick="runCmd('clear')">[ clear ]</button>
+  </div>
 
-    <!-- SEÇÕES DE CONTEÚDO (Inicialmente ocultas, reveladas pelo JS) -->
-    <section id="sec-about" class="term-section hidden">
-      <h2 class="sec-title">>> PERFIL DA TRIPULAÇÃO</h2>
-      <p>Atuo como <strong>Analista de SOC N1</strong> e na área de <strong>DFIR</strong>. Durante meu estágio em segurança da informação, fiz a triagem e investigação de alertas em SIEM (malware, phishing e acessos suspeitos), analisei logs e evidências e escrevi playbooks de resposta a incidentes.</p>
-      <p>Minha base em pentest e suporte de redes me ajuda a pensar como o atacante, isolar falhas a partir de logs e escrever detecções que não deixam o adversário passar.</p>
-    </section>
+  <section id="sec-about" class="term-section">
+    <h2 class="sec-title">>> PERFIL DA TRIPULAÇÃO</h2>
+    <p>Atuo como <strong>Analista de SOC N1</strong> e na área de <strong>DFIR</strong>. Durante meu estágio em segurança da informação, fiz a triagem e investigação de alertas em SIEM (malware, phishing e acessos suspeitos), analisei logs e evidências e escrevi playbooks de resposta a incidentes.</p>
+    <p>Minha base em pentest e suporte de redes me ajuda a pensar como o atacante, isolar falhas a partir de logs e escrever detecções que não deixam o adversário passar.</p>
+  </section>
 
-    <section id="sec-soc" class="term-section hidden">
-      <h2 class="sec-title">>> PROTOCOLOS DE TRIAGEM (SOC N1)</h2>
-      <p>Digite um sub-comando para ver o playbook: <span class="cmd-highlight">soc phishing</span> | <span class="cmd-highlight">soc acesso</span> | <span class="cmd-highlight">soc malware</span></p>
+  <section id="sec-soc" class="term-section">
+    <h2 class="sec-title">>> PROTOCOLOS DE TRIAGEM (SOC N1)</h2>
+    <p>Digite um sub-comando para ver o playbook: <span style="color:var(--phosphor-bright)">soc phishing</span> | <span style="color:var(--phosphor-bright)">soc acesso</span> | <span style="color:var(--phosphor-bright)">soc malware</span></p>
 
-      <div id="soc-phishing" class="sub-section hidden">
-        <h3>[PLAYBOOK: PHISHING]</h3>
-        <ul class="term-list">
-          <li><span class="step">01</span> Identificar: Remetente, assunto, anexos e links.</li>
-          <li><span class="step">02</span> Cabeçalhos: Analisar SPF, DKIM, DMARC e caminho de entrega.</li>
-          <li><span class="step">03</span> Abrir com cuidado: Links e anexos apenas em ambiente isolado (sandbox).</li>
-          <li><span class="step">04</span> Medir o alcance: Quem recebeu, quem abriu, quem clicou.</li>
-          <li><span class="step">05</span> Conter: Bloquear remetente/URL e redefinir senhas comprometidas.</li>
-          <li><span class="step">06</span> Registrar: Salvar evidências e IOCs no SIEM.</li>
-        </ul>
-        <div class="warn-box">⚠ ESCALAR SE: Credenciais digitadas, anexo executado ou alvo em diretoria/financeiro.</div>
-      </div>
-      <!-- (Adicione soc-acesso e soc-malware com a mesma estrutura, ocultando/mostrando via JS se quiser, ou deixe tudo visível sob o título) -->
-    </section>
-
-    <section id="sec-dfir" class="term-section hidden">
-      <h2 class="sec-title">>> FORENSE DIGITAL E RESPOSTA A INCIDENTES</h2>
-      <p>Do alerta à reconstrução completa da linha do tempo.</p>
-      <div class="flow-term">
-        <div class="flow-step">01. IDENTIFICAR</div>
-        <div class="flow-step">02. PRESERVAR</div>
-        <div class="flow-step">03. COLETAR</div>
-        <div class="flow-step">04. ANALISAR</div>
-        <div class="flow-step">05. REPORTAR</div>
-      </div>
-      <div class="evid-box">
-        <div class="evid-label">CADEIA DE CUSTÓDIA</div>
-        <ul>
-          <li><strong>TRABALHO:</strong> Sempre em cópia, nunca no original.</li>
-          <li><strong>INTEGRIDADE:</strong> Hash (SHA256) antes e depois da coleta.</li>
-          <li><strong>ORDEM:</strong> Do mais volátil (RAM) ao menos volátil (Disco).</li>
-        </ul>
-      </div>
-      <h3>STACK DFIR</h3>
-      <div class="chips">
-        <span>Wazuh</span><span>Volatility 3</span><span>Wireshark</span><span>Autopsy</span><span>KAPE</span><span>Sysmon</span><span>MITRE ATT&CK</span><span>Sigma</span><span>YARA</span>
-      </div>
-    </section>
-
-    <section id="sec-projetos" class="term-section hidden">
-      <h2 class="sec-title">>> REGISTROS DE LABORATÓRIO E PROJETOS</h2>
-
-      <article class="project-log">
-        <div class="log-header"><span class="tag">DFIR</span> <span class="date">CASE-2026-001</span></div>
-        <h3>XLMRat — Network Forensics & Malware Triage</h3>
-        <p>Investigação completa de cadeia de entrega de malware a partir de PCAP. Análise de tráfego HTTP, desofuscação de payload, identificação do AsyncRAT, abuso do LOLBin RegSvcs.exe e mapeamento MITRE ATT&CK (T1105, T1059.001, T1218.009).</p>
-        <div class="stack">Wireshark | CyberChef | VirusTotal | Python</div>
-        <a href="https://github.com/Pendragon711/xlmrat-dfir-investigation" target="_blank" class="term-link">[ ACESSAR ARQUIVO DO CASO ]</a>
-      </article>
-
-      <article class="project-log">
-        <div class="log-header"><span class="tag">DETECÇÃO</span> <span class="date">CASE-2026-002</span></div>
-        <h3>Laboratório SOC com Wazuh & Honeypot</h3>
-        <p>Ambientes montados para gerar ataques (Metasploit, Nmap), monitorar o que aparece nos logs e escrever regras de detecção customizadas. Inclui Honeypot SSH/Web em Python com dashboard de tentativas.</p>
-        <div class="stack">Wazuh | Python | Flask | VirtualBox</div>
-        <a href="https://github.com/Pendragon711/soc-lab-wazuh" target="_blank" class="term-link">[ ACESSAR REPOSITÓRIO ]</a>
-      </article>
-
-      <article class="project-log offensive">
-        <div class="log-header"><span class="tag warn">OFENSIVO</span></div>
-        <h3>Ferramentas Próprias: ODIN (Go) & GHOST (Python)</h3>
-        <p>Pipeline de reconhecimento web e framework de pentest. Conhecer o ataque ajuda a escrever detecções melhores.</p>
-        <a href="https://github.com/Pendragon711/odin-recon" target="_blank" class="term-link">[ ODIN RECON ]</a> |
-        <a href="https://github.com/Pendragon711/GHOST---Web-Pentest-Framework" target="_blank" class="term-link">[ GHOST FRAMEWORK ]</a>
-      </article>
-    </section>
-
-    <section id="sec-experiencia" class="term-section hidden">
-      <h2 class="sec-title">>> HISTÓRICO DE OPERAÇÕES</h2>
-
-      <div class="exp-entry">
-        <div class="exp-date">03/2026 — 08/2026</div>
-        <h3>Estagiário de Segurança da Informação</h3>
-        <div class="exp-company">Multi Energisa S.A.</div>
-        <p>Triagem e investigação de alertas em SIEM, análise de logs e evidências, apoio a firewalls, criação de playbooks e dashboards.</p>
-      </div>
-
-      <div class="exp-entry">
-        <div class="exp-date">09/2023 — 12/2024</div>
-        <h3>Analista de Suporte Técnico N2</h3>
-        <div class="exp-company">Tahto (Brasil Telecom S.A.)</div>
-        <p>Troubleshooting estruturado de redes GPON/WLAN/LAN, análise de latência, isolamento de falhas e documentação.</p>
-      </div>
-
-      <h3 style="margin-top: 30px;">>> EDUCAÇÃO E CERTIFICAÇÕES</h3>
+    <div id="soc-phishing">
+      <h3 style="margin-top:20px;">[PLAYBOOK: PHISHING]</h3>
       <ul class="term-list">
-        <li><strong>Graduação em Cibersegurança</strong> — Unicesumar (Em andamento)</li>
-        <li><strong>Google Cybersecurity Professional</strong> — Coursera (Concluído)</li>
-        <li><strong>Cisco Junior Cybersecurity Analyst</strong> — Networking Academy (Concluído)</li>
-        <li><strong>FIAP Nano Course Cybersecurity</strong> — Riscos, TCP/IP, hardening (2026)</li>
+        <li><span class="step">01</span> Identificar: Remetente, assunto, anexos e links.</li>
+        <li><span class="step">02</span> Cabeçalhos: Analisar SPF, DKIM, DMARC e caminho de entrega.</li>
+        <li><span class="step">03</span> Abrir com cuidado: Links e anexos apenas em ambiente isolado (sandbox).</li>
+        <li><span class="step">04</span> Medir o alcance: Quem recebeu, quem abriu, quem clicou.</li>
+        <li><span class="step">05</span> Conter: Bloquear remetente/URL e redefinir senhas comprometidas.</li>
+        <li><span class="step">06</span> Registrar: Salvar evidências e IOCs no SIEM.</li>
       </ul>
-    </section>
+      <div class="warn-box">⚠ ESCALAR SE: Credenciais digitadas, anexo executado ou alvo em diretoria/financeiro.</div>
+    </div>
+  </section>
 
-    <section id="sec-contato" class="term-section hidden">
-      <h2 class="sec-title">>> CANAIS DE COMUNICAÇÃO</h2>
-      <p>Busco vagas como <strong>Analista de SOC N1</strong> ou posição júnior em <strong>DFIR</strong>.</p>
-      <div class="contact-grid">
-        <div class="contact-item">
-          <span class="label">EMAIL:</span>
-          <a href="mailto:daniels2live666@gmail.com" class="term-link">daniels2live666@gmail.com</a>
-        </div>
-        <div class="contact-item">
-          <span class="label">LINKEDIN:</span>
-          <a href="https://www.linkedin.com/in/danielwidal" target="_blank" class="term-link">linkedin.com/in/danielwidal</a>
-        </div>
-        <div class="contact-item">
-          <span class="label">GITHUB:</span>
-          <a href="https://github.com/Pendragon711" target="_blank" class="term-link">github.com/Pendragon711</a>
-        </div>
-        <div class="contact-item">
-          <span class="label">TEL:</span>
-          <span>+55 (67) 99130-6707</span>
-        </div>
+  <section id="sec-dfir" class="term-section">
+    <h2 class="sec-title">>> FORENSE DIGITAL E RESPOSTA A INCIDENTES</h2>
+    <p>Do alerta à reconstrução completa da linha do tempo.</p>
+    <div class="flow-term">
+      <div class="flow-step">01. IDENTIFICAR</div>
+      <div class="flow-step">02. PRESERVAR</div>
+      <div class="flow-step">03. COLETAR</div>
+      <div class="flow-step">04. ANALISAR</div>
+      <div class="flow-step">05. REPORTAR</div>
+    </div>
+    <div class="evid-box">
+      <div class="evid-label">CADEIA DE CUSTÓDIA</div>
+      <ul>
+        <li><strong>TRABALHO:</strong> Sempre em cópia, nunca no original.</li>
+        <li><strong>INTEGRIDADE:</strong> Hash (SHA256) antes e depois da coleta.</li>
+        <li><strong>ORDEM:</strong> Do mais volátil (RAM) ao menos volátil (Disco).</li>
+      </ul>
+    </div>
+    <h3 style="margin-top:30px;">STACK DFIR</h3>
+    <div class="chips">
+      <span>Wazuh</span><span>Volatility 3</span><span>Wireshark</span><span>Autopsy</span><span>KAPE</span><span>Sysmon</span><span>MITRE ATT&CK</span><span>Sigma</span><span>YARA</span>
+    </div>
+  </section>
+
+  <section id="sec-projetos" class="term-section">
+    <h2 class="sec-title">>> REGISTROS DE LABORATÓRIO E PROJETOS</h2>
+
+    <article class="project-log">
+      <div class="log-header"><span class="tag">DFIR</span> <span class="date">CASE-2026-001</span></div>
+      <h3>XLMRat — Network Forensics & Malware Triage</h3>
+      <p>Investigação completa de cadeia de entrega de malware a partir de PCAP. Análise de tráfego HTTP, desofuscação de payload, identificação do AsyncRAT, abuso do LOLBin RegSvcs.exe e mapeamento MITRE ATT&CK (T1105, T1059.001, T1218.009).</p>
+      <div class="stack" style="color:var(--phosphor-dim);margin:10px 0;">Wireshark | CyberChef | VirusTotal | Python</div>
+      <a href="https://github.com/Pendragon711/xlmrat-dfir-investigation" target="_blank" class="term-link">[ ACESSAR ARQUIVO DO CASO ]</a>
+    </article>
+
+    <article class="project-log">
+      <div class="log-header"><span class="tag">DETECÇÃO</span> <span class="date">CASE-2026-002</span></div>
+      <h3>Laboratório SOC com Wazuh & Honeypot</h3>
+      <p>Ambientes montados para gerar ataques (Metasploit, Nmap), monitorar o que aparece nos logs e escrever regras de detecção customizadas. Inclui Honeypot SSH/Web em Python com dashboard de tentativas.</p>
+      <div class="stack" style="color:var(--phosphor-dim);margin:10px 0;">Wazuh | Python | Flask | VirtualBox</div>
+      <a href="https://github.com/Pendragon711/soc-lab-wazuh" target="_blank" class="term-link">[ ACESSAR REPOSITÓRIO ]</a>
+    </article>
+
+    <article class="project-log offensive">
+      <div class="log-header"><span class="tag warn">OFENSIVO</span></div>
+      <h3>Ferramentas Próprias: ODIN (Go) & GHOST (Python)</h3>
+      <p>Pipeline de reconhecimento web e framework de pentest. Conhecer o ataque ajuda a escrever detecções melhores.</p>
+      <a href="https://github.com/Pendragon711/odin-recon" target="_blank" class="term-link">[ ODIN RECON ]</a> |
+      <a href="https://github.com/Pendragon711/GHOST---Web-Pentest-Framework" target="_blank" class="term-link">[ GHOST FRAMEWORK ]</a>
+    </article>
+  </section>
+
+  <section id="sec-experiencia" class="term-section">
+    <h2 class="sec-title">>> HISTÓRICO DE OPERAÇÕES</h2>
+
+    <div class="exp-entry">
+      <div class="exp-date">03/2026 — 08/2026</div>
+      <h3>Estagiário de Segurança da Informação</h3>
+      <div class="exp-company">Multi Energisa S.A.</div>
+      <p>Triagem e investigação de alertas em SIEM, análise de logs e evidências, apoio a firewalls, criação de playbooks e dashboards.</p>
+    </div>
+
+    <div class="exp-entry">
+      <div class="exp-date">09/2023 — 12/2024</div>
+      <h3>Analista de Suporte Técnico N2</h3>
+      <div class="exp-company">Tahto (Brasil Telecom S.A.)</div>
+      <p>Troubleshooting estruturado de redes GPON/WLAN/LAN, análise de latência, isolamento de falhas e documentação.</p>
+    </div>
+
+    <h3 style="margin-top:30px;">>> EDUCAÇÃO E CERTIFICAÇÕES</h3>
+    <ul class="term-list">
+      <li><strong>Graduação em Cibersegurança</strong> — Unicesumar (Em andamento)</li>
+      <li><strong>Google Cybersecurity Professional</strong> — Coursera (Concluído)</li>
+      <li><strong>Cisco Junior Cybersecurity Analyst</strong> — Networking Academy (Concluído)</li>
+      <li><strong>FIAP Nano Course Cybersecurity</strong> — Riscos, TCP/IP, hardening (2026)</li>
+    </ul>
+  </section>
+
+  <section id="sec-contato" class="term-section">
+    <h2 class="sec-title">>> CANAIS DE COMUNICAÇÃO</h2>
+    <p>Busco vagas como <strong>Analista de SOC N1</strong> ou posição júnior em <strong>DFIR</strong>.</p>
+    <div class="contact-grid">
+      <div class="contact-item">
+        <span class="label">EMAIL:</span>
+        <a href="mailto:daniels2live666@gmail.com" class="term-link">daniels2live666@gmail.com</a>
       </div>
-    </section>
+      <div class="contact-item">
+        <span class="label">LINKEDIN:</span>
+        <a href="https://www.linkedin.com/in/danielwidal" target="_blank" class="term-link">linkedin.com/in/danielwidal</a>
+      </div>
+      <div class="contact-item">
+        <span class="label">GITHUB:</span>
+        <a href="https://github.com/Pendragon711" target="_blank" class="term-link">github.com/Pendragon711</a>
+      </div>
+      <div class="contact-item">
+        <span class="label">TEL:</span>
+        <span>+55 (67) 99130-6707</span>
+      </div>
+    </div>
+  </section>
 
-  </main>
+</main>
 
-  <!-- ÁREA DE INPUT -->
-  <footer class="term-input-area">
-    <span class="prompt">root@nostromo:~#</span>
-    <input type="text" id="cmd-input" autocomplete="off" autofocus spellcheck="false">
-    <span class="cursor"></span>
-  </footer>
+<footer class="term-input-area">
+  <span class="prompt">root@nostromo:~#</span>
+  <input type="text" id="cmd-input" autocomplete="off" autofocus spellcheck="false">
+  <span class="cursor"></span>
+</footer>
 
-</div>
+<script>
+// Relógio de missão
+function startMissionClock() {
+  const clockEl = document.getElementById('mission-time');
+  let baseTime = new Date('2122-06-15T08:00:00').getTime();
 
-<script src="js/main.js"></script>
+  setInterval(() => {
+    baseTime += 1000;
+    const d = new Date(baseTime);
+    const year = d.getFullYear();
+    const day = String(d.getDate()).padStart(2, '0');
+    const hours = String(d.getHours()).padStart(2, '0');
+    const mins = String(d.getMinutes()).padStart(2, '0');
+    const secs = String(d.getSeconds()).padStart(2, '0');
+    clockEl.textContent = `MISSION TIME: ${year}.${day}:${hours}:${mins}:${secs}`;
+  }, 1000);
+}
+
+// Comandos
+const commands = {
+  'help': 'COMANDOS: about, soc, dfir, projetos, experiencia, contato, clear',
+  'about': 'sec-about',
+  'soc': 'sec-soc',
+  'dfir': 'sec-dfir',
+  'projetos': 'sec-projetos',
+  'experiencia': 'sec-experiencia',
+  'contato': 'sec-contato',
+  'clear': 'clear'
+};
+
+function processCommand(cmd) {
+  const cleanCmd = cmd.trim().toLowerCase();
+
+  const historyLine = document.createElement('div');
+  historyLine.innerHTML = `<span class="prompt">root@nostromo:~#</span> ${cleanCmd}`;
+  document.getElementById('output-area').insertBefore(historyLine, document.getElementById('output-area').firstChild);
+
+  if (cleanCmd === '') return;
+
+  if (cleanCmd === 'clear') {
+    document.querySelectorAll('.term-section').forEach(sec => sec.classList.remove('active'));
+    return;
+  }
+
+  if (commands[cleanCmd]) {
+    const target = commands[cleanCmd];
+    if (target.startsWith('sec-')) {
+      document.querySelectorAll('.term-section').forEach(sec => sec.classList.remove('active'));
+      const section = document.getElementById(target);
+      if (section) {
+        section.classList.add('active');
+        setTimeout(() => {
+          section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 100);
+      }
+    }
+  } else {
+    const errorLine = document.createElement('div');
+    errorLine.innerHTML = `<span style="color:var(--alert)">ERRO: COMANDO '${cleanCmd}' NÃO RECONHECIDO. DIGITE 'help'.</span>`;
+    document.getElementById('output-area').insertBefore(errorLine, document.getElementById('output-area').firstChild);
+  }
+}
+
+const cmdInput = document.getElementById('cmd-input');
+cmdInput.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') {
+    processCommand(cmdInput.value);
+    cmdInput.value = '';
+  }
+});
+
+window.runCmd = function(cmd) {
+  cmdInput.value = cmd;
+  processCommand(cmd);
+  cmdInput.value = '';
+  cmdInput.focus();
+};
+
+document.body.addEventListener('click', () => {
+  cmdInput.focus();
+});
+
+// Iniciar
+window.addEventListener('DOMContentLoaded', () => {
+  startMissionClock();
+  cmdInput.focus();
+});
+</script>
+
 </body>
 </html>
