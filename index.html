@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Daniel Widal // SEVASTOLINK Personal Terminal</title>
-<meta name="description" content="Portfólio de Daniel Widal: SOC N1 e DFIR (Digital Forensics & Incident Response).">
+<meta name="description" content="Portfólio de Daniel Widal: Profissional focado em Digital Forensics & Incident Response (DFIR) e Detection Engineering.">
 <meta property="og:image" content="assets/og-image.png">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Share+Tech&family=Orbitron:wght@700&display=swap" rel="stylesheet">
@@ -28,52 +28,52 @@
   <div class="fx scanlines"></div><div class="fx vignette"></div><div class="fx bar" id="bar"></div>
 </div></div>
 <template id="t-perfil"><h2>LOG_01 // PERFIL</h2>
-<p>Daniel Widal. Analista de Cibersegurança Júnior, com experiência profissional em <b>SOC N1</b> e foco em <b>DFIR (Digital Forensics &amp; Incident Response)</b>, Blue Team e investigação de eventos de segurança.</p>
-<p>Atuação em triagem e classificação de alertas SIEM, investigação inicial de phishing, malware e acessos suspeitos, análise de logs, eventos de rede e autenticação, escalonamento de incidentes e documentação operacional.</p>
-<p>Experiência anterior em suporte técnico N1/N2, troubleshooting de redes e investigação de falhas, com diagnóstico de causa-raiz, coleta de evidências e acompanhamento de incidentes.</p>
+<p>Daniel Widal. Profissional de Cibersegurança focado em <b>Digital Forensics, Incident Response (DFIR)</b> e <b>Detection Engineering</b>, com sólida experiência na investigação e contenção de ameaças.</p>
+<p>Atuação em investigação profunda de incidentes (malware, phishing, movimentação lateral), forense de rede (PCAP), análise de comportamento e construção de playbooks de resposta a incidentes guiados pelo framework MITRE ATT&amp;CK.</p>
+<p>Experiência anterior consolidada em troubleshooting avançado e diagnóstico de causa-raiz em infraestruturas, garantindo rastreabilidade e preservação de evidências do alerta à mitigação.</p>
 <p><b>FOCO TÉCNICO</b></p>
-<ul><li>SOC: monitoramento SIEM, triagem de alertas, investigação inicial, playbooks e redução de falsos positivos.</li>
-<li>DFIR: análise de PCAP, correlação de eventos, identificação de IOCs, linha do tempo e preservação de evidências.</li>
-<li>Blue Team: detecção baseada em logs, mapeamento MITRE ATT&amp;CK e documentação de incidentes.</li></ul>
+<ul><li>DFIR: Forense de rede (Deep Packet Inspection), análise de PCAP, extração de payloads, correlacionamento de eventos e documentação de IOCs.</li>
+<li>Detection Engineering: Desenvolvimento de honeypots em Python, detecção baseada em anomalias e estratégias de redução de alert fatigue.</li>
+<li>Blue Team: Monitoramento SIEM (Wazuh), isolamento de ameaças (Sandboxing) e mapeamento tático (Living off the Land).</li></ul>
 <p class="dim">FORMAÇÃO: Graduação em Cibersegurança — Unicesumar (em andamento). Campo Grande, MS.</p>
-<p class="dim">STACK: Wazuh, Splunk (conhecimentos), Wireshark, Volatility 3, Autopsy, KAPE, Sysmon, Sigma, YARA, CyberChef, Python e Linux.</p>
+<p class="dim">STACK: Wazuh, Splunk, Wireshark, Volatility 3, Autopsy, KAPE, Sysmon, VirusTotal, ANY.RUN, CyberChef, Python e Linux.</p>
 </template>
-<template id="t-dfir"><h2>SYS_DIAG // METODOLOGIA DFIR</h2><p>Do alerta à linha do tempo completa:</p><p class="flow">IDENTIFICAR ▸ PRESERVAR ▸ COLETAR ▸ ANALISAR ▸ REPORTAR</p><ul><li>Trabalho sempre em cópia, nunca no original.</li><li>Hash SHA256 antes e depois da coleta.</li><li>Ordem de volatilidade: RAM, depois disco.</li><li>Mapeamento MITRE ATT&amp;CK em cada caso.</li></ul><p class="dim">STACK: Wazuh, Volatility 3, Wireshark, Autopsy, KAPE, Sysmon, Sigma, YARA, CyberChef</p></template>
+<template id="t-dfir"><h2>SYS_DIAG // METODOLOGIA DFIR</h2><p>Do alerta à reconstrução completa da Kill Chain:</p><p class="flow">IDENTIFICAR ▸ PRESERVAR ▸ COLETAR ▸ ANALISAR ▸ REPORTAR</p><ul><li>Trabalho rigoroso em cópia forense ou sandbox, nunca no ambiente original.</li><li>Garantia de integridade via cálculo de hash (MD5/SHA256) antes e depois da coleta.</li><li>Extração em ordem de volatilidade: RAM, tabela de processos, disco.</li><li>Mapeamento tático (MITRE ATT&amp;CK) de TTPs em todos os relatórios.</li></ul><p class="dim">FERRAMENTAS: Wazuh, Volatility 3, Wireshark, Autopsy, KAPE, Sysmon, Sigma, YARA, CyberChef</p></template>
 <template id="t-casos"><h2>ARQUIVOS // CASOS E PROJETOS</h2>
-<div class="card"><b>CASE-2026-001 &nbsp;XLMRat: Network Forensics e Malware Triage</b><p>Cadeia de entrega de malware a partir de PCAP: tráfego HTTP, desofuscação do payload, AsyncRAT, abuso do LOLBin RegSvcs.exe. MITRE T1105, T1059.001, T1218.009.</p><p class="dim">Wireshark | CyberChef | VirusTotal | Python</p><a href="https://github.com/Pendragon711/xlmrat-dfir-investigation" target="_blank" rel="noopener">&gt; ABRIR ARQUIVO DO CASO</a></div>
-<div class="card"><b>CASE-2026-002 &nbsp;Laboratório SOC: Wazuh e Honeypot</b><p>Ataques simulados (Metasploit, Nmap), análise dos logs e regras de detecção customizadas. Honeypot SSH/Web em Python com dashboard.</p><p class="dim">Wazuh | Python | Flask | VirtualBox</p><a href="https://github.com/Pendragon711/soc-lab-wazuh" target="_blank" rel="noopener">&gt; ABRIR REPOSITÓRIO</a> &nbsp; <a href="https://github.com/Pendragon711/ssh-honeypot-lab" target="_blank" rel="noopener">&gt; HONEYPOT</a></div>
-<div class="card warn"><b>OFENSIVO &nbsp;ODIN (Go) e GHOST (Python)</b><p>Recon web e framework de pentest próprios.</p><a href="https://github.com/Pendragon711/odin-recon" target="_blank" rel="noopener">&gt; ODIN</a> &nbsp; <a href="https://github.com/Pendragon711/GHOST---Web-Pentest-Framework" target="_blank" rel="noopener">&gt; GHOST</a></div></template>
+<div class="card"><b>CASE-2026-001 &nbsp;DanaBot: Network Forensics e Kill Chain</b><p>Análise forense de tráfego de rede (PCAP) para investigar a infecção do malware DanaBot, com extração de payloads disfarçados (.js/.dll) e mapeamento do abuso de binários nativos (LOLBins / wscript.exe).</p><p class="dim">Wireshark | VirusTotal | ANY.RUN | PowerShell | OSINT</p><a href="https://github.com/Pendragon711/danabot-dfir-investigation" target="_blank" rel="noopener">&gt; ABRIR ARQUIVO DO CASO</a></div>
+<div class="card"><b>CASE-2026-002 &nbsp;XLMRat: Network Forensics e Malware Triage</b><p>Cadeia de entrega de malware a partir de PCAP: tráfego HTTP, desofuscação do payload, AsyncRAT, abuso do LOLBin RegSvcs.exe. MITRE T1105, T1059.001, T1218.009.</p><p class="dim">Wireshark | CyberChef | VirusTotal | Python</p><a href="https://github.com/Pendragon711/xlmrat-dfir-investigation" target="_blank" rel="noopener">&gt; ABRIR ARQUIVO DO CASO</a></div>
+<div class="card"><b>CASE-2026-003 &nbsp;SOC Lab & Detection Engineering</b><p>Simulação de ameaças (Metasploit, Nmap) e monitoramento corporativo. Desenvolvimento do zero de um Honeypot SSH/Web em Python com motor de detecção comportamental e deduplicação de eventos.</p><p class="dim">Wazuh | Python | Flask | VirtualBox</p><a href="https://github.com/Pendragon711/soc-lab-wazuh" target="_blank" rel="noopener">&gt; ABRIR SIEM LAB</a> &nbsp; <a href="https://github.com/Pendragon711/ssh-honeypot-lab" target="_blank" rel="noopener">&gt; VER HONEYPOT</a></div>
+<div class="card warn"><b>OFENSIVO &nbsp;ODIN (Go) e GHOST (Python)</b><p>Red Team Awareness: Recon web e framework de pentest próprio focados em mapeamento de superfície e ofuscação.</p><a href="https://github.com/Pendragon711/odin-recon" target="_blank" rel="noopener">&gt; PROJETO ODIN</a> &nbsp; <a href="https://github.com/Pendragon711/GHOST---Web-Pentest-Framework" target="_blank" rel="noopener">&gt; PROJETO GHOST</a></div></template>
 <template id="t-exp"><h2>LOG_02 // HISTÓRICO PROFISSIONAL</h2>
 <div class="card"><b>03/2026 — 08/2026 | Estagiário de Segurança da Informação</b><br>Grupo Energisa — Campo Grande, MS
-<ul><li>Monitoramento, triagem e classificação de eventos e alertas de segurança em ambiente SIEM, com escalonamento de incidentes.</li>
-<li>Análise preliminar de eventos relacionados a redes, endpoints, autenticação e acessos.</li>
-<li>Investigação inicial de alertas de malware, phishing, acessos suspeitos e comportamentos anômalos.</li>
-<li>Apoio ao monitoramento e à administração operacional de soluções de segurança.</li>
-<li>Elaboração e atualização de relatórios, dashboards, indicadores e documentação operacional.</li>
-<li>Apoio à criação e atualização de playbooks e procedimentos de resposta a incidentes.</li>
-<li>Colaboração com as equipes de Redes e Segurança no tratamento e acompanhamento de eventos.</li></ul>
-<p class="dim">FOCO: SOC N1 | SIEM | TRIAGEM | INCIDENT RESPONSE | BLUE TEAM</p></div>
+<ul><li>Monitoramento, investigação e classificação de eventos de segurança corporativa no ambiente SIEM, escalonando incidentes críticos.</li>
+<li>Análise aprofundada de eventos em redes, endpoints e comportamentos anômalos de autenticação.</li>
+<li>Investigação de ameaças (Threat Hunting inicial) focada em alertas de malware, phishing e comprometimento de contas.</li>
+<li>Apoio operacional e administrativo de plataformas e soluções de segurança em nuvem e on-premise.</li>
+<li>Criação e execução estruturada de playbooks de Resposta a Incidentes.</li>
+<li>Documentação operacional e elaboração de relatórios técnicos de segurança.</li></ul>
+<p class="dim">FOCO: INCIDENT RESPONSE | SIEM | THREAT HUNTING | DFIR | BLUE TEAM</p></div>
 <div class="card"><b>09/2023 — 12/2024 | Analista de Suporte Técnico N2</b><br>Tahto — Campo Grande, MS
 <ul><li>Investigação de incidentes técnicos e diagnóstico de causa-raiz em ambientes GPON, WLAN e LAN.</li>
-<li>Análise de latência, perda de pacotes e variações de sinal para identificar falhas e gargalos.</li>
-<li>Troubleshooting estruturado de hardware, sistemas, configurações e infraestrutura.</li>
-<li>Documentação de evidências, reprodução de falhas, diagnóstico e resolução até o fechamento dos incidentes.</li></ul>
-<p class="dim">COMPETÊNCIAS TRANSFERÍVEIS: NETWORK FORENSICS | ANÁLISE DE LOGS | TROUBLESHOOTING</p></div>
+<li>Análise de latência, perda de pacotes e variações de sinal para identificar falhas e gargalos estruturais.</li>
+<li>Troubleshooting estruturado de hardware, sistemas, configurações e infraestrutura de rede.</li>
+<li>Documentação de evidências e reprodução de falhas até o fechamento definitivo das ocorrências.</li></ul>
+<p class="dim">COMPETÊNCIAS: NETWORK TROUBLESHOOTING | LOG ANALYSIS | INCIDENT MANAGEMENT</p></div>
 <div class="card"><b>11/2017 — 07/2019 | Analista de Suporte N1</b><br>BTCC Call Center — Campo Grande, MS
-<ul><li>Análise de logs de sistemas corporativos para investigar falhas de ativação e erros de provisionamento.</li>
-<li>Investigação de inconsistências de dados e comportamentos anômalos, organizando evidências para as equipes de sustentação.</li>
-<li>Diagnóstico inicial de incidentes e acompanhamento das ocorrências até a resolução.</li></ul></div>
+<ul><li>Análise técnica de logs em sistemas corporativos para resolução de falhas de ativação e provisionamento.</li>
+<li>Identificação de anomalias sistêmicas e compilação de evidências técnicas para times de sustentação.</li>
+<li>Acompanhamento de ponta a ponta do ciclo de vida de chamados e incidentes operacionais.</li></ul></div>
 <p><b>CERTIFICAÇÕES E FORMAÇÃO COMPLEMENTAR</b></p>
 <ul><li>Certificado Profissional de Segurança Cibernética — Google (2026).</li>
 <li>Analista SOC na Era da IA — IBSEC (2026).</li>
 <li>Pentester na Era da IA — IBSEC (2026).</li>
-<li>Curso SOC N1 — Be Safe.inc (2026).</li>
+<li>Curso Fundamentos de SOC — Be Safe.inc (2026).</li>
 <li>Nano Course Cybersecurity — FIAP (2026).</li>
 <li>Cisco Junior Cybersecurity Analyst.</li></ul>
-<p><b>IDIOMAS</b></p><p>Português: nativo | Inglês: B1.</p>
+<p><b>IDIOMAS</b></p><p>Português: Nativo | Inglês: Intermediário (Leitura Técnica Avançada).</p>
 </template>
 <template id="t-contato"><h2>COMUNICAÇÕES // CONTATO</h2>
-<p>Disponível para oportunidades como <b>Analista SOC N1</b>, <b>Blue Team</b> ou <b>Analista DFIR Júnior</b>.</p>
+<p>Disponível para oportunidades como <b>Analista de Segurança</b>, <b>Digital Forensics & Incident Response (DFIR)</b> ou <b>Threat Detection / Blue Team</b>.</p>
 <ul><li>LOCALIZAÇÃO &nbsp; Campo Grande, MS</li>
 <li>EMAIL &nbsp; <a href="mailto:daniels2live666@gmail.com">daniels2live666@gmail.com</a></li>
 <li>TELEFONE &nbsp; <a href="tel:+5567991306707">(67) 99130-6707</a></li>
