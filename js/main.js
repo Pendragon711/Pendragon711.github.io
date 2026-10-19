@@ -16,13 +16,25 @@ const ITEMS = [
   ['sys', 'UTILITY']
 ];
 
-let ac, out;
+// ---- ORIGINAL WAV AUDIO SYSTEM ----
+const AUDIO_BASE = 'assets/audio/';
+
+const audioFiles = {
+  startup: 'Interactive_Terminal_Startup.wav',
+  ambient: 'Interactive_Terminal_BG_Loop.wav',
+  accept: 'UI_Accept_V2.wav',
+  move: 'Move_cursor_1.wav',
+  click: 'CLICK_01.wav',
+  telem: 'Interactive_Terminal_Telem_01.wav',
+  error: 'Interactive_Terminal_Telem_07.wav'
+};
+
+const audioPlayers = {};
 let muted = false;
 let sel = 0;
 let booted = false;
 let starting = false;
 let skip = false;
-let humNodes = [];
 let glitchTimer = null;
 
 const reducedMotion = window.matchMedia(
@@ -33,209 +45,81 @@ const wait = ms => new Promise(resolve =>
   setTimeout(resolve, skip ? 0 : ms)
 );
 
-// ---- AUDIO CORE ----
+// Os arquivos sao carregados uma unica vez e reutilizados.
 function audioInit() {
-  if (ac) return true;
+  if (Object.keys(audioPlayers).length) return true;
 
   try {
-    const AudioContextClass =
-      window.AudioContext || window.webkitAudioContext;
+    for (const [key, filename] of Object.entries(audioFiles)) {
+      const audio = new Audio(AUDIO_BASE + filename);
+      audio.preload = 'auto';
+      audio.volume = key === 'ambient' ? 0.12 : 0.48;
+      audio.loop = key === 'ambient';
+      audioPlayers[key] = audio;
+    }
 
-    if (!AudioContextClass) return false;
-
-    ac = new AudioContextClass();
-    out = ac.createGain();
-    out.gain.value = 0.36;
-    out.connect(ac.destination);
     return true;
-  } catch {
+  } catch (error) {
+    console.error('Falha ao preparar o audio:', error);
     return false;
   }
 }
 
-function tone(f, d, type = 'square', v = 0.025, delay = 0, f2) {
-  if (!ac || muted) return;
+function playAudio(key) {
+  if (muted || !audioInit()) return Promise.resolve();
 
-  const start = ac.currentTime + delay;
-  const osc = ac.createOscillator();
-  const gain = ac.createGain();
+  const audio = audioPlayers[key];
+  if (!audio) return Promise.resolve();
 
-  osc.type = type;
-  osc.frequency.setValueAtTime(f, start);
+  try {
+    audio.currentTime = 0;
 
-  if (f2 && f2 > 0) {
-    osc.frequency.exponentialRampToValueAtTime(
-      f2, start + d
-    );
+    const result = audio.play();
+    if (result && typeof result.catch === 'function') {
+      return result.catch(error => {
+        console.warn('Audio indisponivel:', key, error);
+      });
+    }
+
+    return Promise.resolve();
+  } catch (error) {
+    console.warn('Falha ao reproduzir audio:', key, error);
+    return Promise.resolve();
   }
-
-  gain.gain.setValueAtTime(0.0001, start);
-  gain.gain.linearRampToValueAtTime(v, start + 0.006);
-  gain.gain.exponentialRampToValueAtTime(
-    0.0001, start + d
-  );
-
-  osc.connect(gain);
-  gain.connect(out);
-  osc.start(start);
-  osc.stop(start + d + 0.02);
 }
 
-function noise(d, v = 0.04, hp = 500, lp = 7000) {
-  if (!ac || muted) return;
+function stopAudio(key, reset = false) {
+  const audio = audioPlayers[key];
+  if (!audio) return;
 
-  const length = Math.max(1, Math.floor(ac.sampleRate * d));
-  const buffer = ac.createBuffer(1, length, ac.sampleRate);
-  const data = buffer.getChannelData(0);
-
-  for (let i = 0; i < length; i++) {
-    const fade = Math.pow(1 - i / length, 2);
-    data[i] = (Math.random() * 2 - 1) * fade;
+  audio.pause();
+  if (reset) {
+    try { audio.currentTime = 0; } catch {}
   }
-
-  const source = ac.createBufferSource();
-  const high = ac.createBiquadFilter();
-  const low = ac.createBiquadFilter();
-  const gain = ac.createGain();
-
-  high.type = 'highpass';
-  high.frequency.value = hp;
-
-  low.type = 'lowpass';
-  low.frequency.value = lp;
-
-  gain.gain.value = v;
-
-  source.buffer = buffer;
-  source.connect(high);
-  high.connect(low);
-  low.connect(gain);
-  gain.connect(out);
-  source.start();
 }
 
-// ---- ORIGINAL TERMINAL SOUNDS ----
-
-// Energização: relé, pulso grave e ruído de circuito.
-function sPower() {
-  noise(0.32, 0.10, 180, 2400);
-  tone(48, 0.65, 'sine', 0.10);
-  tone(92, 0.42, 'triangle', 0.025, 0.08, 58);
-  tone(1250, 0.07, 'square', 0.012, 0.18, 760);
-  noise(0.12, 0.035, 2400, 6500);
-}
-
-// Tecla: clique seco e curto.
-function sKey() {
-  noise(0.025, 0.018, 1000, 5200);
-  tone(1380 + Math.random() * 180, 0.022, 'square', 0.009);
-}
-
-// Movimento de seleção.
-function sMove() {
-  tone(860, 0.035, 'triangle', 0.018, 0, 640);
-  noise(0.018, 0.009, 1800, 6000);
-}
-
-// Acesso a uma pasta.
-function sOpen() {
-  noise(0.055, 0.035, 500, 4000);
-  tone(420, 0.10, 'triangle', 0.028, 0, 285);
-  tone(690, 0.045, 'square', 0.012, 0.035);
-}
-
-// Arquivo sendo recuperado.
-function sRead() {
-  tone(245, 0.13, 'sawtooth', 0.012, 0, 175);
-  noise(0.12, 0.018, 700, 3000);
-}
-
-// Confirmação eletrônica.
-function sOk() {
-  tone(620, 0.055, 'square', 0.018);
-  tone(930, 0.075, 'triangle', 0.022, 0.065);
-}
-
-// Retorno ao menu.
-function sBack() {
-  tone(380, 0.075, 'triangle', 0.022, 0, 245);
-  noise(0.035, 0.012, 700, 3200);
-}
-
-// Comando inválido.
-function sErr() {
-  tone(210, 0.16, 'sawtooth', 0.025, 0, 135);
-  noise(0.055, 0.018, 250, 1800);
-}
-
-// ---- ELECTRICAL ROOM TONE ----
 function humStart() {
-  if (!ac || muted || humNodes.length) return;
-
-  // Harmônicos discretos: evitar um zumbido intrusivo.
-  const low = ac.createOscillator();
-  const harmonic = ac.createOscillator();
-  const lowGain = ac.createGain();
-  const harmonicGain = ac.createGain();
-
-  low.type = 'sine';
-  low.frequency.value = 50;
-  lowGain.gain.value = 0.010;
-
-  harmonic.type = 'triangle';
-  harmonic.frequency.value = 100;
-  harmonicGain.gain.value = 0.0025;
-
-  low.connect(lowGain);
-  lowGain.connect(out);
-  harmonic.connect(harmonicGain);
-  harmonicGain.connect(out);
-
-  low.start();
-  harmonic.start();
-
-  // Ruído filtrado de baixa intensidade.
-  const buffer = ac.createBuffer(
-    1, ac.sampleRate * 2, ac.sampleRate
-  );
-  const data = buffer.getChannelData(0);
-
-  for (let i = 0; i < data.length; i++) {
-    data[i] = (Math.random() * 2 - 1) * 0.25;
-  }
-
-  const source = ac.createBufferSource();
-  const filter = ac.createBiquadFilter();
-  const noiseGain = ac.createGain();
-
-  source.buffer = buffer;
-  source.loop = true;
-
-  filter.type = 'lowpass';
-  filter.frequency.value = 500;
-  noiseGain.gain.value = 0.003;
-
-  source.connect(filter);
-  filter.connect(noiseGain);
-  noiseGain.connect(out);
-  source.start();
-
-  humNodes = [
-    low, harmonic, source,
-    lowGain, harmonicGain, noiseGain, filter
-  ];
+  if (!booted || muted) return;
+  playAudio('ambient');
 }
 
 function humStop() {
-  humNodes.forEach(node => {
-    try {
-      if (typeof node.stop === 'function') node.stop();
-      node.disconnect();
-    } catch {}
-  });
-
-  humNodes = [];
+  stopAudio('ambient');
 }
+
+// Compatibilidade com as chamadas existentes.
+// Os efeitos sintetizados antigos ficam desativados.
+function tone() {}
+function noise() {}
+
+function sPower() { playAudio('startup'); }
+function sKey()   { playAudio('click'); }
+function sMove()  { playAudio('move'); }
+function sOpen()  { playAudio('telem'); }
+function sRead()  {}
+function sOk()    { playAudio('accept'); }
+function sBack()  { playAudio('click'); }
+function sErr()   { playAudio('error'); }
 
 // ---- STATUS DISPLAY ----
 function setStatus(message) {
@@ -261,7 +145,7 @@ function scheduleGlitch() {
 
       // Interferência sonora rara e muito baixa.
       if (Math.random() < 0.35) {
-        noise(0.07, 0.012, 1800, 6000);
+        // Sem efeito sintetizado: usar somente os WAVs originais.
       }
     }
 
@@ -274,14 +158,9 @@ async function boot() {
   if (starting || booted) return;
   starting = true;
   skip = false;
+  const bootStartedAt = performance.now();
 
   audioInit();
-
-  if (ac && ac.state === 'suspended') {
-    try {
-      await ac.resume();
-    } catch {}
-  }
 
   power.classList.add('gone');
   crt.className = 'on';
@@ -328,6 +207,8 @@ async function boot() {
   await wait(350);
   crt.classList.remove('sync');
 
+  await wait(Math.max(0, 7000 - (performance.now() - bootStartedAt)));
+  if (skip) stopAudio('startup', true);
   $('#ui').classList.remove('hide');
   build();
   open(0, true);
@@ -443,9 +324,6 @@ function open(index, quiet = false) {
 
   if (!quiet) {
     sOpen();
-    setTimeout(() => {
-      if (!muted && booted) sRead();
-    }, 110);
   }
 
   if (key === 'sys') sysUI();
@@ -544,15 +422,11 @@ $('#mute').onclick = event => {
     `[SOM: ${muted ? 'DESLIGADO' : 'LIGADO'}]`;
 
   if (muted) {
+    Object.keys(audioPlayers).forEach(key => stopAudio(key));
     humStop();
   } else {
     audioInit();
-
-    if (ac && ac.state === 'suspended') {
-      ac.resume().catch(() => {});
-    }
-
-    humStart();
+    if (booted) humStart();
     sOk();
   }
 };
@@ -578,3 +452,4 @@ window.addEventListener('pagehide', () => {
 });
 
 power.focus();
+
