@@ -1,10 +1,10 @@
 :root{--g:#1fd68a;--gd:#0f7a52;--gb:#9dffd0;--bg:#031a10;--w:#e8efe9;--r:#ff6a4a}
 *{box-sizing:border-box;margin:0;padding:0}
 html,body{height:100%;background:#0b0d0c;color:var(--g);font-family:"Share Tech","Trebuchet MS",sans-serif;font-size:19px;letter-spacing:.06em}
-body{display:grid;place-items:center;overflow:hidden}
+body{display:block;overflow:hidden}
 #power{position:fixed;inset:0;z-index:50;background:#000;display:flex;flex-direction:column;gap:18px;align-items:center;justify-content:center;text-align:center;padding:20px;cursor:pointer}
 #power.gone{display:none}.blink{animation:bl 1s steps(1) infinite}@keyframes bl{50%{opacity:.2}}.dim{color:var(--gd)}
-#bezel{position:relative;width:min(100vw,1180px);height:min(100vh,780px);padding:0;background:transparent;border-radius:0;box-shadow:none}
+#bezel{position:relative;width:100vw;height:100dvh;padding:0;background:transparent;border-radius:0;box-shadow:none;margin:0}
 #vents{position:absolute;right:42px;top:50px;width:70px;height:95px;background:repeating-linear-gradient(#25282a 0 7px,transparent 7px 17px)}
 #ports{position:absolute;right:30px;bottom:70px;width:100px;height:120px;background:#2b2e30;border-radius:6px;display:flex;gap:10px;align-items:flex-end;justify-content:center;padding:10px}
 #ports i{width:26px;height:26px;border-radius:50%;border:5px solid #aaa;background:#111}#ports i.r{border-color:#b33}
@@ -50,5 +50,5 @@ a{color:var(--gb);text-decoration:underline dotted}a:hover,#view button:hover{ba
 .bar{height:70px;top:-80px;bottom:auto;background:linear-gradient(transparent,rgba(120,255,190,.07),transparent);opacity:0}.bar.go{animation:sw 2.2s linear}@keyframes sw{0%{top:-80px;opacity:1}100%{top:100%;opacity:1}}
 .ghost{animation:gh .35s ease-out}@keyframes gh{0%{opacity:.3;filter:blur(2px)}100%{opacity:1}}
 .calm .scanlines,.calm .bar{animation:none}.calm{animation:none!important}.noscan .scanlines{display:none}.flat{border-radius:8px!important;transform:none!important}
-@media(max-width:820px){html,body{font-size:15px}#bezel{position:relative;width:min(100vw,1180px);height:min(100vh,780px);padding:0;background:transparent;border-radius:0;box-shadow:none}#vents,#ports{display:none}#crt{border-radius:20px;transform:none}#ui{padding:10px 12px 0}#cols{grid-template-columns:1fr;grid-template-rows:auto 1fr;gap:10px}#conn{display:none!important}#menu{flex-direction:row;flex-wrap:wrap;gap:6px}#menu button{min-height:0;margin:0!important;padding:6px 10px}#menu button.sel:before,#menu button.sel:after{display:none}#fl{display:none}#keys{font-size:.6em}}
+@media(max-width:820px){html,body{font-size:15px}#bezel{position:relative;width:100vw;height:100dvh;padding:0;background:transparent;border-radius:0;box-shadow:none;margin:0}#vents,#ports{display:none}#crt{border-radius:20px;transform:none}#ui{padding:10px 12px 0}#cols{grid-template-columns:1fr;grid-template-rows:auto 1fr;gap:10px}#conn{display:none!important}#menu{flex-direction:row;flex-wrap:wrap;gap:6px}#menu button{min-height:0;margin:0!important;padding:6px 10px}#menu button.sel:before,#menu button.sel:after{display:none}#fl{display:none}#keys{font-size:.6em}}
 @media(prefers-reduced-motion:reduce){#crt.on,#crt.sync,.scanlines,.bar.go,#boot.go #lt{animation:none}#lt{clip-path:none}}
