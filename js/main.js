@@ -1,6 +1,6 @@
 // SEVASTOLINK portfolio: boot roda a CADA visita (nenhum localStorage/sessionStorage é usado)
 const $=s=>document.querySelector(s), crt=$('#crt'), view=$('#view'), menu=$('#menu');
-const ITEMS=[['perfil','PERFIL'],['dfir','DFIR'],['casos','CASOS'],['exp','HISTÓRICO'],['audio','ÁUDIO'],['contato','CONTATO'],['sys','UTILITY']];
+const ITEMS=[['perfil','PERFIL'],['dfir','DFIR'],['casos','CASOS'],['exp','HISTÓRICO'],['contato','CONTATO'],['sys','UTILITY']];
 let ac,out,muted=false,sel=0,booted=false,skip=false,hum;
 const wait=ms=>new Promise(r=>setTimeout(r,skip?0:ms));
 
@@ -31,13 +31,8 @@ async function boot(){
 // ---- MENU / CONTEÚDO ----
 function build(){ ITEMS.forEach(([k,t],i)=>{const b=document.createElement('button');b.textContent=t;b.onclick=()=>{open(i);view.focus()};b.onmouseenter=()=>{if(sel!==i){mark(i);sSel()}};menu.append(b)}); }
 function mark(i){ sel=i; const bs=menu.querySelectorAll('button'); bs.forEach((b,j)=>b.classList.toggle('sel',j===i)); const c=$('#conn'),b=bs[i]; if(innerWidth>820){c.style.display='block';const cy=b.offsetTop+b.offsetHeight/2-menu.scrollTop,ty=$('#title').offsetTop+$('#title').offsetHeight/2;c.style.top=Math.min(cy,ty)+'px';c.style.height=Math.abs(cy-ty)+'px';c.style.borderBottom=cy>ty?'2px solid #e8efe9':'0';c.style.borderTop=cy>ty?'0':'2px solid #e8efe9';c.style.borderLeft=cy>ty?'2px solid #e8efe9':'2px solid #e8efe9'} }
-function open(i,quiet){ mark(i); const k=ITEMS[i][0]; view.innerHTML=''; const f=$('#t-'+k).content.cloneNode(true); $('#title').textContent=f.querySelector('h2').textContent; view.append(f); view.classList.remove('ghost'); void view.offsetWidth; view.classList.add('ghost'); view.scrollTop=0; if(!quiet)sOk(); if(k==='audio')audioUI(); if(k==='sys')sysUI(); }
+function open(i,quiet){ mark(i); const k=ITEMS[i][0]; view.innerHTML=''; const f=$('#t-'+k).content.cloneNode(true); $('#title').textContent=f.querySelector('h2').textContent; view.append(f); view.classList.remove('ghost'); void view.offsetWidth; view.classList.add('ghost'); view.scrollTop=0; if(!quiet)sOk(); if(k==='sys')sysUI(); }
 function sysUI(){ view.querySelectorAll('[data-fx]').forEach(b=>b.onclick=()=>{const f=b.dataset.fx; if(f==='curve')crt.classList.toggle('flat'); if(f==='scan')crt.classList.toggle('noscan'); if(f==='calm')crt.classList.toggle('calm'); sOk()}); }
-
-// ---- VU / ÁUDIO_REC ----
-function audioUI(){ const cv=$('#vu'),c=cv.getContext('2d'),pg=$('#prog'),btn=$('#play'); let t0=0,run=false,id;
-  const draw=()=>{ const p=Math.min((performance.now()-t0)/6000,1); c.clearRect(0,0,520,90); c.fillStyle='#1fd68a'; for(let x=0;x<520;x+=8){ const h=run?6+Math.abs(Math.sin(x*.07+performance.now()/90))*Math.random()*70:4; c.fillRect(x,45-h/2,5,h);} const n=Math.round(p*20); pg.textContent='['+'█'.repeat(n)+'░'.repeat(20-n)+'] '+Math.round(p*100)+'%'; if(p<1&&run)id=requestAnimationFrame(draw); else {run=false;btn.textContent='[ REPRODUZIR ]'} };
-  btn.onclick=()=>{ if(run){run=false;return} run=true;t0=performance.now();btn.textContent='[ PARAR ]';sOk();for(let i=0;i<24;i++)tone(180+Math.random()*260,.12,'sawtooth',.03,i*.25);draw(); }; }
 
 // ---- EFEITOS ----
 function glitch(){ if(crt.classList.contains('calm'))return; const b=$('#bar'); b.classList.remove('go'); void b.offsetWidth; b.classList.add('go'); noise(.12,.05,2500); }

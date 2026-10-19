@@ -15,7 +15,7 @@ body{display:block;overflow:hidden}
 #flash{position:absolute;inset:0;background:radial-gradient(circle,#b8ffe0,transparent 55%);opacity:0;z-index:5;pointer-events:none}#flash.go{animation:fl .5s ease-out}@keyframes fl{0%{opacity:1}100%{opacity:0}}
 .hide{display:none!important}
 #boot{position:absolute;inset:0;padding:0 8%}
-#logo{position:absolute;top:18%;left:8%;right:8%;text-align:left}
+#logo{position:absolute;top:18%;left:8%;right:8%;text-align:center}
 #lt{display:inline-block;font:italic 700 clamp(34px,8vw,86px)/1 Orbitron,"Arial Black",sans-serif;letter-spacing:.04em;transform:skewX(-14deg);clip-path:inset(0 100% 0 0)}
 #boot.go #lt{animation:rv 1.4s steps(18) forwards}@keyframes rv{to{clip-path:inset(0 0 0 0)}}
 #logo small{display:block;text-align:right;font-size:.62em;margin-top:2px;color:var(--gd)}
