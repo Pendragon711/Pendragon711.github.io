@@ -3,32 +3,30 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Daniel Widal // Terminal Pessoal SEVASTOLINK</title>
+<title>Daniel Widal // SEVASTOLINK Personal Terminal</title>
 <meta name="description" content="Portfólio de Daniel Widal: SOC N1 e DFIR (Digital Forensics & Incident Response).">
 <meta property="og:image" content="assets/og-image.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech&family=Orbitron:wght@700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-<div id="power" role="button" tabindex="0"><p>SEEGSON SEVASTOLINK // TERMINAL PESSOAL</p><p class="blink">[ CLIQUE OU TECLE PARA LIGAR O MONITOR ]</p><p class="dim">Ativa o áudio. A sequência de boot roda a cada acesso. ESC pula.</p></div>
-
+<div id="power" role="button" tabindex="0"><p>SEEGSON SEVASTOLINK // PERSONAL TERMINAL</p><p class="blink">[ CLIQUE OU TECLE PARA LIGAR O MONITOR ]</p><p class="dim">Ativa o áudio. A sequência de boot roda a cada acesso. ESC pula.</p></div>
+<div id="bezel"><div id="vents"></div><div id="ports"><i class="r"></i><i></i></div>
 <div id="crt" class="off">
   <div id="flash"></div>
-  <div id="logo-screen" class="hide">
-    <svg viewBox="0 0 200 200" width="170"><circle id="ring" cx="100" cy="100" r="88" fill="none" stroke="currentColor" stroke-width="6" pathLength="1"/><text x="100" y="112" text-anchor="middle" font-size="34" font-weight="700" letter-spacing="3" fill="currentColor" font-family="Arial,sans-serif">SEEGSON</text></svg>
-    <p id="slogan">SYNTHESIS OF TOMORROW</p>
-  </div>
-  <pre id="scan" class="hide"></pre>
+  <div id="boot" class="hide"><div id="logo"><span id="lt">SEVASTOLINK</span><small>AN LM-LINK PRODUCT</small></div><div id="pb"><i id="pf"></i></div><p id="copy">(C) LM-LINK DATA SYSTEMS</p></div>
   <div id="ui" class="hide">
-    <header><span>SEVASTOLINK PERSONAL TERMINAL</span><span id="clock"></span></header>
-    <div class="cols">
-      <nav id="menu" aria-label="Menu principal"></nav>
-      <main id="view" tabindex="-1"></main>
+    <div id="top"><span>PERSONAL TERMINAL</span><i></i></div>
+    <div id="cols">
+      <nav id="menu" aria-label="Pastas"><p id="fl">FOLDERS</p></nav>
+      <div id="conn"></div>
+      <section id="right"><div id="title"></div><div id="sub"></div><div id="panel"><div id="pbar"></div><main id="view" tabindex="-1"></main></div></section>
     </div>
-    <footer>↑↓ SELECIONAR &nbsp; ENTER ABRIR &nbsp; 1-6 ATALHO &nbsp; ESC VOLTAR &nbsp; (ou toque/clique nos itens) <button id="mute">[SOM: LIGADO]</button></footer>
   </div>
+  <div id="keys"><b>UP</b> / <b>DOWN</b> <u>HIGHLIGHT</u> . . . . . <b>E</b> <u>SELECT</u> . . . . . <b>PAGE UP</b> / <b>PAGE DOWN</b> <u>SCROLL</u> . . . . . <b>Q</b> <u>BACK</u> <button id="mute">[SOM: LIGADO]</button></div>
   <div class="fx scanlines"></div><div class="fx vignette"></div><div class="fx bar" id="bar"></div>
-</div>
-
+</div></div>
 <template id="t-perfil"><h2>LOG_01 // PERFIL</h2><p>Daniel Widal. Foco em <b>DFIR</b> e <b>SOC N1</b>: triagem de alertas em SIEM (malware, phishing, acessos suspeitos), análise de logs e evidências, playbooks de resposta.</p><p>Base em pentest e suporte de redes: penso como o atacante para escrever detecções melhores.</p><p class="dim">Graduação em Cibersegurança, Unicesumar (em andamento). Campo Grande, MS.</p></template>
 <template id="t-dfir"><h2>SYS_DIAG // METODOLOGIA DFIR</h2><p>Do alerta à linha do tempo completa:</p><p class="flow">IDENTIFICAR ▸ PRESERVAR ▸ COLETAR ▸ ANALISAR ▸ REPORTAR</p><ul><li>Trabalho sempre em cópia, nunca no original.</li><li>Hash SHA256 antes e depois da coleta.</li><li>Ordem de volatilidade: RAM, depois disco.</li><li>Mapeamento MITRE ATT&amp;CK em cada caso.</li></ul><p class="dim">STACK: Wazuh, Volatility 3, Wireshark, Autopsy, KAPE, Sysmon, Sigma, YARA, CyberChef</p></template>
 <template id="t-casos"><h2>ARQUIVOS // CASOS E PROJETOS</h2>
