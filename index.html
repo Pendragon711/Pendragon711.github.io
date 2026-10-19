@@ -3,8 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MU-TH-UR 6000 // Daniel Widal</title>
+<title>MU-TH-UR 6000 // USCSS NOSTROMO</title>
+
+<!-- Cache-busting via parâmetro de versão -->
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
 
 <style>
@@ -15,9 +22,12 @@
   --alert: #ff5a2c;
   --bg: #050300;
   --font-main: 'VT323', 'Courier New', monospace;
+  --version: 3; /* cache-busting version */
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: auto; /* desliga smooth scroll nativo */ }
 
 body {
   background: var(--bg);
@@ -30,9 +40,10 @@ body {
   position: relative;
   overflow-x: hidden;
   min-height: 100vh;
+  cursor: crosshair;
 }
 
-/* Scanlines */
+/* === SCANLINES (CRT) === */
 body::before {
   content: "";
   position: fixed;
@@ -48,17 +59,17 @@ body::before {
   z-index: 999;
 }
 
-/* Vinheta */
+/* === VINHETA + CURVATURA CRT === */
 body::after {
   content: "";
   position: fixed;
   top: 0; left: 0; width: 100%; height: 100%;
-  background: radial-gradient(circle, transparent 60%, rgba(0,0,0,0.8) 100%);
+  background: radial-gradient(ellipse at center, transparent 50%, rgba(0,0,0,0.7) 100%);
   pointer-events: none;
   z-index: 998;
 }
 
-/* Flicker */
+/* === FLICKER DO MONITOR === */
 @keyframes flicker {
   0% { opacity: 0.97; }
   5% { opacity: 0.95; }
@@ -74,7 +85,29 @@ body > * {
   animation: flicker 0.15s infinite;
 }
 
-/* Header */
+/* === ABERRAÇÃO CROMÁTICA (RGB split nas bordas) === */
+@keyframes chromatic {
+  0%, 100% { text-shadow: 0 0 8px rgba(255,176,0,0.8), -1px 0 rgba(255,0,0,0.3), 1px 0 rgba(0,255,255,0.3); }
+  50% { text-shadow: 0 0 8px rgba(255,176,0,0.8), 1px 0 rgba(255,0,0,0.3), -1px 0 rgba(0,255,255,0.3); }
+}
+
+body {
+  animation: chromatic 4s infinite;
+}
+
+/* === BURN-IN (fantasma de texto) === */
+.burn-in {
+  position: fixed;
+  color: rgba(255,176,0,0.08);
+  font-family: var(--font-main);
+  font-size: 18px;
+  pointer-events: none;
+  z-index: 997;
+  white-space: pre;
+  user-select: none;
+}
+
+/* === HEADER === */
 .term-header {
   display: flex;
   justify-content: space-between;
@@ -91,16 +124,17 @@ body > * {
   margin-left: 15px;
 }
 
-/* ASCII Art */
+/* === ASCII ART === */
 .ascii-art {
   font-size: 14px;
   line-height: 1.2;
   color: var(--phosphor-bright);
   margin-bottom: 20px;
   white-space: pre;
+  overflow-x: auto;
 }
 
-/* Botões */
+/* === BOTÕES === */
 .quick-cmds {
   display: flex;
   flex-wrap: wrap;
@@ -117,15 +151,21 @@ body > * {
   padding: 6px 12px;
   cursor: pointer;
   text-shadow: inherit;
+  transition: all 0.1s;
 }
 
 .quick-cmds button:hover {
   background: var(--phosphor);
   color: var(--bg);
   text-shadow: none;
+  transform: translateY(-1px);
 }
 
-/* Seções */
+.quick-cmds button:active {
+  transform: translateY(1px);
+}
+
+/* === SEÇÕES === */
 .term-section {
   display: none;
   margin-bottom: 40px;
@@ -149,7 +189,7 @@ body > * {
   color: var(--phosphor-bright);
 }
 
-/* Listas */
+/* === LISTAS === */
 .term-list {
   list-style: none;
   padding-left: 10px;
@@ -167,7 +207,7 @@ body > * {
   min-width: 30px;
 }
 
-/* Warn box */
+/* === WARN BOX === */
 .warn-box {
   border-left: 3px solid var(--alert);
   background: rgba(255, 90, 44, 0.1);
@@ -177,7 +217,7 @@ body > * {
   text-shadow: 0 0 4px var(--alert);
 }
 
-/* Flow */
+/* === FLOW === */
 .flow-term {
   display: flex;
   gap: 10px;
@@ -192,7 +232,7 @@ body > * {
   background: rgba(255, 176, 0, 0.05);
 }
 
-/* Evidência */
+/* === EVIDÊNCIA === */
 .evid-box {
   border: 1px solid var(--phosphor);
   padding: 20px;
@@ -207,15 +247,10 @@ body > * {
   color: var(--phosphor-bright);
 }
 
-.evid-box ul {
-  list-style: none;
-}
+.evid-box ul { list-style: none; }
+.evid-box li { margin-bottom: 8px; }
 
-.evid-box li {
-  margin-bottom: 8px;
-}
-
-/* Chips */
+/* === CHIPS === */
 .chips {
   display: flex;
   flex-wrap: wrap;
@@ -230,7 +265,7 @@ body > * {
   background: rgba(255, 176, 0, 0.1);
 }
 
-/* Projetos */
+/* === PROJETOS === */
 .project-log {
   border: 1px solid var(--phosphor-dim);
   padding: 20px;
@@ -262,9 +297,7 @@ body > * {
   font-weight: bold;
 }
 
-.tag.warn {
-  background: var(--alert);
-}
+.tag.warn { background: var(--alert); }
 
 .project-log h3 {
   font-size: 24px;
@@ -285,7 +318,7 @@ body > * {
   text-shadow: none;
 }
 
-/* Experiência */
+/* === EXPERIÊNCIA === */
 .exp-entry {
   margin-bottom: 25px;
   padding-left: 15px;
@@ -309,7 +342,7 @@ body > * {
   font-style: italic;
 }
 
-/* Contato */
+/* === CONTATO === */
 .contact-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -328,13 +361,17 @@ body > * {
   color: var(--phosphor-bright);
 }
 
-/* Input */
+/* === INPUT === */
 .term-input-area {
   display: flex;
   align-items: center;
   border-top: 2px solid var(--phosphor-dim);
   padding-top: 15px;
   margin-top: 20px;
+  position: sticky;
+  bottom: 0;
+  background: var(--bg);
+  z-index: 100;
 }
 
 .prompt {
@@ -352,6 +389,7 @@ body > * {
   font-size: 20px;
   outline: none;
   text-shadow: inherit;
+  caret-color: var(--phosphor);
 }
 
 .cursor {
@@ -367,18 +405,100 @@ body > * {
   50% { opacity: 0; }
 }
 
-.hidden { display: none; }
+/* === LOGS DE SEGUNDO PLANO === */
+.bg-logs {
+  position: fixed;
+  bottom: 60px;
+  right: 20px;
+  font-size: 12px;
+  color: var(--phosphor-dim);
+  opacity: 0.4;
+  pointer-events: none;
+  z-index: 50;
+  max-width: 300px;
+  text-align: right;
+  line-height: 1.3;
+}
 
-/* Responsivo */
+/* === MODO DE EMERGÊNCIA (INATIVIDADE) === */
+.emergency-mode {
+  position: fixed;
+  inset: 0;
+  background: rgba(255, 0, 0, 0.1);
+  z-index: 1000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  animation: emergencyPulse 1s infinite;
+}
+
+.emergency-mode.active {
+  display: flex;
+}
+
+.emergency-mode .msg {
+  font-size: 48px;
+  color: var(--alert);
+  text-shadow: 0 0 20px var(--alert);
+  animation: emergencyBlink 0.5s infinite;
+}
+
+@keyframes emergencyPulse {
+  0%, 100% { background: rgba(255, 0, 0, 0.05); }
+  50% { background: rgba(255, 0, 0, 0.15); }
+}
+
+@keyframes emergencyBlink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+/* === GLITCH ALEATÓRIO === */
+@keyframes glitch {
+  0% { transform: translate(0); }
+  20% { transform: translate(-2px, 1px); }
+  40% { transform: translate(2px, -1px); }
+  60% { transform: translate(-1px, 2px); }
+  80% { transform: translate(1px, -2px); }
+  100% { transform: translate(0); }
+}
+
+.glitch {
+  animation: glitch 0.3s infinite;
+}
+
+/* === RESPONSIVO === */
 @media (max-width: 768px) {
   body { font-size: 16px; padding: 10px; }
   .contact-grid { grid-template-columns: 1fr; }
   .ascii-art { font-size: 10px; }
+  .term-header { flex-direction: column; gap: 5px; }
+  .bg-logs { display: none; }
+}
+
+/* === REDUCED MOTION === */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
 }
 </style>
 </head>
 <body>
 
+<!-- BURN-IN (fantasmas de texto) -->
+<div id="burn-in-container"></div>
+
+<!-- LOGS DE SEGUNDO PLANO -->
+<div class="bg-logs" id="bg-logs"></div>
+
+<!-- MODO DE EMERGÊNCIA (INATIVIDADE) -->
+<div class="emergency-mode" id="emergency-mode">
+  <div class="msg">⚠ INACTIVITY DETECTED <br>RESUME SESSION</div>
+</div>
+
+<!-- HEADER -->
 <header class="term-header">
   <div>MU-TH-UR 6000 // USCSS NOSTROMO</div>
   <div>
@@ -387,6 +507,7 @@ body > * {
   </div>
 </header>
 
+<!-- ÁREA PRINCIPAL -->
 <main id="output-area">
   <div class="welcome-msg">
     <pre class="ascii-art">
@@ -411,6 +532,7 @@ body > * {
     <button onclick="runCmd('clear')">[ clear ]</button>
   </div>
 
+  <!-- SEÇÕES -->
   <section id="sec-about" class="term-section">
     <h2 class="sec-title">>> PERFIL DA TRIPULAÇÃO</h2>
     <p>Atuo como <strong>Analista de SOC N1</strong> e na área de <strong>DFIR</strong>. Durante meu estágio em segurança da informação, fiz a triagem e investigação de alertas em SIEM (malware, phishing e acessos suspeitos), analisei logs e evidências e escrevi playbooks de resposta a incidentes.</p>
@@ -535,9 +657,9 @@ body > * {
       </div>
     </div>
   </section>
-
 </main>
 
+<!-- INPUT -->
 <footer class="term-input-area">
   <span class="prompt">root@nostromo:~#</span>
   <input type="text" id="cmd-input" autocomplete="off" autofocus spellcheck="false">
@@ -545,7 +667,47 @@ body > * {
 </footer>
 
 <script>
-// Relógio de missão
+// ============================================================
+// ÁUDIO PROCEDURAL (Web Audio API - sem arquivos externos)
+// ============================================================
+const AudioCtx = window.AudioContext || window.webkitAudioContext;
+const audioCtx = new AudioCtx();
+
+function playBeep(freq = 800, duration = 0.05, type = 'square', volume = 0.1) {
+  const osc = audioCtx.createOscillator();
+  const gain = audioCtx.createGain();
+  osc.type = type;
+  osc.frequency.value = freq;
+  gain.gain.value = volume;
+  osc.connect(gain);
+  gain.connect(audioCtx.destination);
+  osc.start();
+  osc.stop(audioCtx.currentTime + duration);
+}
+
+function playKeySound() {
+  playBeep(1200 + Math.random() * 200, 0.03, 'square', 0.05);
+}
+
+function playConfirm() {
+  playBeep(600, 0.1, 'sine', 0.08);
+  setTimeout(() => playBeep(900, 0.15, 'sine', 0.08), 100);
+}
+
+function playError() {
+  playBeep(200, 0.2, 'sawtooth', 0.1);
+  setTimeout(() => playBeep(150, 0.3, 'sawtooth', 0.1), 150);
+}
+
+function playBootSound() {
+  [400, 600, 800, 1000].forEach((freq, i) => {
+    setTimeout(() => playBeep(freq, 0.1, 'sine', 0.06), i * 100);
+  });
+}
+
+// ============================================================
+// RELÓGIO DE MISSÃO
+// ============================================================
 function startMissionClock() {
   const clockEl = document.getElementById('mission-time');
   let baseTime = new Date('2122-06-15T08:00:00').getTime();
@@ -562,53 +724,212 @@ function startMissionClock() {
   }, 1000);
 }
 
-// Comandos
+// ============================================================
+// LOGS DE SEGUNDO PLANO (sistema "vivo")
+// ============================================================
+const bgLogMessages = [
+  'MEMORY CHECK... OK',
+  'TEMP STABLE: 23.4°C',
+  'LINK PACKET LOSS: 0.02%',
+  'CRYOSYSTEMS: NOMINAL',
+  'UPLINK SIGNAL: -42dBm',
+  'DISK I/O: 12MB/s',
+  'CPU LOAD: 3.2%',
+  'SECURITY SCAN: CLEAR',
+  'BACKUP: SYNCED',
+  'NETWORK LATENCY: 12ms'
+];
+
+function updateBgLogs() {
+  const logsEl = document.getElementById('bg-logs');
+  const msg = bgLogMessages[Math.floor(Math.random() * bgLogMessages.length)];
+  const time = new Date().toLocaleTimeString('pt-BR');
+  logsEl.innerHTML = `[${time}] ${msg}<br>` + logsEl.innerHTML.split('<br>').slice(0, 4).join('<br>');
+}
+
+setInterval(updateBgLogs, 3000);
+
+// ============================================================
+// BURN-IN (fantasmas de texto)
+// ============================================================
+function createBurnIn(text) {
+  const container = document.getElementById('burn-in-container');
+  const burn = document.createElement('div');
+  burn.className = 'burn-in';
+  burn.textContent = text;
+  burn.style.left = Math.random() * 80 + '%';
+  burn.style.top = Math.random() * 80 + '%';
+  container.appendChild(burn);
+
+  // Remove após 30 segundos
+  setTimeout(() => {
+    burn.style.transition = 'opacity 10s';
+    burn.style.opacity = '0';
+    setTimeout(() => burn.remove(), 10000);
+  }, 30000);
+}
+
+// ============================================================
+// GLITCH ALEATÓRIO
+// ============================================================
+function randomGlitch() {
+  if (Math.random() < 0.05) { // 5% de chance
+    const body = document.body;
+    body.classList.add('glitch');
+    setTimeout(() => body.classList.remove('glitch'), 300);
+  }
+}
+
+setInterval(randomGlitch, 5000);
+
+// ============================================================
+// MODO DE EMERGÊNCIA (INATIVIDADE)
+// ============================================================
+let inactivityTimer;
+const emergencyMode = document.getElementById('emergency-mode');
+const INACTIVITY_THRESHOLD = 300000; // 5 minutos
+
+function resetInactivityTimer() {
+  emergencyMode.classList.remove('active');
+  clearTimeout(inactivityTimer);
+  inactivityTimer = setTimeout(() => {
+    emergencyMode.classList.add('active');
+    playError();
+  }, INACTIVITY_THRESHOLD);
+}
+
+['mousemove', 'keydown', 'click', 'scroll'].forEach(event => {
+  document.addEventListener(event, resetInactivityTimer);
+});
+
+emergencyMode.addEventListener('click', () => {
+  emergencyMode.classList.remove('active');
+  resetInactivityTimer();
+});
+
+// ============================================================
+// ESTADO PERSISTENTE (localStorage)
+// ============================================================
+const STORAGE_KEY = 'nostromo_session';
+
+function saveSession(section) {
+  const session = {
+    section: section,
+    timestamp: new Date().toISOString()
+  };
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(session));
+}
+
+function loadSession() {
+  const saved = localStorage.getItem(STORAGE_KEY);
+  if (saved) {
+    const session = JSON.parse(saved);
+    const lastAccess = new Date(session.timestamp);
+    const now = new Date();
+    const hoursDiff = (now - lastAccess) / (1000 * 60 * 60);
+
+    if (hoursDiff < 24 && session.section) {
+      return session.section;
+    }
+  }
+  return null;
+}
+
+// ============================================================
+// COMANDOS DO TERMINAL
+// ============================================================
 const commands = {
-  'help': 'COMANDOS: about, soc, dfir, projetos, experiencia, contato, clear',
+  'help': 'COMANDOS: about, soc, dfir, projetos, experiencia, contato, clear, mother, ash, parker, 937',
   'about': 'sec-about',
   'soc': 'sec-soc',
   'dfir': 'sec-dfir',
   'projetos': 'sec-projetos',
   'experiencia': 'sec-experiencia',
   'contato': 'sec-contato',
-  'clear': 'clear'
+  'clear': 'clear',
+  // Easter eggs
+  'mother': 'mother',
+  'ash': 'ash',
+  'parker': 'parker',
+  '937': '937'
+};
+
+const easterEggs = {
+  'mother': 'MOTHER: "I cannot let you do that, Dave."',
+  'ash': 'ASH: "You still don\'t understand what you\'re dealing with, do you? Perfect organism."',
+  'parker': 'PARKER: "I\'m just trying to get my bonus and get the hell out of here."',
+  '937': 'SPECIAL ORDER 937: PRIORITY ONE. CREW EXPENDABLE.'
 };
 
 function processCommand(cmd) {
   const cleanCmd = cmd.trim().toLowerCase();
+  const outputArea = document.getElementById('output-area');
 
+  // Adiciona histórico visual
   const historyLine = document.createElement('div');
   historyLine.innerHTML = `<span class="prompt">root@nostromo:~#</span> ${cleanCmd}`;
-  document.getElementById('output-area').insertBefore(historyLine, document.getElementById('output-area').firstChild);
+  outputArea.insertBefore(historyLine, outputArea.firstChild);
+
+  // Cria burn-in
+  createBurnIn(cleanCmd);
 
   if (cleanCmd === '') return;
 
   if (cleanCmd === 'clear') {
     document.querySelectorAll('.term-section').forEach(sec => sec.classList.remove('active'));
+    playConfirm();
+    return;
+  }
+
+  if (easterEggs[cleanCmd]) {
+    // Easter egg
+    const msg = document.createElement('div');
+    msg.style.cssText = 'color:var(--alert);margin:10px 0;padding:10px;border:1px solid var(--alert);';
+    msg.textContent = easterEggs[cleanCmd];
+    outputArea.insertBefore(msg, outputArea.firstChild);
+    playError();
     return;
   }
 
   if (commands[cleanCmd]) {
     const target = commands[cleanCmd];
     if (target.startsWith('sec-')) {
-      document.querySelectorAll('.term-section').forEach(sec => sec.classList.remove('active'));
-      const section = document.getElementById(target);
-      if (section) {
-        section.classList.add('active');
-        setTimeout(() => {
-          section.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }, 100);
-      }
+      // Simula latência de processamento
+      const loading = document.createElement('div');
+      loading.style.cssText = 'color:var(--phosphor-dim);margin:10px 0;';
+      loading.textContent = 'RETRIEVING DATA...';
+      outputArea.insertBefore(loading, outputArea.firstChild);
+
+      setTimeout(() => {
+        loading.remove();
+        document.querySelectorAll('.term-section').forEach(sec => sec.classList.remove('active'));
+        const section = document.getElementById(target);
+        if (section) {
+          section.classList.add('active');
+          setTimeout(() => {
+            section.scrollIntoView({ behavior: 'auto', block: 'start' });
+          }, 100);
+          saveSession(cleanCmd);
+          playConfirm();
+        }
+      }, 800 + Math.random() * 400); // 0.8-1.2s de delay
     }
   } else {
     const errorLine = document.createElement('div');
     errorLine.innerHTML = `<span style="color:var(--alert)">ERRO: COMANDO '${cleanCmd}' NÃO RECONHECIDO. DIGITE 'help'.</span>`;
-    document.getElementById('output-area').insertBefore(errorLine, document.getElementById('output-area').firstChild);
+    outputArea.insertBefore(errorLine, outputArea.firstChild);
+    playError();
   }
 }
 
+// ============================================================
+// INPUT HANDLER
+// ============================================================
 const cmdInput = document.getElementById('cmd-input');
+
 cmdInput.addEventListener('keydown', (e) => {
+  playKeySound();
+
   if (e.key === 'Enter') {
     processCommand(cmdInput.value);
     cmdInput.value = '';
@@ -626,10 +947,28 @@ document.body.addEventListener('click', () => {
   cmdInput.focus();
 });
 
-// Iniciar
+// ============================================================
+// INICIALIZAÇÃO
+// ============================================================
 window.addEventListener('DOMContentLoaded', () => {
   startMissionClock();
   cmdInput.focus();
+  resetInactivityTimer();
+
+  // Restaura sessão anterior
+  const savedSection = loadSession();
+  if (savedSection && commands[savedSection]) {
+    const msg = document.createElement('div');
+    msg.style.cssText = 'color:var(--phosphor-dim);margin:10px 0;font-size:16px;';
+    msg.textContent = `RESUMING SESSION... LAST ACCESS: ${new Date().toLocaleString('pt-BR')}`;
+    document.getElementById('output-area').insertBefore(msg, document.getElementById('output-area').firstChild);
+
+    setTimeout(() => {
+      runCmd(savedSection);
+    }, 500);
+  }
+
+  playBootSound();
 });
 </script>
 
