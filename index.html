@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>MU-TH-UR 6000 // USCSS NOSTROMO</title>
 
-<!-- Cache-busting via parâmetro de versão -->
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
@@ -22,12 +21,11 @@
   --alert: #ff5a2c;
   --bg: #050300;
   --font-main: 'VT323', 'Courier New', monospace;
-  --version: 3; /* cache-busting version */
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
-html { scroll-behavior: auto; /* desliga smooth scroll nativo */ }
+html { scroll-behavior: auto; }
 
 body {
   background: var(--bg);
@@ -43,7 +41,6 @@ body {
   cursor: crosshair;
 }
 
-/* === SCANLINES (CRT) === */
 body::before {
   content: "";
   position: fixed;
@@ -59,7 +56,6 @@ body::before {
   z-index: 999;
 }
 
-/* === VINHETA + CURVATURA CRT === */
 body::after {
   content: "";
   position: fixed;
@@ -69,7 +65,6 @@ body::after {
   z-index: 998;
 }
 
-/* === FLICKER DO MONITOR === */
 @keyframes flicker {
   0% { opacity: 0.97; }
   5% { opacity: 0.95; }
@@ -85,7 +80,6 @@ body > * {
   animation: flicker 0.15s infinite;
 }
 
-/* === ABERRAÇÃO CROMÁTICA (RGB split nas bordas) === */
 @keyframes chromatic {
   0%, 100% { text-shadow: 0 0 8px rgba(255,176,0,0.8), -1px 0 rgba(255,0,0,0.3), 1px 0 rgba(0,255,255,0.3); }
   50% { text-shadow: 0 0 8px rgba(255,176,0,0.8), 1px 0 rgba(255,0,0,0.3), -1px 0 rgba(0,255,255,0.3); }
@@ -95,7 +89,6 @@ body {
   animation: chromatic 4s infinite;
 }
 
-/* === BURN-IN (fantasma de texto) === */
 .burn-in {
   position: fixed;
   color: rgba(255,176,0,0.08);
@@ -107,7 +100,6 @@ body {
   user-select: none;
 }
 
-/* === HEADER === */
 .term-header {
   display: flex;
   justify-content: space-between;
@@ -124,7 +116,6 @@ body {
   margin-left: 15px;
 }
 
-/* === ASCII ART === */
 .ascii-art {
   font-size: 14px;
   line-height: 1.2;
@@ -134,7 +125,6 @@ body {
   overflow-x: auto;
 }
 
-/* === BOTÕES === */
 .quick-cmds {
   display: flex;
   flex-wrap: wrap;
@@ -165,7 +155,6 @@ body {
   transform: translateY(1px);
 }
 
-/* === SEÇÕES === */
 .term-section {
   display: none;
   margin-bottom: 40px;
@@ -189,7 +178,6 @@ body {
   color: var(--phosphor-bright);
 }
 
-/* === LISTAS === */
 .term-list {
   list-style: none;
   padding-left: 10px;
@@ -207,7 +195,6 @@ body {
   min-width: 30px;
 }
 
-/* === WARN BOX === */
 .warn-box {
   border-left: 3px solid var(--alert);
   background: rgba(255, 90, 44, 0.1);
@@ -217,7 +204,6 @@ body {
   text-shadow: 0 0 4px var(--alert);
 }
 
-/* === FLOW === */
 .flow-term {
   display: flex;
   gap: 10px;
@@ -232,7 +218,6 @@ body {
   background: rgba(255, 176, 0, 0.05);
 }
 
-/* === EVIDÊNCIA === */
 .evid-box {
   border: 1px solid var(--phosphor);
   padding: 20px;
@@ -250,7 +235,6 @@ body {
 .evid-box ul { list-style: none; }
 .evid-box li { margin-bottom: 8px; }
 
-/* === CHIPS === */
 .chips {
   display: flex;
   flex-wrap: wrap;
@@ -265,7 +249,6 @@ body {
   background: rgba(255, 176, 0, 0.1);
 }
 
-/* === PROJETOS === */
 .project-log {
   border: 1px solid var(--phosphor-dim);
   padding: 20px;
@@ -318,7 +301,6 @@ body {
   text-shadow: none;
 }
 
-/* === EXPERIÊNCIA === */
 .exp-entry {
   margin-bottom: 25px;
   padding-left: 15px;
@@ -342,7 +324,6 @@ body {
   font-style: italic;
 }
 
-/* === CONTATO === */
 .contact-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -361,7 +342,6 @@ body {
   color: var(--phosphor-bright);
 }
 
-/* === INPUT === */
 .term-input-area {
   display: flex;
   align-items: center;
@@ -405,7 +385,6 @@ body {
   50% { opacity: 0; }
 }
 
-/* === LOGS DE SEGUNDO PLANO === */
 .bg-logs {
   position: fixed;
   bottom: 60px;
@@ -420,7 +399,6 @@ body {
   line-height: 1.3;
 }
 
-/* === MODO DE EMERGÊNCIA (INATIVIDADE) === */
 .emergency-mode {
   position: fixed;
   inset: 0;
@@ -441,6 +419,7 @@ body {
   color: var(--alert);
   text-shadow: 0 0 20px var(--alert);
   animation: emergencyBlink 0.5s infinite;
+  text-align: center;
 }
 
 @keyframes emergencyPulse {
@@ -453,7 +432,6 @@ body {
   50% { opacity: 0.3; }
 }
 
-/* === GLITCH ALEATÓRIO === */
 @keyframes glitch {
   0% { transform: translate(0); }
   20% { transform: translate(-2px, 1px); }
@@ -467,16 +445,73 @@ body {
   animation: glitch 0.3s infinite;
 }
 
-/* === RESPONSIVO === */
+/* BOTÃO DE INICIALIZAÇÃO */
+#init-screen {
+  position: fixed;
+  inset: 0;
+  background: var(--bg);
+  z-index: 2000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+}
+
+#init-screen.hidden {
+  display: none;
+}
+
+#init-btn {
+  background: transparent;
+  border: 2px solid var(--phosphor);
+  color: var(--phosphor);
+  font-family: var(--font-main);
+  font-size: 24px;
+  padding: 15px 40px;
+  cursor: pointer;
+  text-shadow: 0 0 10px var(--phosphor);
+  animation: initPulse 2s infinite;
+  letter-spacing: 2px;
+}
+
+#init-btn:hover {
+  background: var(--phosphor);
+  color: var(--bg);
+  text-shadow: none;
+}
+
+@keyframes initPulse {
+  0%, 100% { box-shadow: 0 0 10px var(--phosphor); }
+  50% { box-shadow: 0 0 25px var(--phosphor); }
+}
+
+#boot-log {
+  font-size: 18px;
+  max-width: 600px;
+  width: 100%;
+  padding: 20px;
+}
+
+.boot-line {
+  opacity: 0;
+  animation: bootFade 0.1s forwards;
+  margin-bottom: 4px;
+}
+
+@keyframes bootFade {
+  to { opacity: 1; }
+}
+
 @media (max-width: 768px) {
   body { font-size: 16px; padding: 10px; }
   .contact-grid { grid-template-columns: 1fr; }
   .ascii-art { font-size: 10px; }
   .term-header { flex-direction: column; gap: 5px; }
   .bg-logs { display: none; }
+  #init-btn { font-size: 18px; padding: 12px 30px; }
 }
 
-/* === REDUCED MOTION === */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
@@ -487,18 +522,33 @@ body {
 </head>
 <body>
 
-<!-- BURN-IN (fantasmas de texto) -->
-<div id="burn-in-container"></div>
-
-<!-- LOGS DE SEGUNDO PLANO -->
-<div class="bg-logs" id="bg-logs"></div>
-
-<!-- MODO DE EMERGÊNCIA (INATIVIDADE) -->
-<div class="emergency-mode" id="emergency-mode">
-  <div class="msg">⚠ INACTIVITY DETECTED <br>RESUME SESSION</div>
+<!-- TELA DE INICIALIZAÇÃO (contorna política de autoplay) -->
+<div id="init-screen">
+  <div style="font-size: 48px; color: var(--phosphor-bright); text-shadow: 0 0 20px var(--phosphor);">
+    MU-TH-UR 6000
+  </div>
+  <div style="font-size: 20px; color: var(--phosphor-dim);">
+    USCSS NOSTROMO // WEYLAND-YUTANI CORP.
+  </div>
+  <button id="init-btn" onclick="startSystem()">
+    [ INICIAR SISTEMA ]
+  </button>
+  <div style="font-size: 14px; color: var(--phosphor-dim); margin-top: 20px;">
+    CLIQUE PARA ATIVAR ÁUDIO E ANIMAÇÕES
+  </div>
 </div>
 
-<!-- HEADER -->
+<!-- LOG DO BOOT -->
+<div id="boot-log" style="display: none; position: fixed; inset: 0; background: var(--bg); z-index: 1999; padding: 40px; font-size: 18px;"></div>
+
+<div id="burn-in-container"></div>
+
+<div class="bg-logs" id="bg-logs"></div>
+
+<div class="emergency-mode" id="emergency-mode">
+  <div class="msg"> INACTIVITY DETECTED<br>RESUME SESSION</div>
+</div>
+
 <header class="term-header">
   <div>MU-TH-UR 6000 // USCSS NOSTROMO</div>
   <div>
@@ -507,7 +557,6 @@ body {
   </div>
 </header>
 
-<!-- ÁREA PRINCIPAL -->
 <main id="output-area">
   <div class="welcome-msg">
     <pre class="ascii-art">
@@ -532,7 +581,6 @@ body {
     <button onclick="runCmd('clear')">[ clear ]</button>
   </div>
 
-  <!-- SEÇÕES -->
   <section id="sec-about" class="term-section">
     <h2 class="sec-title">>> PERFIL DA TRIPULAÇÃO</h2>
     <p>Atuo como <strong>Analista de SOC N1</strong> e na área de <strong>DFIR</strong>. Durante meu estágio em segurança da informação, fiz a triagem e investigação de alertas em SIEM (malware, phishing e acessos suspeitos), analisei logs e evidências e escrevi playbooks de resposta a incidentes.</p>
@@ -659,7 +707,6 @@ body {
   </section>
 </main>
 
-<!-- INPUT -->
 <footer class="term-input-area">
   <span class="prompt">root@nostromo:~#</span>
   <input type="text" id="cmd-input" autocomplete="off" autofocus spellcheck="false">
@@ -667,13 +714,24 @@ body {
 </footer>
 
 <script>
-// ============================================================
-// ÁUDIO PROCEDURAL (Web Audio API - sem arquivos externos)
-// ============================================================
+console.log('🚀 Script carregado com sucesso');
+
 const AudioCtx = window.AudioContext || window.webkitAudioContext;
-const audioCtx = new AudioCtx();
+let audioCtx;
+
+function initAudio() {
+  if (!audioCtx) {
+    audioCtx = new AudioCtx();
+    console.log(' AudioContext inicializado');
+  }
+  if (audioCtx.state === 'suspended') {
+    audioCtx.resume();
+    console.log(' AudioContext resumido');
+  }
+}
 
 function playBeep(freq = 800, duration = 0.05, type = 'square', volume = 0.1) {
+  if (!audioCtx) return;
   const osc = audioCtx.createOscillator();
   const gain = audioCtx.createGain();
   osc.type = type;
@@ -705,9 +763,6 @@ function playBootSound() {
   });
 }
 
-// ============================================================
-// RELÓGIO DE MISSÃO
-// ============================================================
 function startMissionClock() {
   const clockEl = document.getElementById('mission-time');
   let baseTime = new Date('2122-06-15T08:00:00').getTime();
@@ -724,9 +779,6 @@ function startMissionClock() {
   }, 1000);
 }
 
-// ============================================================
-// LOGS DE SEGUNDO PLANO (sistema "vivo")
-// ============================================================
 const bgLogMessages = [
   'MEMORY CHECK... OK',
   'TEMP STABLE: 23.4°C',
@@ -749,9 +801,6 @@ function updateBgLogs() {
 
 setInterval(updateBgLogs, 3000);
 
-// ============================================================
-// BURN-IN (fantasmas de texto)
-// ============================================================
 function createBurnIn(text) {
   const container = document.getElementById('burn-in-container');
   const burn = document.createElement('div');
@@ -761,7 +810,6 @@ function createBurnIn(text) {
   burn.style.top = Math.random() * 80 + '%';
   container.appendChild(burn);
 
-  // Remove após 30 segundos
   setTimeout(() => {
     burn.style.transition = 'opacity 10s';
     burn.style.opacity = '0';
@@ -769,11 +817,8 @@ function createBurnIn(text) {
   }, 30000);
 }
 
-// ============================================================
-// GLITCH ALEATÓRIO
-// ============================================================
 function randomGlitch() {
-  if (Math.random() < 0.05) { // 5% de chance
+  if (Math.random() < 0.05) {
     const body = document.body;
     body.classList.add('glitch');
     setTimeout(() => body.classList.remove('glitch'), 300);
@@ -782,12 +827,9 @@ function randomGlitch() {
 
 setInterval(randomGlitch, 5000);
 
-// ============================================================
-// MODO DE EMERGÊNCIA (INATIVIDADE)
-// ============================================================
 let inactivityTimer;
 const emergencyMode = document.getElementById('emergency-mode');
-const INACTIVITY_THRESHOLD = 300000; // 5 minutos
+const INACTIVITY_THRESHOLD = 300000;
 
 function resetInactivityTimer() {
   emergencyMode.classList.remove('active');
@@ -807,9 +849,6 @@ emergencyMode.addEventListener('click', () => {
   resetInactivityTimer();
 });
 
-// ============================================================
-// ESTADO PERSISTENTE (localStorage)
-// ============================================================
 const STORAGE_KEY = 'nostromo_session';
 
 function saveSession(section) {
@@ -835,9 +874,6 @@ function loadSession() {
   return null;
 }
 
-// ============================================================
-// COMANDOS DO TERMINAL
-// ============================================================
 const commands = {
   'help': 'COMANDOS: about, soc, dfir, projetos, experiencia, contato, clear, mother, ash, parker, 937',
   'about': 'sec-about',
@@ -847,7 +883,6 @@ const commands = {
   'experiencia': 'sec-experiencia',
   'contato': 'sec-contato',
   'clear': 'clear',
-  // Easter eggs
   'mother': 'mother',
   'ash': 'ash',
   'parker': 'parker',
@@ -865,12 +900,10 @@ function processCommand(cmd) {
   const cleanCmd = cmd.trim().toLowerCase();
   const outputArea = document.getElementById('output-area');
 
-  // Adiciona histórico visual
   const historyLine = document.createElement('div');
   historyLine.innerHTML = `<span class="prompt">root@nostromo:~#</span> ${cleanCmd}`;
   outputArea.insertBefore(historyLine, outputArea.firstChild);
 
-  // Cria burn-in
   createBurnIn(cleanCmd);
 
   if (cleanCmd === '') return;
@@ -882,7 +915,6 @@ function processCommand(cmd) {
   }
 
   if (easterEggs[cleanCmd]) {
-    // Easter egg
     const msg = document.createElement('div');
     msg.style.cssText = 'color:var(--alert);margin:10px 0;padding:10px;border:1px solid var(--alert);';
     msg.textContent = easterEggs[cleanCmd];
@@ -894,7 +926,6 @@ function processCommand(cmd) {
   if (commands[cleanCmd]) {
     const target = commands[cleanCmd];
     if (target.startsWith('sec-')) {
-      // Simula latência de processamento
       const loading = document.createElement('div');
       loading.style.cssText = 'color:var(--phosphor-dim);margin:10px 0;';
       loading.textContent = 'RETRIEVING DATA...';
@@ -912,7 +943,7 @@ function processCommand(cmd) {
           saveSession(cleanCmd);
           playConfirm();
         }
-      }, 800 + Math.random() * 400); // 0.8-1.2s de delay
+      }, 800 + Math.random() * 400);
     }
   } else {
     const errorLine = document.createElement('div');
@@ -922,9 +953,6 @@ function processCommand(cmd) {
   }
 }
 
-// ============================================================
-// INPUT HANDLER
-// ============================================================
 const cmdInput = document.getElementById('cmd-input');
 
 cmdInput.addEventListener('keydown', (e) => {
@@ -947,28 +975,73 @@ document.body.addEventListener('click', () => {
   cmdInput.focus();
 });
 
-// ============================================================
-// INICIALIZAÇÃO
-// ============================================================
-window.addEventListener('DOMContentLoaded', () => {
-  startMissionClock();
-  cmdInput.focus();
-  resetInactivityTimer();
+const bootLines = [
+  'INICIALIZANDO MU-TH-UR 6000...',
+  'VERIFICANDO SISTEMAS DE CRIOGÊNESE... [OK]',
+  'CARREGANDO MÓDULOS DE REDE... [OK]',
+  'ESTABELECENDO UPLINK SEGURO... [OK]',
+  'AUTENTICAÇÃO DE OFICIAL DE CIÊNCIAS: DANIEL WIDAL',
+  'ACESSO CONCEDIDO.',
+  'CARREGANDO INTERFACE PRINCIPAL...'
+];
 
-  // Restaura sessão anterior
-  const savedSection = loadSession();
-  if (savedSection && commands[savedSection]) {
-    const msg = document.createElement('div');
-    msg.style.cssText = 'color:var(--phosphor-dim);margin:10px 0;font-size:16px;';
-    msg.textContent = `RESUMING SESSION... LAST ACCESS: ${new Date().toLocaleString('pt-BR')}`;
-    document.getElementById('output-area').insertBefore(msg, document.getElementById('output-area').firstChild);
+function runBootSequence() {
+  console.log('🎬 Iniciando boot sequence');
+  const bootLog = document.getElementById('boot-log');
+  bootLog.style.display = 'block';
 
-    setTimeout(() => {
-      runCmd(savedSection);
-    }, 500);
+  let lineIndex = 0;
+
+  function showNextLine() {
+    if (lineIndex < bootLines.length) {
+      const div = document.createElement('div');
+      div.className = 'boot-line';
+      div.textContent = `> ${bootLines[lineIndex]}`;
+      bootLog.appendChild(div);
+      lineIndex++;
+
+      const delay = lineIndex === bootLines.length ? 800 : Math.random() * 300 + 100;
+      setTimeout(showNextLine, delay);
+    } else {
+      setTimeout(() => {
+        bootLog.style.transition = 'opacity 1s';
+        bootLog.style.opacity = '0';
+        setTimeout(() => {
+          bootLog.style.display = 'none';
+          document.getElementById('init-screen').classList.add('hidden');
+          cmdInput.focus();
+          resetInactivityTimer();
+
+          const savedSection = loadSession();
+          if (savedSection && commands[savedSection]) {
+            const msg = document.createElement('div');
+            msg.style.cssText = 'color:var(--phosphor-dim);margin:10px 0;font-size:16px;';
+            msg.textContent = `RESUMING SESSION... LAST ACCESS: ${new Date().toLocaleString('pt-BR')}`;
+            document.getElementById('output-area').insertBefore(msg, document.getElementById('output-area').firstChild);
+
+            setTimeout(() => {
+              runCmd(savedSection);
+            }, 500);
+          }
+        }, 1000);
+      }, 500);
+    }
   }
 
+  showNextLine();
+}
+
+function startSystem() {
+  console.log('🔧 startSystem chamado');
+  initAudio();
   playBootSound();
+  runBootSequence();
+}
+
+window.addEventListener('DOMContentLoaded', () => {
+  console.log('✅ DOM carregado');
+  startMissionClock();
+  updateBgLogs();
 });
 </script>
 
