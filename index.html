@@ -10,18 +10,12 @@
 <meta property="og:image" content="assets/og-image.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-<div class="aurora" aria-hidden="true">
-  <span class="blob b1"></span>
-  <span class="blob b2"></span>
-  <span class="blob b3"></span>
-  <span class="blob b4"></span>
-</div>
-<div class="cursor-glow" id="cursorGlow" aria-hidden="true"></div>
+<canvas id="particles" aria-hidden="true"></canvas>
 
 <header class="nav">
   <a class="brand" href="#top">
@@ -74,7 +68,7 @@
       <span class="section-kicker">01 — Perfil</span>
       <h2>Quem investiga</h2>
     </div>
-    <div class="card glass">
+    <div class="card">
       <p>
         Profissional de <strong>Cibersegurança</strong> com foco em
         <strong>Threat Intelligence, DFIR</strong> e <strong>Detection Engineering</strong>.
@@ -108,27 +102,27 @@
       <p class="section-sub">Guiado por evidências e rastreabilidade.</p>
     </div>
     <div class="steps">
-      <div class="step glass">
+      <div class="step">
         <span class="step-num">01</span>
         <h3>Identificar</h3>
         <p>Dimensionar o escopo do comprometimento e os vetores de ataque.</p>
       </div>
-      <div class="step glass">
+      <div class="step">
         <span class="step-num">02</span>
         <h3>Preservar</h3>
         <p>Garantir a integridade das evidências antes de qualquer ação mitigatória.</p>
       </div>
-      <div class="step glass">
+      <div class="step">
         <span class="step-num">03</span>
         <h3>Coletar</h3>
         <p>Extrair artefatos do mais volátil ao menos volátil, com cadeia de custódia.</p>
       </div>
-      <div class="step glass">
+      <div class="step">
         <span class="step-num">04</span>
         <h3>Analisar</h3>
         <p>Correlacionar logs, extrair payloads de PCAPs e montar a linha do tempo.</p>
       </div>
-      <div class="step glass">
+      <div class="step">
         <span class="step-num">05</span>
         <h3>Reportar</h3>
         <p>Documentar IOCs, TTPs (MITRE ATT&amp;CK) e remediação estruturada.</p>
@@ -144,7 +138,7 @@
     </div>
 
     <div class="intel-grid">
-      <div class="card glass intel-card">
+      <div class="card intel-card">
         <div class="intel-card-head">
           <h3>IOC Watchlist</h3>
           <button class="defang-toggle" id="defangToggle" type="button">Defang: ON</button>
@@ -184,7 +178,7 @@
         <p class="muted small">Indicadores de laboratório, defanged por padrão.</p>
       </div>
 
-      <div class="card glass intel-card">
+      <div class="card intel-card">
         <div class="intel-card-head">
           <h3>MITRE ATT&amp;CK Coverage</h3>
         </div>
@@ -208,7 +202,7 @@
     </div>
 
     <div class="cases">
-      <article class="case glass">
+      <article class="case">
         <div class="case-head">
           <span class="case-id">CASE-2026-001</span>
           <span class="case-badge">DFIR</span>
@@ -227,7 +221,7 @@
         <a class="case-link" href="https://github.com/Pendragon711/danabot-dfir-investigation" target="_blank" rel="noopener">Abrir dossier →</a>
       </article>
 
-      <article class="case glass">
+      <article class="case">
         <div class="case-head">
           <span class="case-id">CASE-2026-002</span>
           <span class="case-badge">DFIR</span>
@@ -246,7 +240,7 @@
         <a class="case-link" href="https://github.com/Pendragon711/xlmrat-dfir-investigation" target="_blank" rel="noopener">Abrir dossier →</a>
       </article>
 
-      <article class="case glass">
+      <article class="case">
         <div class="case-head">
           <span class="case-id">TOOL</span>
           <span class="case-badge warn">Red Team</span>
@@ -274,7 +268,7 @@
     </div>
 
     <div class="timeline">
-      <div class="tl-item glass">
+      <div class="tl-item">
         <div class="tl-dot"></div>
         <div class="tl-content">
           <span class="tl-date">03/2026 — 08/2026</span>
@@ -288,7 +282,7 @@
         </div>
       </div>
 
-      <div class="tl-item glass">
+      <div class="tl-item">
         <div class="tl-dot"></div>
         <div class="tl-content">
           <span class="tl-date">09/2023 — 12/2024</span>
@@ -302,7 +296,7 @@
         </div>
       </div>
 
-      <div class="tl-item glass">
+      <div class="tl-item">
         <div class="tl-dot"></div>
         <div class="tl-content">
           <span class="tl-date">11/2017 — 07/2019</span>
@@ -316,7 +310,7 @@
       </div>
     </div>
 
-    <div class="certs glass">
+    <div class="certs">
       <h3>Formação &amp; Certificações</h3>
       <ul>
         <li>Graduação em Cibersegurança — UniCesumar (em andamento)</li>
@@ -337,19 +331,19 @@
       <p class="section-sub">Disponível para oportunidades em Threat Intelligence, DFIR e SOC.</p>
     </div>
     <div class="contact-grid">
-      <a class="contact-card glass" href="mailto:daniels2live666@gmail.com">
+      <a class="contact-card" href="mailto:daniels2live666@gmail.com">
         <span class="contact-label">Email</span>
         <span class="contact-value">daniels2live666@gmail.com</span>
       </a>
-      <a class="contact-card glass" href="https://www.linkedin.com/in/danielwidal" target="_blank" rel="noopener">
+      <a class="contact-card" href="https://www.linkedin.com/in/danielwidal" target="_blank" rel="noopener">
         <span class="contact-label">LinkedIn</span>
         <span class="contact-value">linkedin.com/in/danielwidal</span>
       </a>
-      <a class="contact-card glass" href="https://github.com/Pendragon711" target="_blank" rel="noopener">
+      <a class="contact-card" href="https://github.com/Pendragon711" target="_blank" rel="noopener">
         <span class="contact-label">GitHub</span>
         <span class="contact-value">github.com/Pendragon711</span>
       </a>
-      <a class="contact-card glass" href="https://pendragon711.github.io">
+      <a class="contact-card" href="https://pendragon711.github.io">
         <span class="contact-label">Portfólio</span>
         <span class="contact-value">pendragon711.github.io</span>
       </a>
@@ -366,3 +360,6 @@
 <script src="js/main.js"></script>
 </body>
 </html>
+
+
+
