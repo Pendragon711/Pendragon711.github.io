@@ -9,7 +9,7 @@ const $$ = (sel, ctx = document) => [...ctx.querySelectorAll(sel)];
 const yearEl = $('#year');
 if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-// ---------- PARTÍCULAS (canvas leve) ----------
+// ---------- PARTÍCULAS PREMIUM (canvas leve) ----------
 (function initParticles() {
   const canvas = document.getElementById('particles');
   if (!canvas) return;
@@ -18,9 +18,11 @@ if (yearEl) yearEl.textContent = new Date().getFullYear();
   const isMobile = window.matchMedia('(max-width: 720px)').matches;
   if (reduce || isMobile) { canvas.style.display = 'none'; return; }
 
-  const ctx = canvas.getContext('2d');
+  const ctx = canvas.getContext('2d', { alpha: true });
   let w, h, points = [];
-  let dpr = Math.min(window.devicePixelRatio || 1, 2);
+  const dpr = Math.min(window.devicePixelRatio || 1, 2);
+  const LINK_DIST = 160;
+  const LINK_DIST_SQ = LINK_DIST * LINK_DIST;
 
   function resize() {
     w = canvas.clientWidth;
@@ -31,29 +33,33 @@ if (yearEl) yearEl.textContent = new Date().getFullYear();
   }
 
   function build() {
-    const count = Math.min(38, Math.floor((w * h) / 32000));
-    points = Array.from({ length: count }, () => ({
-      x: Math.random() * w,
-      y: Math.random() * h,
-      vx: (Math.random() - 0.5) * 0.18,
-      vy: (Math.random() - 0.5) * 0.18,
-      r: Math.random() * 1.4 + 0.6
-    }));
+    const count = Math.min(45, Math.floor((w * h) / 26000));
+    points = Array.from({ length: count }, () => {
+      const isAmber = Math.random() < 0.18;
+      return {
+        x: Math.random() * w,
+        y: Math.random() * h,
+        vx: (Math.random() - 0.5) * 0.16,
+        vy: (Math.random() - 0.5) * 0.16,
+        r: Math.random() * 1.6 + 0.7,
+        color: isAmber ? '245,158,11' : '34,211,238',
+        glow: isAmber ? 0.75 : 0.55
+      };
+    });
   }
 
   function tick() {
     ctx.clearRect(0, 0, w, h);
 
-    // linhas
     for (let i = 0; i < points.length; i++) {
       const a = points[i];
       for (let j = i + 1; j < points.length; j++) {
         const b = points[j];
         const dx = a.x - b.x, dy = a.y - b.y;
         const d2 = dx * dx + dy * dy;
-        if (d2 < 14000) {
-          const alpha = (1 - d2 / 14000) * 0.18;
-          ctx.strokeStyle = `rgba(34,211,238,${alpha})`;
+        if (d2 < LINK_DIST_SQ) {
+          const alpha = (1 - d2 / LINK_DIST_SQ) * 0.22;
+          ctx.strokeStyle = `rgba(${a.color},${alpha})`;
           ctx.lineWidth = 0.6;
           ctx.beginPath();
           ctx.moveTo(a.x, a.y);
@@ -63,7 +69,6 @@ if (yearEl) yearEl.textContent = new Date().getFullYear();
       }
     }
 
-    // pontos
     for (const p of points) {
       p.x += p.vx;
       p.y += p.vy;
@@ -71,7 +76,7 @@ if (yearEl) yearEl.textContent = new Date().getFullYear();
       if (p.y < 0 || p.y > h) p.vy *= -1;
 
       ctx.beginPath();
-      ctx.fillStyle = 'rgba(34,211,238,.55)';
+      ctx.fillStyle = `rgba(${p.color},${p.glow})`;
       ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
       ctx.fill();
     }
@@ -176,3 +181,4 @@ $$('a[href^="#"]').forEach((a) => {
     if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
   });
 });
+
