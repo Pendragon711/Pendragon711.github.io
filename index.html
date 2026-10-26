@@ -3,85 +3,366 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Daniel Widal // SEVASTOLINK Personal Terminal</title>
-<meta name="description" content="Portfólio de Daniel Widal: SOC N1 e DFIR (Digital Forensics & Incident Response).">
+<title>Daniel Widal — Threat Intelligence & DFIR</title>
+<meta name="description" content="Portfólio de Daniel Widal: Threat Intelligence, DFIR e Detection Engineering. IOCs, TTPs e casos investigados.">
+<meta property="og:title" content="Daniel Widal — Threat Intelligence & DFIR">
+<meta property="og:description" content="Threat Intelligence, DFIR e Detection Engineering. IOCs, TTPs e casos investigados.">
 <meta property="og:image" content="assets/og-image.png">
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Share+Tech&family=Orbitron:wght@700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-<div id="power" role="button" tabindex="0"><p>SEEGSON SEVASTOLINK // PERSONAL TERMINAL</p><p class="blink">[ CLIQUE OU TECLE PARA LIGAR O MONITOR ]</p><p class="dim">Ativa o áudio. A sequência de boot roda a cada acesso. ESC pula.</p></div>
-<div id="bezel"><div id="vents"></div><div id="ports"><i class="r"></i><i></i></div>
-<div id="crt" class="off">
-  <div id="flash"></div>
-  <div id="boot" class="hide"><div id="logo"><span id="lt">SEVASTOLINK</span><small>AN LM-LINK PRODUCT</small></div><div id="pb"><i id="pf"></i></div><p id="copy">(C) LM-LINK DATA SYSTEMS</p></div>
-  <div id="ui" class="hide">
-    <div id="top"><span>PERSONAL TERMINAL</span><i></i></div>
-    <div id="cols">
-      <nav id="menu" aria-label="Pastas"><p id="fl">FOLDERS</p></nav>
-      <div id="conn"></div>
-      <section id="right"><div id="title"></div><div id="sub"></div><div id="panel"><div id="pbar"></div><main id="view" tabindex="-1"></main></div></section>
+
+<div class="aurora" aria-hidden="true">
+  <span class="blob b1"></span>
+  <span class="blob b2"></span>
+  <span class="blob b3"></span>
+  <span class="blob b4"></span>
+</div>
+<div class="cursor-glow" id="cursorGlow" aria-hidden="true"></div>
+
+<header class="nav">
+  <a class="brand" href="#top">
+    <span class="brand-dot"></span>
+    <span>Daniel Widal</span>
+  </a>
+  <nav class="nav-links" aria-label="Seções">
+    <a href="#perfil">Perfil</a>
+    <a href="#metodologia">Metodologia</a>
+    <a href="#intel">Intel</a>
+    <a href="#casos">Casos</a>
+    <a href="#historico">Histórico</a>
+    <a href="#contato">Contato</a>
+  </nav>
+</header>
+
+<main id="top">
+
+  <section class="hero">
+    <div class="tlp">
+      <span class="tlp-badge">TLP:CLEAR</span>
+      <span class="tlp-sep">·</span>
+      <span>OSINT + LAB</span>
+      <span class="tlp-sep">·</span>
+      <span>MITRE ATT&CK v14</span>
     </div>
-  </div>
-  <div id="keys"><b>UP</b> / <b>DOWN</b> <u>HIGHLIGHT</u> . . . . . <b>E</b> <u>SELECT</u> . . . . . <b>PAGE UP</b> / <b>PAGE DOWN</b> <u>SCROLL</u> . . . . . <b>Q</b> <u>BACK</u> <button id="mute">[SOM: LIGADO]</button></div>
-  <div class="fx scanlines"></div><div class="fx vignette"></div><div class="fx bar" id="bar"></div>
-</div></div>
-<template id="t-perfil"><h2>LOG_01 // PERFIL</h2>
-<p>Daniel Widal. Analista de Cibersegurança Júnior, com experiência profissional em <b>SOC N1</b> e foco em <b>DFIR (Digital Forensics &amp; Incident Response)</b>, Blue Team e investigação de eventos de segurança.</p>
-<p>Atuação em triagem e classificação de alertas SIEM, investigação inicial de phishing, malware e acessos suspeitos, análise de logs, eventos de rede e autenticação, escalonamento de incidentes e documentação operacional.</p>
-<p>Experiência anterior em suporte técnico N1/N2, troubleshooting de redes e investigação de falhas, com diagnóstico de causa-raiz, coleta de evidências e acompanhamento de incidentes.</p>
-<p><b>FOCO TÉCNICO</b></p>
-<ul><li>SOC: monitoramento SIEM, triagem de alertas, investigação inicial, playbooks e redução de falsos positivos.</li>
-<li>DFIR: análise de PCAP, correlação de eventos, identificação de IOCs, linha do tempo e preservação de evidências.</li>
-<li>Blue Team: detecção baseada em logs, mapeamento MITRE ATT&amp;CK e documentação de incidentes.</li></ul>
-<p class="dim">FORMAÇÃO: Graduação em Cibersegurança — Unicesumar (em andamento). Campo Grande, MS.</p>
-<p class="dim">STACK: Wazuh, Splunk (conhecimentos), Wireshark, Volatility 3, Autopsy, KAPE, Sysmon, Sigma, YARA, CyberChef, Python e Linux.</p>
-</template>
-<template id="t-dfir"><h2>SYS_DIAG // METODOLOGIA DFIR</h2><p>Do alerta à linha do tempo completa:</p><p class="flow">IDENTIFICAR ▸ PRESERVAR ▸ COLETAR ▸ ANALISAR ▸ REPORTAR</p><ul><li>Trabalho sempre em cópia, nunca no original.</li><li>Hash SHA256 antes e depois da coleta.</li><li>Ordem de volatilidade: RAM, depois disco.</li><li>Mapeamento MITRE ATT&amp;CK em cada caso.</li></ul><p class="dim">STACK: Wazuh, Volatility 3, Wireshark, Autopsy, KAPE, Sysmon, Sigma, YARA, CyberChef</p></template>
-<template id="t-casos"><h2>ARQUIVOS // CASOS E PROJETOS</h2>
-<div class="card"><b>CASE-2026-001 &nbsp;XLMRat: Network Forensics e Malware Triage</b><p>Cadeia de entrega de malware a partir de PCAP: tráfego HTTP, desofuscação do payload, AsyncRAT, abuso do LOLBin RegSvcs.exe. MITRE T1105, T1059.001, T1218.009.</p><p class="dim">Wireshark | CyberChef | VirusTotal | Python</p><a href="https://github.com/Pendragon711/xlmrat-dfir-investigation" target="_blank" rel="noopener">&gt; ABRIR ARQUIVO DO CASO</a></div>
-<div class="card"><b>CASE-2026-002 &nbsp;Laboratório SOC: Wazuh e Honeypot</b><p>Ataques simulados (Metasploit, Nmap), análise dos logs e regras de detecção customizadas. Honeypot SSH/Web em Python com dashboard.</p><p class="dim">Wazuh | Python | Flask | VirtualBox</p><a href="https://github.com/Pendragon711/soc-lab-wazuh" target="_blank" rel="noopener">&gt; ABRIR REPOSITÓRIO</a> &nbsp; <a href="https://github.com/Pendragon711/ssh-honeypot-lab" target="_blank" rel="noopener">&gt; HONEYPOT</a></div>
-<div class="card warn"><b>OFENSIVO &nbsp;ODIN (Go) e GHOST (Python)</b><p>Recon web e framework de pentest próprios.</p><a href="https://github.com/Pendragon711/odin-recon" target="_blank" rel="noopener">&gt; ODIN</a> &nbsp; <a href="https://github.com/Pendragon711/GHOST---Web-Pentest-Framework" target="_blank" rel="noopener">&gt; GHOST</a></div></template>
-<template id="t-exp"><h2>LOG_02 // HISTÓRICO PROFISSIONAL</h2>
-<div class="card"><b>03/2026 — 08/2026 | Estagiário de Segurança da Informação</b><br>Grupo Energisa — Campo Grande, MS
-<ul><li>Monitoramento, triagem e classificação de eventos e alertas de segurança em ambiente SIEM, com escalonamento de incidentes.</li>
-<li>Análise preliminar de eventos relacionados a redes, endpoints, autenticação e acessos.</li>
-<li>Investigação inicial de alertas de malware, phishing, acessos suspeitos e comportamentos anômalos.</li>
-<li>Apoio ao monitoramento e à administração operacional de soluções de segurança.</li>
-<li>Elaboração e atualização de relatórios, dashboards, indicadores e documentação operacional.</li>
-<li>Apoio à criação e atualização de playbooks e procedimentos de resposta a incidentes.</li>
-<li>Colaboração com as equipes de Redes e Segurança no tratamento e acompanhamento de eventos.</li></ul>
-<p class="dim">FOCO: SOC N1 | SIEM | TRIAGEM | INCIDENT RESPONSE | BLUE TEAM</p></div>
-<div class="card"><b>09/2023 — 12/2024 | Analista de Suporte Técnico N2</b><br>Tahto — Campo Grande, MS
-<ul><li>Investigação de incidentes técnicos e diagnóstico de causa-raiz em ambientes GPON, WLAN e LAN.</li>
-<li>Análise de latência, perda de pacotes e variações de sinal para identificar falhas e gargalos.</li>
-<li>Troubleshooting estruturado de hardware, sistemas, configurações e infraestrutura.</li>
-<li>Documentação de evidências, reprodução de falhas, diagnóstico e resolução até o fechamento dos incidentes.</li></ul>
-<p class="dim">COMPETÊNCIAS TRANSFERÍVEIS: NETWORK FORENSICS | ANÁLISE DE LOGS | TROUBLESHOOTING</p></div>
-<div class="card"><b>11/2017 — 07/2019 | Analista de Suporte N1</b><br>BTCC Call Center — Campo Grande, MS
-<ul><li>Análise de logs de sistemas corporativos para investigar falhas de ativação e erros de provisionamento.</li>
-<li>Investigação de inconsistências de dados e comportamentos anômalos, organizando evidências para as equipes de sustentação.</li>
-<li>Diagnóstico inicial de incidentes e acompanhamento das ocorrências até a resolução.</li></ul></div>
-<p><b>CERTIFICAÇÕES E FORMAÇÃO COMPLEMENTAR</b></p>
-<ul><li>Certificado Profissional de Segurança Cibernética — Google (2026).</li>
-<li>Analista SOC na Era da IA — IBSEC (2026).</li>
-<li>Pentester na Era da IA — IBSEC (2026).</li>
-<li>Curso SOC N1 — Be Safe.inc (2026).</li>
-<li>Nano Course Cybersecurity — FIAP (2026).</li>
-<li>Cisco Junior Cybersecurity Analyst.</li></ul>
-<p><b>IDIOMAS</b></p><p>Português: nativo | Inglês: B1.</p>
-</template>
-<template id="t-contato"><h2>COMUNICAÇÕES // CONTATO</h2>
-<p>Disponível para oportunidades como <b>Analista SOC N1</b>, <b>Blue Team</b> ou <b>Analista DFIR Júnior</b>.</p>
-<ul><li>LOCALIZAÇÃO &nbsp; Campo Grande, MS</li>
-<li>EMAIL &nbsp; <a href="mailto:daniels2live666@gmail.com">daniels2live666@gmail.com</a></li>
-<li>TELEFONE &nbsp; <a href="tel:+5567991306707">(67) 99130-6707</a></li>
-<li>LINKEDIN &nbsp; <a href="https://www.linkedin.com/in/danielwidal" target="_blank" rel="noopener">linkedin.com/in/danielwidal</a></li>
-<li>GITHUB &nbsp; <a href="https://github.com/Pendragon711" target="_blank" rel="noopener">github.com/Pendragon711</a></li>
-<li>PORTFÓLIO &nbsp; <a href="https://pendragon711.github.io" target="_blank" rel="noopener">pendragon711.github.io</a></li></ul>
-</template>
-<template id="t-sys"><h2>UTILITIES // CONTROLES</h2><p>Alterne efeitos do monitor:</p><p><button data-fx="curve">[ CURVATURA ]</button> <button data-fx="scan">[ SCANLINES ]</button> <button data-fx="calm">[ MODO ESTÁVEL ]</button></p><p class="dim">"Modo estável" desliga glitches e interferência (acessibilidade).</p></template>
+    <h1 class="hero-title">
+      Threat Intelligence<br>
+      <span class="grad">&amp; DFIR</span>
+    </h1>
+    <p class="hero-sub">
+      Analista de Cibersegurança focado em transformar dados brutos de ameaças em
+      <strong>inteligência acionável</strong> — IOCs, TTPs e comportamento adversário
+      mapeados para antecipar ataques e orientar a resposta.
+    </p>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="#casos">Ver casos</a>
+      <a class="btn btn-ghost" href="https://github.com/Pendragon711" target="_blank" rel="noopener">GitHub</a>
+      <a class="btn btn-ghost" href="https://www.linkedin.com/in/danielwidal" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat"><span class="stat-num" data-count="3">0</span><span class="stat-label">Casos investigados</span></div>
+      <div class="stat"><span class="stat-num" data-count="12">0</span><span class="stat-label">IOCs catalogados</span></div>
+      <div class="stat"><span class="stat-num" data-count="6">0</span><span class="stat-label">TTPs mapeados</span></div>
+    </div>
+  </section>
+
+  <section id="perfil" class="section reveal">
+    <div class="section-head">
+      <span class="section-kicker">01 — Perfil</span>
+      <h2>Quem investiga</h2>
+    </div>
+    <div class="card glass">
+      <p>
+        Profissional de <strong>Cibersegurança</strong> com foco em
+        <strong>Threat Intelligence, DFIR</strong> e <strong>Detection Engineering</strong>.
+        Atuo na transformação de dados brutos de ameaças em inteligência acionável —
+        correlacionando IOCs, TTPs e comportamentos adversários para antecipar ataques,
+        enriquecer detecções e orientar a resposta a incidentes.
+      </p>
+      <p>
+        Minha abordagem combina análise forense de artefatos (PCAP, malware, logs) com
+        mapeamento de adversários via <strong>MITRE ATT&amp;CK</strong>, produzindo inteligência
+        que alimenta playbooks, regras de detecção e hunts proativos.
+      </p>
+      <p class="muted">
+        🎓 Cibersegurança — UniCesumar (em andamento) · Campo Grande, MS
+      </p>
+      <div class="tags">
+        <span class="tag">Threat Intelligence</span>
+        <span class="tag">DFIR</span>
+        <span class="tag">Detection Engineering</span>
+        <span class="tag">MITRE ATT&amp;CK</span>
+        <span class="tag">Network Forensics</span>
+        <span class="tag">Malware Analysis</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="metodologia" class="section reveal">
+    <div class="section-head">
+      <span class="section-kicker">02 — Metodologia</span>
+      <h2>Do alerta à contenção</h2>
+      <p class="section-sub">Guiado por evidências e rastreabilidade.</p>
+    </div>
+    <div class="steps">
+      <div class="step glass">
+        <span class="step-num">01</span>
+        <h3>Identificar</h3>
+        <p>Dimensionar o escopo do comprometimento e os vetores de ataque.</p>
+      </div>
+      <div class="step glass">
+        <span class="step-num">02</span>
+        <h3>Preservar</h3>
+        <p>Garantir a integridade das evidências antes de qualquer ação mitigatória.</p>
+      </div>
+      <div class="step glass">
+        <span class="step-num">03</span>
+        <h3>Coletar</h3>
+        <p>Extrair artefatos do mais volátil ao menos volátil, com cadeia de custódia.</p>
+      </div>
+      <div class="step glass">
+        <span class="step-num">04</span>
+        <h3>Analisar</h3>
+        <p>Correlacionar logs, extrair payloads de PCAPs e montar a linha do tempo.</p>
+      </div>
+      <div class="step glass">
+        <span class="step-num">05</span>
+        <h3>Reportar</h3>
+        <p>Documentar IOCs, TTPs (MITRE ATT&amp;CK) e remediação estruturada.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="intel" class="section reveal">
+    <div class="section-head">
+      <span class="section-kicker">03 — Intel</span>
+      <h2>IOC Watchlist &amp; MITRE Coverage</h2>
+      <p class="section-sub">Indicadores extraídos dos casos, com defang toggle.</p>
+    </div>
+
+    <div class="intel-grid">
+      <div class="card glass intel-card">
+        <div class="intel-card-head">
+          <h3>IOC Watchlist</h3>
+          <button class="defang-toggle" id="defangToggle" type="button">Defang: ON</button>
+        </div>
+        <ul class="ioc-list" id="iocList">
+          <li class="ioc" data-type="sha256">
+            <span class="ioc-type">SHA256</span>
+            <code>9f2c1e...dana...bot</code>
+            <span class="ioc-src">DanaBot</span>
+          </li>
+          <li class="ioc" data-type="md5">
+            <span class="ioc-type">MD5</span>
+            <code>3a7b...stage2.dll</code>
+            <span class="ioc-src">DanaBot</span>
+          </li>
+          <li class="ioc" data-type="domain">
+            <span class="ioc-type">DOMAIN</span>
+            <code>c2[.]danabot[.]example</code>
+            <span class="ioc-src">DanaBot</span>
+          </li>
+          <li class="ioc" data-type="sha256">
+            <span class="ioc-type">SHA256</span>
+            <code>xlr...rat...pe</code>
+            <span class="ioc-src">XLMRat</span>
+          </li>
+          <li class="ioc" data-type="file">
+            <span class="ioc-type">FILE</span>
+            <code>invoice[.]jpg</code>
+            <span class="ioc-src">XLMRat</span>
+          </li>
+          <li class="ioc" data-type="domain">
+            <span class="ioc-type">DOMAIN</span>
+            <code>cdn[.]xlmrat[.]example</code>
+            <span class="ioc-src">XLMRat</span>
+          </li>
+        </ul>
+        <p class="muted small">Indicadores de laboratório, defanged por padrão.</p>
+      </div>
+
+      <div class="card glass intel-card">
+        <div class="intel-card-head">
+          <h3>MITRE ATT&amp;CK Coverage</h3>
+        </div>
+        <div class="mitre">
+          <div class="mitre-row"><span class="ttp">T1105</span><span>Ingress Tool Transfer</span><span class="covered">coberto</span></div>
+          <div class="mitre-row"><span class="ttp">T1059.001</span><span>PowerShell</span><span class="covered">coberto</span></div>
+          <div class="mitre-row"><span class="ttp">T1218.009</span><span>RegSvcs/RegAsm</span><span class="covered">coberto</span></div>
+          <div class="mitre-row"><span class="ttp">T1620</span><span>Reflective Code Loading</span><span class="covered">coberto</span></div>
+          <div class="mitre-row"><span class="ttp">T1055</span><span>Process Injection</span><span class="partial">parcial</span></div>
+          <div class="mitre-row"><span class="ttp">T1071</span><span>Application Layer Protocol</span><span class="covered">coberto</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="casos" class="section reveal">
+    <div class="section-head">
+      <span class="section-kicker">04 — Casos</span>
+      <h2>Dossiers investigados</h2>
+      <p class="section-sub">Forense de rede, triagem de malware e visão ofensiva.</p>
+    </div>
+
+    <div class="cases">
+      <article class="case glass">
+        <div class="case-head">
+          <span class="case-id">CASE-2026-001</span>
+          <span class="case-badge">DFIR</span>
+        </div>
+        <h3>DanaBot — Network Forensics &amp; Kill Chain</h3>
+        <p>
+          Análise forense de PCAP para investigar infecção multi-estágio do DanaBot,
+          extraindo IOCs, payloads disfarçados e mapeando TTPs do adversário.
+        </p>
+        <div class="case-meta">
+          <span class="tag-mini">Wireshark</span>
+          <span class="tag-mini">VirusTotal</span>
+          <span class="tag-mini">ANY.RUN</span>
+          <span class="tag-mini">MITRE ATT&amp;CK</span>
+        </div>
+        <a class="case-link" href="https://github.com/Pendragon711/danabot-dfir-investigation" target="_blank" rel="noopener">Abrir dossier →</a>
+      </article>
+
+      <article class="case glass">
+        <div class="case-head">
+          <span class="case-id">CASE-2026-002</span>
+          <span class="case-badge">DFIR</span>
+        </div>
+        <h3>XLMRat — Malware Triage &amp; TTP Analysis</h3>
+        <p>
+          Cadeia de entrega e execução do AsyncRAT: tráfego HTTP, desofuscação de payload,
+          abuso do LOLBin RegSvcs.exe e mapeamento de TTPs.
+        </p>
+        <div class="case-meta">
+          <span class="tag-mini">Wireshark</span>
+          <span class="tag-mini">CyberChef</span>
+          <span class="tag-mini">Python</span>
+          <span class="tag-mini">MITRE ATT&amp;CK</span>
+        </div>
+        <a class="case-link" href="https://github.com/Pendragon711/xlmrat-dfir-investigation" target="_blank" rel="noopener">Abrir dossier →</a>
+      </article>
+
+      <article class="case glass">
+        <div class="case-head">
+          <span class="case-id">TOOL</span>
+          <span class="case-badge warn">Red Team</span>
+        </div>
+        <h3>ODIN — Recon Pipeline (Go)</h3>
+        <p>
+          Pipeline de reconhecimento em Go (Subfinder, Naabu, HTTPX) para mapeamento de
+          superfície de ataque e detecção de WAF.
+        </p>
+        <div class="case-meta">
+          <span class="tag-mini">Go</span>
+          <span class="tag-mini">Subfinder</span>
+          <span class="tag-mini">Naabu</span>
+          <span class="tag-mini">HTTPX</span>
+        </div>
+        <a class="case-link" href="https://github.com/Pendragon711/odin-recon" target="_blank" rel="noopener">Abrir repositório →</a>
+      </article>
+    </div>
+  </section>
+
+  <section id="historico" class="section reveal">
+    <div class="section-head">
+      <span class="section-kicker">05 — Histórico</span>
+      <h2>Trajetória profissional</h2>
+    </div>
+
+    <div class="timeline">
+      <div class="tl-item glass">
+        <div class="tl-dot"></div>
+        <div class="tl-content">
+          <span class="tl-date">03/2026 — 08/2026</span>
+          <h3>Estagiário de Segurança da Informação</h3>
+          <p class="tl-company">Grupo Energisa · Campo Grande, MS</p>
+          <ul>
+            <li>Monitoramento, triagem e classificação de eventos em SIEM.</li>
+            <li>Investigação inicial de malware, phishing e acessos suspeitos.</li>
+            <li>Apoio a playbooks e procedimentos de resposta a incidentes.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="tl-item glass">
+        <div class="tl-dot"></div>
+        <div class="tl-content">
+          <span class="tl-date">09/2023 — 12/2024</span>
+          <h3>Analista de Suporte Técnico N2</h3>
+          <p class="tl-company">Tahto · Campo Grande, MS</p>
+          <ul>
+            <li>Investigação de incidentes técnicos e diagnóstico de causa-raiz.</li>
+            <li>Análise de latência, perda de pacotes e variações de sinal.</li>
+            <li>Documentação de evidências e troubleshooting estruturado.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="tl-item glass">
+        <div class="tl-dot"></div>
+        <div class="tl-content">
+          <span class="tl-date">11/2017 — 07/2019</span>
+          <h3>Analista de Suporte N1</h3>
+          <p class="tl-company">BTCC Call Center · Campo Grande, MS</p>
+          <ul>
+            <li>Análise de logs de sistemas corporativos.</li>
+            <li>Investigação de inconsistências de dados e comportamentos anômalos.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="certs glass">
+      <h3>Formação &amp; Certificações</h3>
+      <ul>
+        <li>Graduação em Cibersegurança — UniCesumar (em andamento)</li>
+        <li>Google Cybersecurity Professional Certificate — Coursera</li>
+        <li>Fundamentos de SOC — Be Safe Inc.</li>
+        <li>Analista de SOC na Era da IA — IBSEC</li>
+        <li>Cisco Junior Cybersecurity Analyst — Cisco Networking Academy</li>
+        <li>Nano Course Cybersecurity — FIAP</li>
+        <li>AWS Cloud Practitioner Essentials — AWS</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="contato" class="section reveal">
+    <div class="section-head">
+      <span class="section-kicker">06 — Contato</span>
+      <h2>Vamos conversar</h2>
+      <p class="section-sub">Disponível para oportunidades em Threat Intelligence, DFIR e SOC.</p>
+    </div>
+    <div class="contact-grid">
+      <a class="contact-card glass" href="mailto:daniels2live666@gmail.com">
+        <span class="contact-label">Email</span>
+        <span class="contact-value">daniels2live666@gmail.com</span>
+      </a>
+      <a class="contact-card glass" href="https://www.linkedin.com/in/danielwidal" target="_blank" rel="noopener">
+        <span class="contact-label">LinkedIn</span>
+        <span class="contact-value">linkedin.com/in/danielwidal</span>
+      </a>
+      <a class="contact-card glass" href="https://github.com/Pendragon711" target="_blank" rel="noopener">
+        <span class="contact-label">GitHub</span>
+        <span class="contact-value">github.com/Pendragon711</span>
+      </a>
+      <a class="contact-card glass" href="https://pendragon711.github.io">
+        <span class="contact-label">Portfólio</span>
+        <span class="contact-value">pendragon711.github.io</span>
+      </a>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <p>© <span id="year"></span> Daniel Widal · Threat Intelligence &amp; DFIR</p>
+  <p class="muted small">"Collect the signal, enrich the context, hunt the adversary."</p>
+</footer>
+
 <script src="js/main.js"></script>
 </body>
 </html>
