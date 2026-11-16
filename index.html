@@ -1,19 +1,18 @@
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Daniel Widal — Analista SOC N1 | Blue Team</title>
+  <title>Daniel Widal — Cyber Threat Intelligence & Threat Hunting</title>
 
-  <meta name="description" content="Portfólio profissional de Daniel Widal, Analista SOC N1 com foco em Blue Team, SIEM, Threat Intelligence, DFIR e Segurança da Informação.">
+  <meta name="description" content="Portfólio de Daniel Widal — Analista de Cyber Threat Intelligence (CTI), Threat Hunting e Detection Engineering. Inteligência acionável, IOCs, MITRE ATT&CK e análise de ameaças.">
 
-  <meta property="og:title" content="Daniel Widal — Analista SOC N1 | Blue Team">
-  <meta property="og:description" content="Experiência em operações SOC, monitoramento de eventos, análise de logs, Threat Intelligence e investigação de incidentes.">
+  <meta property="og:title" content="Daniel Widal — Cyber Threat Intelligence & Threat Hunting">
+  <meta property="og:description" content="Transformando telemetria bruta, tráfego e artefatos maliciosos em inteligência acionável e defesa proativa.">
   <meta property="og:image" content="assets/og-image.png">
 
-  <meta name="theme-color" content="#080b12">
+  <meta name="theme-color" content="#04070d">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -33,15 +32,16 @@
 <header class="nav">
   <a class="brand" href="#top">
     <span class="brand-dot"></span>
-    <span>Daniel Widal</span>
+    <span>DW // THREAT INTEL</span>
   </a>
 
   <nav class="nav-links" aria-label="Seções">
     <a href="#perfil">Perfil</a>
-    <a href="#competencias">Competências</a>
+    <a href="#ciclo">Ciclo CTI</a>
+    <a href="#intel-hub">Intel & TTPs</a>
+    <a href="#projetos">Investigações</a>
     <a href="#experiencia">Experiência</a>
-    <a href="#projetos">Projetos</a>
-    <a href="#formacao">Formação</a>
+    <a href="#competencias">Stack</a>
     <a href="#contato">Contato</a>
   </nav>
 </header>
@@ -49,39 +49,42 @@
 <main id="top">
 
   <!-- HERO -->
-
   <section class="hero">
 
-    <div class="tlp">
-      <span class="tlp-badge">BLUE TEAM</span>
-      <span class="tlp-sep">·</span>
-      <span>SOC OPERATIONS</span>
-      <span class="tlp-sep">·</span>
-      <span>CYBERSECURITY</span>
+    <div class="tlp-bar">
+      <div class="tlp">
+        <span class="tlp-badge">TLP:CLEAR</span>
+        <span class="tlp-sep">·</span>
+        <span>CYBER THREAT INTELLIGENCE</span>
+        <span class="tlp-sep">·</span>
+        <span>THREAT HUNTING</span>
+      </div>
+      <div class="status-pill">
+        <span class="pulse-dot"></span>
+        <span>INTEL-DRIVEN DEFENSE</span>
+      </div>
     </div>
 
     <h1 class="hero-title">
-      Analista SOC N1<br>
-      <span class="grad">| Blue Team</span>
+      Cyber Threat<br>
+      <span class="grad">Intelligence</span>
     </h1>
 
     <p class="hero-sub">
-      Profissional de <strong>Segurança da Informação</strong> com experiência
-      em operações SOC, monitoramento de eventos, análise de logs,
-      triagem de alertas e investigação de atividades suspeitas.
-
-      Atuação com <strong>SIEM, Grafana, Threat Intelligence e DFIR</strong>,
-      apoiando a identificação de ameaças e a resposta a incidentes.
+      <strong>Daniel Widal</strong> — Profissional de Segurança da Informação focado em
+      <strong>Cyber Threat Intelligence (CTI)</strong>, <strong>Threat Hunting</strong> e
+      <strong>Detection Engineering</strong>. Transformo telemetria bruta, tráfego de rede e
+      artefatos maliciosos em inteligência acionável para antecipar vetores de ataque e
+      fortalecer detecções.
     </p>
 
     <div class="hero-actions">
-
-      <a class="btn btn-primary" href="#experiencia">
-        Experiência profissional
+      <a class="btn btn-primary" href="#projetos">
+        Explorar investigações
       </a>
 
-      <a class="btn btn-ghost" href="#projetos">
-        Ver projetos
+      <a class="btn btn-ghost" href="#intel-hub">
+        Feed de IOCs & ATT&CK
       </a>
 
       <a class="btn btn-ghost"
@@ -97,185 +100,213 @@
          rel="noopener">
         LinkedIn
       </a>
-
     </div>
 
     <div class="hero-stats">
-
       <div class="stat">
-        <span class="stat-num">SOC</span>
-        <span class="stat-label">Operações de Segurança</span>
+        <span class="stat-code">CTI // OSINT</span>
+        <span class="stat-num">IOCs & TTPs</span>
+        <span class="stat-label">Coleta, enriquecimento e análise adversária</span>
       </div>
 
       <div class="stat">
-        <span class="stat-num">SIEM</span>
-        <span class="stat-label">Monitoramento e Detecção</span>
+        <span class="stat-code">MITRE ATT&CK</span>
+        <span class="stat-num">HUNTING</span>
+        <span class="stat-label">Caça proativa e correlação comportamental</span>
       </div>
 
       <div class="stat">
-        <span class="stat-num">DFIR</span>
-        <span class="stat-label">Investigação de Incidentes</span>
+        <span class="stat-code">WAF // SIEM</span>
+        <span class="stat-num">DETECTION</span>
+        <span class="stat-label">Regras de mitigação e engenharia de detecção</span>
       </div>
-
     </div>
 
   </section>
 
 
-  <!-- PERFIL -->
-
+  <!-- 01 — PERFIL -->
   <section id="perfil" class="section reveal">
 
     <div class="section-head">
-      <span class="section-kicker">01 — Perfil profissional</span>
-      <h2>Quem sou</h2>
+      <span class="section-kicker">01 // Briefing Operacional</span>
+      <h2>Perfil Profissional</h2>
     </div>
 
-    <div class="card">
+    <div class="card briefing-card">
+      <div class="briefing-header">
+        <span class="mono-tag">ANALYST_ID: DW-711</span>
+        <span class="mono-tag">LOC: CAMPO GRANDE, MS // REMOTE</span>
+        <span class="mono-tag">EDU: CIBERSEGURANÇA — UNICESUMAR</span>
+      </div>
 
       <p>
-        Profissional de <strong>Segurança da Informação</strong>,
-        com experiência em operações SOC, monitoramento contínuo
-        de eventos, análise de logs, triagem de alertas e investigação
-        inicial de atividades suspeitas.
+        Profissional de <strong>Segurança da Informação</strong> com atuação direcionada a
+        <strong>Cyber Threat Intelligence (CTI)</strong>, Threat Hunting e operações defensivas.
+        Experiência na coleta, enriquecimento e operacionalização de
+        <strong>Indicadores de Comprometimento (IOCs)</strong>, investigação de campanhas maliciosas
+        e mapeamento de TTPs com base no framework <strong>MITRE ATT&CK</strong>.
       </p>
 
       <p>
-        Experiência em ambientes de segurança utilizando
-        <strong>Grafana e SIEM</strong>, com atuação em Threat Intelligence,
-        identificação de IOCs, análise de tráfego e apoio à resposta
-        a incidentes.
+        Forte vivência na conversão de inteligência de ameaças em detecções práticas e regras
+        de mitigação em <strong>Cloudflare WAF</strong> (análise de tráfego malicioso, bot mitigation,
+        Rate Limiting e correlação via Ray ID), além de monitoramento contínuo e correlação de
+        eventos via <strong>SIEM, Wazuh e Grafana/Loki</strong>.
       </p>
 
       <p>
-        Possuo conhecimentos em <strong>Wazuh, Grafana, Wireshark
-        e MITRE ATT&CK</strong>, além de experiência anterior em suporte
-        técnico N1/N2, troubleshooting e infraestrutura de redes.
-      </p>
-
-      <p class="muted">
-        Localização: Campo Grande — MS
-        <br>
-        Formação: Graduação em Cibersegurança — UniCesumar (em andamento)
+        Sólida base técnica em análise de pacotes (<strong>Wireshark</strong>), infraestrutura de redes
+        e suporte N1/N2, permitindo investigar incidentes da camada de aplicação à rede e validar
+        falsos positivos com precisão.
       </p>
 
       <div class="tags">
-        <span class="tag">SOC N1</span>
-        <span class="tag">Blue Team</span>
-        <span class="tag">SIEM</span>
-        <span class="tag">Threat Intelligence</span>
-        <span class="tag">DFIR</span>
-        <span class="tag">Incident Response</span>
+        <span class="tag">Cyber Threat Intelligence</span>
+        <span class="tag">Threat Hunting</span>
+        <span class="tag">Detection Engineering</span>
         <span class="tag">MITRE ATT&CK</span>
+        <span class="tag">IOC Enrichment</span>
+        <span class="tag">Cloudflare WAF</span>
+        <span class="tag">Wazuh SIEM</span>
+        <span class="tag">Malware & PCAP Analysis</span>
       </div>
-
     </div>
 
   </section>
 
 
-  <!-- COMPETÊNCIAS -->
-
-  <section id="competencias" class="section reveal">
+  <!-- 02 — CICLO DE INTELIGÊNCIA -->
+  <section id="ciclo" class="section reveal">
 
     <div class="section-head">
-      <span class="section-kicker">02 — Conhecimentos técnicos</span>
-      <h2>Competências técnicas</h2>
+      <span class="section-kicker">02 // Intelligence-Driven Defense</span>
+      <h2>Ciclo de Inteligência Aplicada</h2>
       <p class="section-sub">
-        Ferramentas, tecnologias e conhecimentos aplicados à Segurança da Informação.
+        Como converto telemetria bruta e artefatos de ameaças em regras de detecção e mitigação ativa.
+      </p>
+    </div>
+
+    <div class="steps">
+      <div class="step">
+        <span class="step-num">FASE 01 // COLLECTION</span>
+        <h3>Coleta & Telemetria</h3>
+        <p>Captura de sinais via honeypots próprios, logs de WAF/SIEM, feeds OSINT e capturas de rede (PCAP).</p>
+      </div>
+
+      <div class="step">
+        <span class="step-num">FASE 02 // ENRICHMENT</span>
+        <h3>Enriquecimento de IOCs</h3>
+        <p>Extração, correlação e higienização (defang) de hashes, domínios, IPs e infraestrutura de C2.</p>
+      </div>
+
+      <div class="step">
+        <span class="step-num">FASE 03 // ANALYSIS</span>
+        <h3>Mapeamento de TTPs</h3>
+        <p>Reconstrução da Kill Chain, análise de payloads e abuso de LOLBins mapeados no MITRE ATT&CK.</p>
+      </div>
+
+      <div class="step">
+        <span class="step-num">FASE 04 // ACTION</span>
+        <h3>Operacionalização</h3>
+        <p>Implantação de regras customizadas em WAF, SIEM/Wazuh, YARA/Sigma e hipóteses de Threat Hunting.</p>
+      </div>
+    </div>
+
+  </section>
+
+
+  <!-- 03 — INTEL HUB (IOCs + MITRE ATT&CK) -->
+  <section id="intel-hub" class="section reveal">
+
+    <div class="section-head">
+      <span class="section-kicker">03 // Threat Telemetry & Mapping</span>
+      <h2>Amostra de Inteligência & Matriz ATT&CK</h2>
+      <p class="section-sub">
+        Exemplos reais de indicadores extraídos em investigações técnicas e cobertura de técnicas adversárias.
       </p>
     </div>
 
     <div class="intel-grid">
 
+      <!-- FEED DE IOCS COM DEFANG INTERATIVO -->
       <div class="card intel-card">
-
-        <h3>SOC & Incident Response</h3>
-
-        <div class="tags">
-          <span class="tag">Monitoramento</span>
-          <span class="tag">Triagem de alertas</span>
-          <span class="tag">Investigação inicial</span>
-          <span class="tag">Escalonamento</span>
-          <span class="tag">Documentação</span>
-          <span class="tag">Resposta a incidentes</span>
+        <div class="intel-card-head">
+          <div>
+            <span class="tlp-mini">TLP:AMBER // EXTRACTED IOCS</span>
+            <h3>Indicadores de Comprometimento</h3>
+          </div>
+          <button id="defangToggle" class="defang-toggle" type="button" title="Alternar higienização de IOCs">
+            Defang: ON
+          </button>
         </div>
 
+        <ul id="iocList" class="ioc-list">
+          <li class="ioc">
+            <span class="ioc-type">URL</span>
+            <code>hxxp://185[.]141[.]25[.]168/payload/gate[.]php</code>
+            <span class="ioc-src">DanaBot</span>
+          </li>
+          <li class="ioc">
+            <span class="ioc-type">DOMAIN</span>
+            <code>cdn-update-service[.]ddns[.]net</code>
+            <span class="ioc-src">XLMRat C2</span>
+          </li>
+          <li class="ioc">
+            <span class="ioc-type">SHA256</span>
+            <code>9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08</code>
+            <span class="ioc-src">Stage-2 DLL</span>
+          </li>
+          <li class="ioc">
+            <span class="ioc-type">LOLBIN</span>
+            <code>RegSvcs.exe // Process Hollowing Injection</code>
+            <span class="ioc-src">T1218.009</span>
+          </li>
+          <li class="ioc">
+            <span class="ioc-type">WAF_SIG</span>
+            <code>Unmatched Route Enum + Missing Device-ID Header</code>
+            <span class="ioc-src">AppSec Hunt</span>
+          </li>
+        </ul>
       </div>
 
+      <!-- MATRIZ MITRE ATT&CK -->
       <div class="card intel-card">
-
-        <h3>SIEM & Observabilidade</h3>
-
-        <div class="tags">
-          <span class="tag">Grafana</span>
-          <span class="tag">Wazuh</span>
-          <span class="tag">Splunk</span>
-          <span class="tag">Dashboards</span>
-          <span class="tag">Análise de logs</span>
-          <span class="tag">Regras de detecção</span>
+        <div class="intel-card-head">
+          <div>
+            <span class="tlp-mini">ADVERSARY BEHAVIOR</span>
+            <h3>Cobertura MITRE ATT&CK</h3>
+          </div>
+          <span class="matrix-badge">ATT&CK v16</span>
         </div>
 
-      </div>
-
-      <div class="card intel-card">
-
-        <h3>Threat Intelligence & DFIR</h3>
-
-        <div class="tags">
-          <span class="tag">Análise de IOCs</span>
-          <span class="tag">Threat Hunting</span>
-          <span class="tag">Análise de PCAP</span>
-          <span class="tag">Phishing</span>
-          <span class="tag">Malware Analysis</span>
-          <span class="tag">Correlação de ameaças</span>
+        <div class="mitre">
+          <div class="mitre-row">
+            <span class="ttp">T1059.001</span>
+            <span>Command & Scripting: PowerShell / WScript</span>
+            <span class="covered">Detecção Ativa</span>
+          </div>
+          <div class="mitre-row">
+            <span class="ttp">T1218.009</span>
+            <span>System Binary Proxy Execution: RegSvcs</span>
+            <span class="covered">Mapeado</span>
+          </div>
+          <div class="mitre-row">
+            <span class="ttp">T1105</span>
+            <span>Ingress Tool Transfer (HTTP Payload Drop)</span>
+            <span class="covered">PCAP / WAF</span>
+          </div>
+          <div class="mitre-row">
+            <span class="ttp">T1110.001</span>
+            <span>Brute Force: Password Guessing (SSH/Auth)</span>
+            <span class="covered">Wazuh Rule</span>
+          </div>
+          <div class="mitre-row">
+            <span class="ttp">T1595.002</span>
+            <span>Active Scanning: Automated Recon & Enumeration</span>
+            <span class="partial">WAF Mitigation</span>
+          </div>
         </div>
-
-      </div>
-
-      <div class="card intel-card">
-
-        <h3>Redes & Sistemas</h3>
-
-        <div class="tags">
-          <span class="tag">TCP/IP</span>
-          <span class="tag">LAN</span>
-          <span class="tag">WLAN</span>
-          <span class="tag">Linux</span>
-          <span class="tag">Bash</span>
-          <span class="tag">AWS</span>
-        </div>
-
-      </div>
-
-      <div class="card intel-card">
-
-        <h3>Ferramentas & Desenvolvimento</h3>
-
-        <div class="tags">
-          <span class="tag">Wireshark</span>
-          <span class="tag">Zabbix</span>
-          <span class="tag">CyberChef</span>
-          <span class="tag">VirusTotal</span>
-          <span class="tag">Python</span>
-          <span class="tag">Go</span>
-          <span class="tag">Rust</span>
-          <span class="tag">Git</span>
-          <span class="tag">GitHub</span>
-        </div>
-
-      </div>
-
-      <div class="card intel-card">
-
-        <h3>Frameworks & Normas</h3>
-
-        <div class="tags">
-          <span class="tag">MITRE ATT&CK</span>
-          <span class="tag">ISO 27001</span>
-          <span class="tag">LGPD</span>
-        </div>
-
       </div>
 
     </div>
@@ -283,315 +314,38 @@
   </section>
 
 
-  <!-- EXPERIÊNCIA -->
-
-  <section id="experiencia" class="section reveal">
-
-    <div class="section-head">
-      <span class="section-kicker">03 — Experiência profissional</span>
-      <h2>Trajetória profissional</h2>
-      <p class="section-sub">
-        Experiência em operações de segurança, monitoramento e infraestrutura.
-      </p>
-    </div>
-
-    <div class="timeline">
-
-      <div class="tl-item">
-
-        <div class="tl-dot"></div>
-
-        <div class="tl-content">
-
-          <span class="tl-date">10/2026 — Atual</span>
-
-          <h3>Analista de SOC (Blue Team) & Threat Intelligence</h3>
-
-          <p class="tl-company">
-            É Nóis · Remoto
-          </p>
-
-          <ul>
-            <li>
-              Monitoramento de eventos, logs e comportamentos da aplicação utilizando Grafana.
-            </li>
-
-            <li>
-              Desenvolvimento e ajuste de regras de detecção para identificação de atividades suspeitas e possíveis ataques.
-            </li>
-
-            <li>
-              Investigação de IPs, IOCs, acessos suspeitos e comportamentos anômalos.
-            </li>
-
-            <li>
-              Análise e correlação de eventos para apoiar a identificação e investigação de incidentes.
-            </li>
-
-            <li>
-              Desenvolvimento de dashboards de segurança e acompanhamento de indicadores.
-            </li>
-
-            <li>
-              Documentação de evidências e apoio às atividades de mitigação de ameaças.
-            </li>
-          </ul>
-
-        </div>
-
-      </div>
-
-
-      <div class="tl-item">
-
-        <div class="tl-dot"></div>
-
-        <div class="tl-content">
-
-          <span class="tl-date">03/2026 — 08/2026</span>
-
-          <h3>Estagiário de Segurança da Informação</h3>
-
-          <p class="tl-company">
-            Grupo Energisa · Campo Grande, MS
-          </p>
-
-          <ul>
-            <li>
-              Monitoramento e triagem de eventos e alertas em ambiente SIEM.
-            </li>
-
-            <li>
-              Análise preliminar de ocorrências relacionadas a malware, phishing, autenticação e acessos suspeitos.
-            </li>
-
-            <li>
-              Classificação e escalonamento de incidentes conforme procedimentos operacionais.
-            </li>
-
-            <li>
-              Apoio à elaboração de relatórios, dashboards e documentação de segurança.
-            </li>
-
-            <li>
-              Participação na atualização de playbooks e procedimentos de resposta a incidentes.
-            </li>
-          </ul>
-
-        </div>
-
-      </div>
-
-
-      <div class="tl-item">
-
-        <div class="tl-dot"></div>
-
-        <div class="tl-content">
-
-          <span class="tl-date">09/2023 — 12/2024</span>
-
-          <h3>Analista de Suporte N2</h3>
-
-          <p class="tl-company">
-            Tahto · Campo Grande, MS
-          </p>
-
-          <ul>
-            <li>
-              Investigação e diagnóstico de incidentes em ambientes GPON, WLAN e LAN.
-            </li>
-
-            <li>
-              Análise de métricas de rede, latência e perda de pacotes.
-            </li>
-
-            <li>
-              Troubleshooting de infraestrutura, sistemas e conectividade.
-            </li>
-
-            <li>
-              Documentação de diagnósticos e acompanhamento de incidentes até a resolução.
-            </li>
-          </ul>
-
-        </div>
-
-      </div>
-
-
-      <div class="tl-item">
-
-        <div class="tl-dot"></div>
-
-        <div class="tl-content">
-
-          <span class="tl-date">11/2017 — 07/2019</span>
-
-          <h3>Analista de Suporte N1</h3>
-
-          <p class="tl-company">
-            BTCC Call Center · Campo Grande, MS
-          </p>
-
-          <ul>
-            <li>
-              Atendimento e suporte técnico a usuários de sistemas corporativos.
-            </li>
-
-            <li>
-              Análise de logs e investigação de falhas de ativação e provisionamento.
-            </li>
-
-            <li>
-              Identificação de inconsistências e encaminhamento de ocorrências às equipes responsáveis.
-            </li>
-          </ul>
-
-        </div>
-
-      </div>
-
-    </div>
-
-  </section>
-
-
-  <!-- PROJETOS -->
-
+  <!-- 04 — PROJETOS & INVESTIGAÇÕES -->
   <section id="projetos" class="section reveal">
 
     <div class="section-head">
-      <span class="section-kicker">04 — Projetos e laboratórios</span>
-      <h2>Projetos de cibersegurança</h2>
+      <span class="section-kicker">04 // Threat Research & Labs</span>
+      <h2>Investigações & Engenharia de Detecção</h2>
       <p class="section-sub">
-        Projetos práticos, laboratórios e investigações técnicas em Segurança da Informação.
+        Análises de campanhas maliciosas, extração de IOCs, reconhecimento de superfície e laboratórios de telemetria.
       </p>
     </div>
 
     <div class="cases">
 
-      <!-- SIEM PRÓPRIO -->
-
-      <article class="case">
-
-        <div class="case-head">
-          <span class="case-id">PROJECT-001</span>
-          <span class="case-badge">Blue Team</span>
-        </div>
-
-        <h3>SIEM Próprio — Rust & Grafana</h3>
-
-        <p>
-          Desenvolvimento de solução própria para ingestão e processamento
-          de logs, monitoramento de eventos e implementação de mecanismos
-          personalizados de detecção.
-        </p>
-
-        <div class="case-meta">
-          <span class="tag-mini">Rust</span>
-          <span class="tag-mini">Grafana</span>
-          <span class="tag-mini">Log Processing</span>
-          <span class="tag-mini">Detection Engineering</span>
-        </div>
-
-        <span class="case-link">
-          Projeto em desenvolvimento
-        </span>
-
-      </article>
-
-
-      <!-- WAZUH -->
-
-      <article class="case">
-
-        <div class="case-head">
-          <span class="case-id">LAB-001</span>
-          <span class="case-badge">SOC / SIEM</span>
-        </div>
-
-        <h3>SOC Lab — Wazuh SIEM</h3>
-
-        <p>
-          Laboratório de simulação de ataques utilizando Wazuh,
-          Kali Linux e Metasploitable 2. Implementação e validação
-          de regras de detecção, incluindo brute force SSH detectado
-          em aproximadamente 10 segundos no cenário testado.
-        </p>
-
-        <div class="case-meta">
-          <span class="tag-mini">Wazuh</span>
-          <span class="tag-mini">Kali Linux</span>
-          <span class="tag-mini">Metasploitable 2</span>
-          <span class="tag-mini">MITRE ATT&CK</span>
-        </div>
-
-        <a class="case-link"
-           href="https://github.com/Pendragon711/soc-lab-wazuh"
-           target="_blank"
-           rel="noopener">
-          Abrir laboratório →
-        </a>
-
-      </article>
-
-
-      <!-- XLMRAT -->
-
-      <article class="case">
-
-        <div class="case-head">
-          <span class="case-id">DFIR-001</span>
-          <span class="case-badge">DFIR</span>
-        </div>
-
-        <h3>Investigação DFIR — XLMRat / AsyncRAT</h3>
-
-        <p>
-          Análise de tráfego PCAP, investigação de malware,
-          identificação de IOCs e mapeamento de técnicas e
-          comportamentos utilizando MITRE ATT&CK.
-        </p>
-
-        <div class="case-meta">
-          <span class="tag-mini">Wireshark</span>
-          <span class="tag-mini">CyberChef</span>
-          <span class="tag-mini">Python</span>
-          <span class="tag-mini">MITRE ATT&CK</span>
-        </div>
-
-        <a class="case-link"
-           href="https://github.com/Pendragon711/xlmrat-dfir-investigation"
-           target="_blank"
-           rel="noopener">
-          Abrir investigação →
-        </a>
-
-      </article>
-
-
       <!-- DANABOT -->
-
       <article class="case">
-
         <div class="case-head">
-          <span class="case-id">DFIR-002</span>
-          <span class="case-badge">DFIR</span>
+          <span class="case-id">CTI-CASE-01</span>
+          <span class="case-badge warn">Malware & C2</span>
         </div>
 
-        <h3>Investigação DFIR — DanaBot</h3>
+        <h3>Análise de Ameaça — DanaBot</h3>
 
         <p>
-          Investigação forense de tráfego de rede, análise de
-          comunicações maliciosas, identificação de indicadores
-          de comprometimento e reconstrução da cadeia de ataque.
+          Investigação de tráfego de rede (PCAP) de infecção multi-estágio do DanaBot,
+          isolando payloads disfarçados (<code>.js</code> em <code>.php</code>), infraestrutura
+          de comando e controle, abuso de <code>wscript.exe</code> e extração de hashes para regras defensivas.
         </p>
 
         <div class="case-meta">
           <span class="tag-mini">Wireshark</span>
-          <span class="tag-mini">Network Forensics</span>
-          <span class="tag-mini">Threat Intelligence</span>
+          <span class="tag-mini">IOC Extraction</span>
+          <span class="tag-mini">ANY.RUN</span>
           <span class="tag-mini">MITRE ATT&CK</span>
         </div>
 
@@ -599,9 +353,127 @@
            href="https://github.com/Pendragon711/danabot-dfir-investigation"
            target="_blank"
            rel="noopener">
-          Abrir investigação →
+          Ler relatório técnico →
         </a>
+      </article>
 
+
+      <!-- XLMRAT -->
+      <article class="case">
+        <div class="case-head">
+          <span class="case-id">CTI-CASE-02</span>
+          <span class="case-badge warn">Kill Chain</span>
+        </div>
+
+        <h3>Cadeia de Entrega — XLMRat / AsyncRAT</h3>
+
+        <p>
+          Análise completa da entrega e evasão do AsyncRAT, identificando payload oculto em
+          cabeçalho adulterado (<code>.jpg</code>), desofuscação de estágios e abuso do LOLBin
+          <code>RegSvcs.exe</code> (T1218.009) com mapeamento completo de TTPs.
+        </p>
+
+        <div class="case-meta">
+          <span class="tag-mini">CyberChef</span>
+          <span class="tag-mini">Python</span>
+          <span class="tag-mini">VirusTotal</span>
+          <span class="tag-mini">TTP Mapping</span>
+        </div>
+
+        <a class="case-link"
+           href="https://github.com/Pendragon711/xlmrat-dfir-investigation"
+           target="_blank"
+           rel="noopener">
+          Ler relatório técnico →
+        </a>
+      </article>
+
+
+      <!-- ODIN RECON -->
+      <article class="case">
+        <div class="case-head">
+          <span class="case-id">ASM-TOOL-01</span>
+          <span class="case-badge">Attack Surface</span>
+        </div>
+
+        <h3>ODIN — Attack Surface & Recon Pipeline</h3>
+
+        <p>
+          Pipeline automatizado em Go orquestrando Subfinder, Naabu e HTTPX para mapeamento de
+          superfície de ataque exposta, descoberta de ativos e identificação de presença de WAF.
+        </p>
+
+        <div class="case-meta">
+          <span class="tag-mini">Go</span>
+          <span class="tag-mini">ASM</span>
+          <span class="tag-mini">OSINT</span>
+          <span class="tag-mini">WAF Detection</span>
+        </div>
+
+        <a class="case-link"
+           href="https://github.com/Pendragon711/odin-recon"
+           target="_blank"
+           rel="noopener">
+          Acessar repositório →
+        </a>
+      </article>
+
+
+      <!-- WAZUH -->
+      <article class="case">
+        <div class="case-head">
+          <span class="case-id">DET-LAB-01</span>
+          <span class="case-badge">Detection Eng</span>
+        </div>
+
+        <h3>Threat Hunting & Detection Lab — Wazuh</h3>
+
+        <p>
+          Ambiente controlado para emulação de adversários (Kali Linux / Metasploitable) e
+          engenharia de regras customizadas no Wazuh SIEM, validando detecção de força bruta
+          SSH em ~10 segundos e correlação de eventos.
+        </p>
+
+        <div class="case-meta">
+          <span class="tag-mini">Wazuh</span>
+          <span class="tag-mini">Threat Hunting</span>
+          <span class="tag-mini">Custom Rules</span>
+          <span class="tag-mini">MITRE ATT&CK</span>
+        </div>
+
+        <a class="case-link"
+           href="https://github.com/Pendragon711/soc-lab-wazuh"
+           target="_blank"
+           rel="noopener">
+          Acessar laboratório →
+        </a>
+      </article>
+
+
+      <!-- SIEM PRÓPRIO -->
+      <article class="case">
+        <div class="case-head">
+          <span class="case-id">TELEMETRY-01</span>
+          <span class="case-badge">R&D</span>
+        </div>
+
+        <h3>Motor de Ingestão & Detecção — Rust & Grafana</h3>
+
+        <p>
+          Desenvolvimento de pipeline de alta performance em Rust integrado ao Grafana para
+          ingestão de telemetria, enriquecimento de eventos e regras de detecção em tempo real.
+        </p>
+
+        <div class="case-meta">
+          <span class="tag-mini">Rust</span>
+          <span class="tag-mini">Grafana</span>
+          <span class="tag-mini">Telemetry</span>
+          <span class="tag-mini">Detection Rules</span>
+        </div>
+
+        <span class="case-link muted-link">
+          Em desenvolvimento ativo
+        </span>
       </article>
 
     </div>
@@ -609,158 +481,218 @@
   </section>
 
 
-  <!-- FORMAÇÃO -->
-
-  <section id="formacao" class="section reveal">
+  <!-- 05 — EXPERIÊNCIA -->
+  <section id="experiencia" class="section reveal">
 
     <div class="section-head">
-      <span class="section-kicker">05 — Formação e qualificação</span>
-      <h2>Formação acadêmica</h2>
+      <span class="section-kicker">05 // Histórico Operacional</span>
+      <h2>Experiência Profissional</h2>
+      <p class="section-sub">
+        Atuação em inteligência de ameaças, segurança de aplicações (WAF), operações defensivas e redes.
+      </p>
     </div>
 
-    <div class="card">
+    <div class="timeline">
 
-      <h3>Graduação em Cibersegurança</h3>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-content">
+          <span class="tl-date">10/2026 — ATUAL</span>
+          <h3>Analista de Segurança da Informação (CTI / Blue Team)</h3>
+          <p class="tl-company">É Nóis · Remoto</p>
+          <ul>
+            <li>Coleta, investigação e enriquecimento de IOCs (IPs, padrões de tráfego e anomalias comportamentais) para antecipação de ataques.</li>
+            <li>Conversão de inteligência de ameaças em regras proativas de bloqueio e Rate Limiting no <strong>Cloudflare WAF</strong> e correlação via Ray ID.</li>
+            <li>Threat Hunting e análise contínua de logs de aplicação e telemetria utilizando <strong>Grafana / Loki</strong>.</li>
+            <li>Desenvolvimento de dashboards de inteligência e métricas de ataques bloqueados para apoio à tomada de decisão.</li>
+          </ul>
+        </div>
+      </div>
 
-      <p class="tl-company">
-        UniCesumar · Nov/2025 — Jun/2028
-      </p>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-content">
+          <span class="tl-date">03/2026 — 08/2026</span>
+          <h3>Estagiário de Segurança da Informação</h3>
+          <p class="tl-company">Grupo Energisa · Campo Grande, MS</p>
+          <ul>
+            <li>Monitoramento de eventos em ambiente SIEM, triagem de ameaças e investigação inicial de malware, phishing e acessos anômalos.</li>
+            <li>Classificação de ocorrências, documentação técnica e apoio à atualização de playbooks de resposta a incidentes.</li>
+            <li>Apoio à criação de relatórios gerenciais e dashboards de visibilidade de segurança.</li>
+          </ul>
+        </div>
+      </div>
 
-      <p class="muted">
-        Em andamento
-      </p>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-content">
+          <span class="tl-date">09/2023 — 12/2024</span>
+          <h3>Analista de Suporte N2</h3>
+          <p class="tl-company">Tahto · Campo Grande, MS</p>
+          <ul>
+            <li>Diagnóstico avançado de incidentes em redes GPON, WLAN e LAN, análise de latência, perda de pacotes e conectividade.</li>
+            <li>Troubleshooting de infraestrutura e sistemas, fornecendo base sólida para análise profunda de tráfego de rede.</li>
+          </ul>
+        </div>
+      </div>
 
-      <div class="divider"></div>
-
-      <h3>Tecnólogo em Radiologia</h3>
-
-      <p class="tl-company">
-        Centro Universitário Unigran Capital · 2021 — 2023
-      </p>
-
-    </div>
-
-
-    <div class="certs">
-
-      <h3>Certificações e cursos</h3>
-
-      <ul>
-        <li>Certificado Profissional de Segurança Cibernética — Google</li>
-        <li>Analista SOC na Era da IA — IBSEC</li>
-        <li>Pentester na Era da IA — IBSEC</li>
-        <li>Curso SOC N1 — Be Safe.inc</li>
-        <li>Nano Course Cybersecurity — FIAP</li>
-      </ul>
-
-    </div>
-
-
-    <div class="card">
-
-      <h3>Idiomas</h3>
-
-      <p>
-        <strong>Inglês:</strong> Intermediário (B1),
-        com leitura e escrita técnica avançadas.
-      </p>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-content">
+          <span class="tl-date">11/2017 — 07/2019</span>
+          <h3>Analista de Suporte N1</h3>
+          <p class="tl-company">BTCC Call Center · Campo Grande, MS</p>
+          <ul>
+            <li>Análise de logs de sistemas corporativos, investigação de falhas de provisionamento e escalonamento técnico estruturado.</li>
+          </ul>
+        </div>
+      </div>
 
     </div>
 
   </section>
 
 
-  <!-- CONTATO -->
-
-  <section id="contato" class="section reveal">
+  <!-- 06 — COMPETÊNCIAS & FORMAÇÃO -->
+  <section id="competencias" class="section reveal">
 
     <div class="section-head">
+      <span class="section-kicker">06 // Capacidades & Credenciais</span>
+      <h2>Stack Técnica & Formação</h2>
+    </div>
 
-      <span class="section-kicker">06 — Contato</span>
+    <div class="intel-grid">
 
-      <h2>Vamos conversar</h2>
+      <div class="card intel-card">
+        <h3>Threat Intelligence & Hunting</h3>
+        <div class="tags">
+          <span class="tag">IOC Enrichment</span>
+          <span class="tag">MITRE ATT&CK</span>
+          <span class="tag">TTP Analysis</span>
+          <span class="tag">Threat Hunting</span>
+          <span class="tag">OSINT</span>
+          <span class="tag">Malware Triage</span>
+          <span class="tag">PCAP Analysis</span>
+        </div>
+      </div>
 
-      <p class="section-sub">
-        Aberto a oportunidades em SOC N1, Blue Team,
-        Segurança da Informação e operações de cibersegurança.
-      </p>
+      <div class="card intel-card">
+        <h3>Detection Engineering, WAF & SIEM</h3>
+        <div class="tags">
+          <span class="tag">Cloudflare WAF</span>
+          <span class="tag">Wazuh</span>
+          <span class="tag">Grafana / Loki</span>
+          <span class="tag">Splunk</span>
+          <span class="tag">Sigma / YARA</span>
+          <span class="tag">Log Correlation</span>
+        </div>
+      </div>
+
+      <div class="card intel-card">
+        <h3>Análise & Automação</h3>
+        <div class="tags">
+          <span class="tag">Wireshark / tshark</span>
+          <span class="tag">CyberChef</span>
+          <span class="tag">VirusTotal</span>
+          <span class="tag">ANY.RUN</span>
+          <span class="tag">Python</span>
+          <span class="tag">Go</span>
+          <span class="tag">Rust</span>
+          <span class="tag">Bash</span>
+        </div>
+      </div>
+
+      <div class="card intel-card">
+        <h3>Redes, Infra & Frameworks</h3>
+        <div class="tags">
+          <span class="tag">TCP/IP</span>
+          <span class="tag">Linux</span>
+          <span class="tag">Windows Internals</span>
+          <span class="tag">AWS</span>
+          <span class="tag">ISO 27001</span>
+          <span class="tag">LGPD</span>
+        </div>
+      </div>
 
     </div>
 
+    <div class="edu-grid">
+      <div class="card">
+        <h3>Formação & Idiomas</h3>
+        <p>
+          <strong>Graduação em Cibersegurança</strong><br>
+          UniCesumar · Nov/2025 — Jun/2028 (Em andamento)
+        </p>
+        <p>
+          <strong>Tecnólogo em Radiologia</strong><br>
+          Centro Universitário Unigran Capital · Concluído (2023)
+        </p>
+        <p>
+          <strong>Inglês:</strong> Intermediário (B1) — Leitura e escrita técnica avançada para relatórios de ameaças e documentação.
+        </p>
+      </div>
+
+      <div class="certs">
+        <h3>Certificações & Especializações</h3>
+        <ul>
+          <li>Google Cybersecurity Professional Certificate — Coursera</li>
+          <li>Cisco Junior Cybersecurity Analyst — Cisco Networking Academy</li>
+          <li>Analista SOC na Era da IA — IBSEC</li>
+          <li>Pentester na Era da IA — IBSEC</li>
+          <li>Fundamentos de SOC — Be Safe Inc.</li>
+          <li>Nano Course Cybersecurity — FIAP</li>
+        </ul>
+      </div>
+    </div>
+
+  </section>
+
+
+  <!-- 07 — CONTATO -->
+  <section id="contato" class="section reveal">
+
+    <div class="section-head">
+      <span class="section-kicker">07 // Canal Direto</span>
+      <h2>Vamos conversar</h2>
+      <p class="section-sub">
+        Disponível para oportunidades e projetos em Cyber Threat Intelligence (CTI), Threat Hunting e Detection Engineering.
+      </p>
+    </div>
 
     <div class="contact-grid">
-
-      <a class="contact-card"
-         href="mailto:daniels2live666@gmail.com">
-
+      <a class="contact-card" href="mailto:daniels2live666@gmail.com">
         <span class="contact-label">Email</span>
-
-        <span class="contact-value">
-          daniels2live666@gmail.com
-        </span>
-
+        <span class="contact-value">daniels2live666@gmail.com</span>
       </a>
 
-
-      <a class="contact-card"
-         href="https://www.linkedin.com/in/danielwidal"
-         target="_blank"
-         rel="noopener">
-
+      <a class="contact-card" href="https://www.linkedin.com/in/danielwidal" target="_blank" rel="noopener">
         <span class="contact-label">LinkedIn</span>
-
-        <span class="contact-value">
-          linkedin.com/in/danielwidal
-        </span>
-
+        <span class="contact-value">linkedin.com/in/danielwidal</span>
       </a>
 
-
-      <a class="contact-card"
-         href="https://github.com/Pendragon711"
-         target="_blank"
-         rel="noopener">
-
+      <a class="contact-card" href="https://github.com/Pendragon711" target="_blank" rel="noopener">
         <span class="contact-label">GitHub</span>
-
-        <span class="contact-value">
-          github.com/Pendragon711
-        </span>
-
+        <span class="contact-value">github.com/Pendragon711</span>
       </a>
 
-
-      <a class="contact-card"
-         href="https://pendragon711.github.io">
-
+      <a class="contact-card" href="https://pendragon711.github.io">
         <span class="contact-label">Portfólio</span>
-
-        <span class="contact-value">
-          pendragon711.github.io
-        </span>
-
+        <span class="contact-value">pendragon711.github.io</span>
       </a>
-
     </div>
 
   </section>
 
 </main>
 
-
 <footer class="footer">
-
   <p>
-    © <span id="year"></span> Daniel Widal ·
-    Analista SOC N1 | Blue Team
+    © <span id="year"></span> Daniel Widal · Cyber Threat Intelligence & Threat Hunting
   </p>
-
   <p class="muted small">
-    "Collect the signal. Analyze the evidence. Defend the environment."
+    "Turn raw threat data into actionable defense."
   </p>
-
 </footer>
-
 
 <script src="js/main.js"></script>
 
