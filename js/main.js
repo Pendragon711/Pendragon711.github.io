@@ -29,7 +29,7 @@ if (yearEl) yearEl.textContent = new Date().getFullYear();
   let lastPulseTime = 0;
 
   const dpr = Math.min(window.devicePixelRatio || 1, 2);
-  const LINK_DIST = 185;
+  const LINK_DIST = 210;
   const LINK_DIST_SQ = LINK_DIST * LINK_DIST;
   const INTEL_TAGS = ['IOC', 'C2', 'T1059', 'WAF', 'ASN', 'HASH', 'TTP', 'PCAP'];
 
@@ -54,32 +54,30 @@ if (yearEl) yearEl.textContent = new Date().getFullYear();
   }
 
   function buildMesh() {
-    // Quantidade controlada (~28 a 36 nós) para manter < 0.2ms por frame
-    const count = Math.min(36, Math.max(22, Math.floor((w * h) / 42000)));
+    const count = Math.min(40, Math.max(26, Math.floor((w * h) / 36000)));
     pulses = [];
 
     nodes = Array.from({ length: count }, (_, idx) => {
-      const isHub = idx < 7; // 7 nós principais (pivôs de inteligência)
-      const isAmber = isHub ? idx % 2 === 0 : Math.random() < 0.18;
+      const isHub = idx < 8;
+      const isAmber = isHub ? idx % 2 === 0 : Math.random() < 0.22;
       return {
         x: Math.random() * w,
         y: Math.random() * h,
-        vx: (Math.random() - 0.5) * (isHub ? 0.08 : 0.14),
-        vy: (Math.random() - 0.5) * (isHub ? 0.08 : 0.14),
-        r: isHub ? 2.6 : Math.random() * 1.1 + 0.9,
+        vx: (Math.random() - 0.5) * (isHub ? 0.1 : 0.18),
+        vy: (Math.random() - 0.5) * (isHub ? 0.1 : 0.18),
+        r: isHub ? 3.2 : Math.random() * 1.3 + 1.1,
         isHub,
         isAmber,
         tag: isHub ? INTEL_TAGS[idx % INTEL_TAGS.length] : null,
-        ping: 0 // brilho temporário quando recebe um pulso
+        ping: 0
       };
     });
   }
 
   function spawnPulse(now) {
-    if (now - lastPulseTime < 1400 || pulses.length >= 4) return;
+    if (now - lastPulseTime < 1100 || pulses.length >= 5) return;
 
-    // Procura dois nós conectados para enviar um pacote de telemetria
-    for (let attempt = 0; attempt < 12; attempt++) {
+    for (let attempt = 0; attempt < 15; attempt++) {
       const i = Math.floor(Math.random() * nodes.length);
       const a = nodes[i];
       for (let j = i + 1; j < nodes.length; j++) {
@@ -92,7 +90,7 @@ if (yearEl) yearEl.textContent = new Date().getFullYear();
             from: a,
             to: b,
             progress: 0,
-            speed: 0.012 + Math.random() * 0.008,
+            speed: 0.013 + Math.random() * 0.008,
             isAmber: a.isAmber || b.isAmber
           });
           lastPulseTime = now;
@@ -104,19 +102,17 @@ if (yearEl) yearEl.textContent = new Date().getFullYear();
 
   function render(now) {
     ctx.clearRect(0, 0, w, h);
-    ctx.font = '500 9px "JetBrains Mono", monospace';
+    ctx.font = '600 10px "JetBrains Mono", monospace';
     ctx.textBaseline = 'middle';
 
-    // 1. Atualiza posições dos nós
     for (const n of nodes) {
       n.x += n.vx;
       n.y += n.vy;
-      if (n.x < 20 || n.x > w - 20) n.vx *= -1;
-      if (n.y < 20 || n.y > h - 20) n.vy *= -1;
+      if (n.x < 24 || n.x > w - 24) n.vx *= -1;
+      if (n.y < 24 || n.y > h - 24) n.vy *= -1;
       if (n.ping > 0) n.ping = Math.max(0, n.ping - 0.02);
     }
 
-    // 2. Desenha conexões da malha (arestas do grafo)
     for (let i = 0; i < nodes.length; i++) {
       const a = nodes[i];
       for (let j = i + 1; j < nodes.length; j++) {
@@ -128,12 +124,12 @@ if (yearEl) yearEl.textContent = new Date().getFullYear();
         if (d2 < LINK_DIST_SQ) {
           const ratio = 1 - d2 / LINK_DIST_SQ;
           const isThreatEdge = a.isAmber && b.isAmber;
-          const alpha = ratio * (isThreatEdge ? 0.24 : 0.16);
+          const alpha = ratio * (isThreatEdge ? 0.34 : 0.25);
 
           ctx.strokeStyle = isThreatEdge
             ? `rgba(245, 158, 11, ${alpha})`
             : `rgba(34, 211, 238, ${alpha})`;
-          ctx.lineWidth = (a.isHub || b.isHub) ? 0.85 : 0.55;
+          ctx.lineWidth = (a.isHub || b.isHub) ? 1.0 : 0.7;
 
           ctx.beginPath();
           ctx.moveTo(a.x, a.y);
@@ -142,15 +138,14 @@ if (yearEl) yearEl.textContent = new Date().getFullYear();
         }
       }
 
-      // Triangulação sutil com o cursor do mouse
       if (mouse.active) {
         const mdx = a.x - mouse.x;
         const mdy = a.y - mouse.y;
         const md2 = mdx * mdx + mdy * mdy;
-        if (md2 < 24000) {
-          const mAlpha = (1 - md2 / 24000) * 0.22;
+        if (md2 < 28000) {
+          const mAlpha = (1 - md2 / 28000) * 0.32;
           ctx.strokeStyle = `rgba(34, 211, 238, ${mAlpha})`;
-          ctx.lineWidth = 0.7;
+          ctx.lineWidth = 0.85;
           ctx.beginPath();
           ctx.moveTo(a.x, a.y);
           ctx.lineTo(mouse.x, mouse.y);
@@ -159,7 +154,6 @@ if (yearEl) yearEl.textContent = new Date().getFullYear();
       }
     }
 
-    // 3. Atualiza e desenha pulsos de telemetria trafegando nas arestas
     spawnPulse(now);
     for (let i = pulses.length - 1; i >= 0; i--) {
       const p = pulses[i];
@@ -176,44 +170,39 @@ if (yearEl) yearEl.textContent = new Date().getFullYear();
 
       ctx.beginPath();
       ctx.fillStyle = p.isAmber
-        ? 'rgba(245, 158, 11, 0.9)'
-        : 'rgba(34, 211, 238, 0.9)';
-      ctx.arc(px, py, 2.1, 0, Math.PI * 2);
+        ? 'rgba(245, 158, 11, 0.95)'
+        : 'rgba(34, 211, 238, 0.95)';
+      ctx.arc(px, py, 2.5, 0, Math.PI * 2);
       ctx.fill();
     }
 
-    // 4. Desenha os nós (pivôs com anel tático + rótulo discreto)
     for (const n of nodes) {
       const rgb = n.isAmber ? '245, 158, 11' : '34, 211, 238';
 
-      // Anel externo para Hubs ou nós atingidos por pulso
       if (n.isHub || n.ping > 0) {
-        const ringRadius = n.r + 4.5 + n.ping * 4;
-        const ringAlpha = n.isHub ? 0.28 + n.ping * 0.4 : n.ping * 0.45;
+        const ringRadius = n.r + 5 + n.ping * 5;
+        const ringAlpha = n.isHub ? 0.4 + n.ping * 0.4 : n.ping * 0.55;
         ctx.beginPath();
         ctx.strokeStyle = `rgba(${rgb}, ${ringAlpha})`;
-        ctx.lineWidth = 0.8;
+        ctx.lineWidth = 1.0;
         ctx.arc(n.x, n.y, ringRadius, 0, Math.PI * 2);
         ctx.stroke();
       }
 
-      // Núcleo do nó
       ctx.beginPath();
-      ctx.fillStyle = `rgba(${rgb}, ${n.isHub ? 0.85 : 0.55})`;
+      ctx.fillStyle = `rgba(${rgb}, ${n.isHub ? 0.92 : 0.68})`;
       ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
       ctx.fill();
 
-      // Micro-tag de inteligência nos hubs
       if (n.tag) {
-        ctx.fillStyle = `rgba(${rgb}, ${0.32 + n.ping * 0.35})`;
-        ctx.fillText(n.tag, n.x + 10, n.y);
+        ctx.fillStyle = `rgba(${rgb}, ${0.48 + n.ping * 0.4})`;
+        ctx.fillText(n.tag, n.x + 11, n.y);
       }
     }
 
     animId = requestAnimationFrame(render);
   }
 
-  // Pausa a animação quando a aba não está visível (economia total de bateria/CPU)
   document.addEventListener('visibilitychange', () => {
     if (document.hidden) {
       if (animId) cancelAnimationFrame(animId);
