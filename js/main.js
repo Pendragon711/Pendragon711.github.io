@@ -1,5 +1,5 @@
 // =========================================
-// DEEP INTEL — Interações (leves)
+// DEEP INTEL — Interações CTI
 // =========================================
 
 const $ = (sel, ctx = document) => ctx.querySelector(sel);
@@ -9,7 +9,7 @@ const $$ = (sel, ctx = document) => [...ctx.querySelectorAll(sel)];
 const yearEl = $('#year');
 if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-// ---------- PARTÍCULAS PREMIUM (canvas leve) ----------
+// ---------- PARTÍCULAS DE TELEMETRIA (canvas leve) ----------
 (function initParticles() {
   const canvas = document.getElementById('particles');
   if (!canvas) return;
@@ -33,17 +33,17 @@ if (yearEl) yearEl.textContent = new Date().getFullYear();
   }
 
   function build() {
-    const count = Math.min(45, Math.floor((w * h) / 26000));
+    const count = Math.min(42, Math.floor((w * h) / 28000));
     points = Array.from({ length: count }, () => {
-      const isAmber = Math.random() < 0.18;
+      const isAmber = Math.random() < 0.24;
       return {
         x: Math.random() * w,
         y: Math.random() * h,
-        vx: (Math.random() - 0.5) * 0.16,
-        vy: (Math.random() - 0.5) * 0.16,
-        r: Math.random() * 1.6 + 0.7,
+        vx: (Math.random() - 0.5) * 0.15,
+        vy: (Math.random() - 0.5) * 0.15,
+        r: Math.random() * 1.5 + 0.7,
         color: isAmber ? '245,158,11' : '34,211,238',
-        glow: isAmber ? 0.75 : 0.55
+        glow: isAmber ? 0.75 : 0.5
       };
     });
   }
@@ -58,7 +58,7 @@ if (yearEl) yearEl.textContent = new Date().getFullYear();
         const dx = a.x - b.x, dy = a.y - b.y;
         const d2 = dx * dx + dy * dy;
         if (d2 < LINK_DIST_SQ) {
-          const alpha = (1 - d2 / LINK_DIST_SQ) * 0.22;
+          const alpha = (1 - d2 / LINK_DIST_SQ) * 0.2;
           ctx.strokeStyle = `rgba(${a.color},${alpha})`;
           ctx.lineWidth = 0.6;
           ctx.beginPath();
@@ -84,7 +84,8 @@ if (yearEl) yearEl.textContent = new Date().getFullYear();
     requestAnimationFrame(tick);
   }
 
-  resize(); build();
+  resize();
+  build();
   window.addEventListener('resize', () => { resize(); build(); }, { passive: true });
   tick();
 })();
@@ -105,52 +106,30 @@ if ('IntersectionObserver' in window && revealEls.length) {
   revealEls.forEach((el) => el.classList.add('visible'));
 }
 
-// ---------- CONTAGEM DAS STATS ----------
-const counters = $$('.stat-num');
-function animateCount(el) {
-  const target = parseInt(el.dataset.count, 10) || 0;
-  const duration = 1200;
-  const start = performance.now();
-  function step(now) {
-    const p = Math.min((now - start) / duration, 1);
-    const eased = 1 - Math.pow(1 - p, 3);
-    el.textContent = Math.round(target * eased);
-    if (p < 1) requestAnimationFrame(step);
-    else el.textContent = target;
-  }
-  requestAnimationFrame(step);
-}
-if ('IntersectionObserver' in window && counters.length) {
-  const cio = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        animateCount(entry.target);
-        cio.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.5 });
-  counters.forEach((c) => cio.observe(c));
-} else {
-  counters.forEach((c) => c.textContent = c.dataset.count || '0');
-}
-
-// ---------- DEFANG TOGGLE ----------
+// ---------- DEFANG / REFANG TOGGLE (IOC FEED) ----------
 const defangBtn = $('#defangToggle');
 const iocList = $('#iocList');
 if (defangBtn && iocList) {
   let defanged = true;
-  $$('.ioc code', iocList).forEach((code) => { code.dataset.raw = code.textContent; });
+  $$('.ioc code', iocList).forEach((code) => {
+    code.dataset.defanged = code.textContent;
+  });
+
   function applyDefang() {
     $$('.ioc code', iocList).forEach((code) => {
-      const raw = code.dataset.raw;
+      const safe = code.dataset.defanged;
       code.textContent = defanged
-        ? raw.replace(/\[\.\]/g, '.').replace(/hxxp/gi, 'http')
-        : raw.replace(/\./g, '[.]').replace(/https?/gi, (m) => m.replace('t', 'x'));
+        ? safe
+        : safe.replace(/\[\.\]/g, '.').replace(/hxxp/gi, 'http');
     });
   }
+
   defangBtn.addEventListener('click', () => {
     defanged = !defanged;
     defangBtn.textContent = `Defang: ${defanged ? 'ON' : 'OFF'}`;
+    defangBtn.style.borderColor = defanged ? 'rgba(245, 158, 11, .35)' : 'rgba(244, 63, 94, .5)';
+    defangBtn.style.color = defanged ? 'var(--amber)' : 'var(--rose)';
+    defangBtn.style.background = defanged ? 'var(--amber-dim)' : 'rgba(244, 63, 94, .14)';
     applyDefang();
   });
 }
@@ -160,14 +139,16 @@ const sections = $$('main section[id]');
 const navLinks = $$('.nav-links a');
 if (sections.length && navLinks.length && 'IntersectionObserver' in window) {
   const navMap = new Map();
-  navLinks.forEach((a) => navMap.set(a.getAttribute('href').replace('#',''), a));
+  navLinks.forEach((a) => navMap.set(a.getAttribute('href').replace('#', ''), a));
   const setActive = (id) => {
     navLinks.forEach((a) => a.classList.remove('active'));
     const link = navMap.get(id);
     if (link) link.classList.add('active');
   };
   const sio = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => { if (entry.isIntersecting) setActive(entry.target.id); });
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) setActive(entry.target.id);
+    });
   }, { rootMargin: '-40% 0px -55% 0px', threshold: 0 });
   sections.forEach((s) => sio.observe(s));
 }
@@ -178,7 +159,9 @@ $$('a[href^="#"]').forEach((a) => {
     const id = a.getAttribute('href');
     if (id.length <= 1) return;
     const target = document.querySelector(id);
-    if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+    if (target) {
+      e.preventDefault();
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
   });
 });
-
