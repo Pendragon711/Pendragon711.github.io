@@ -1,0 +1,80 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1200" y2="630" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#07080A"/>
+      <stop offset="55%" stop-color="#0B0D12"/>
+      <stop offset="100%" stop-color="#171209"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#F5D77F"/>
+      <stop offset="50%" stop-color="#D4AF37"/>
+      <stop offset="100%" stop-color="#8C6D1F"/>
+    </linearGradient>
+    <radialGradient id="aura" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#D4AF37" stop-opacity="0.24"/>
+      <stop offset="70%" stop-color="#D4AF37" stop-opacity="0.05"/>
+      <stop offset="100%" stop-color="#07080A" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#D4AF37" stroke-opacity="0.06" stroke-width="1"/>
+    </pattern>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect width="1200" height="630" fill="url(#grid)"/>
+
+  <!-- Moldura e Cantoneiras Táticas -->
+  <rect x="24" y="24" width="1152" height="582" rx="20" stroke="#3D3112" stroke-width="2"/>
+  <path d="M 52 24 L 24 24 L 24 52" stroke="#D4AF37" stroke-width="4" fill="none"/>
+  <path d="M 1148 24 L 1176 24 L 1176 52" stroke="#D4AF37" stroke-width="4" fill="none"/>
+  <path d="M 52 606 L 24 606 L 24 578" stroke="#D4AF37" stroke-width="4" fill="none"/>
+  <path d="M 1148 606 L 1176 606 L 1176 578" stroke="#D4AF37" stroke-width="4" fill="none"/>
+
+  <!-- Top Bar -->
+  <circle cx="58" cy="58" r="6" fill="#D4AF37"/>
+  <circle cx="80" cy="58" r="6" fill="#8C6D1F"/>
+  <circle cx="102" cy="58" r="6" fill="#3D3112"/>
+  <text x="130" y="64" font-family="monospace" font-size="16" font-weight="700" fill="#D4AF37" letter-spacing="3">OP-PENDRAGON // CLASSIFIED DOSSIER</text>
+  <text x="1140" y="64" text-anchor="end" font-family="monospace" font-size="16" font-weight="700" fill="#8C7328" letter-spacing="2">TLP:CLEAR</text>
+  <line x1="48" y1="88" x2="1152" y2="88" stroke="#29210D" stroke-width="1.5"/>
+
+  <!-- Texto Principal -->
+  <text x="64" y="156" font-family="monospace" font-size="18" font-weight="700" fill="#D4AF37" letter-spacing="3">CYBER THREAT INTELLIGENCE &amp; THREAT HUNTING</text>
+
+  <text x="64" y="242" font-family="sans-serif" font-size="74" font-weight="800" fill="#F9FAFB">Daniel Widal <tspan fill="url(#gold)">◈</tspan></text>
+  <text x="64" y="296" font-family="sans-serif" font-size="26" font-weight="500" fill="#D1D5DB">Analista de Segurança da Informação · CTI &amp; Detection Engineering</text>
+
+  <!-- Terminal Box -->
+  <rect x="64" y="340" width="710" height="118" rx="12" fill="#050608" stroke="#4D3D14" stroke-width="1.5"/>
+  <text x="88" y="378" font-family="monospace" font-size="18" font-weight="600" fill="#8C6D1F">daniel@cti-ops:~/threat-intel$</text>
+  <text x="88" y="422" font-family="monospace" font-size="22" font-weight="700" fill="#F5D77F">&gt; hunt.py --extract-iocs --mitre ATT&amp;CK</text>
+  <rect x="635" y="401" width="12" height="24" fill="#D4AF37"/>
+
+  <!-- Tags Inferiores -->
+  <rect x="64" y="492" width="165" height="42" rx="8" fill="#14110A" stroke="#594717"/><text x="146" y="519" text-anchor="middle" font-family="monospace" font-size="16" font-weight="700" fill="#F5D77F">IOC &amp; TTPs</text>
+  <rect x="245" y="492" width="185" height="42" rx="8" fill="#14110A" stroke="#594717"/><text x="337" y="519" text-anchor="middle" font-family="monospace" font-size="16" font-weight="700" fill="#F5D77F">MITRE ATT&amp;CK</text>
+  <rect x="446" y="492" width="175" height="42" rx="8" fill="#14110A" stroke="#594717"/><text x="533" y="519" text-anchor="middle" font-family="monospace" font-size="16" font-weight="700" fill="#F5D77F">PCAP / DFIR</text>
+  <rect x="637" y="492" width="137" height="42" rx="8" fill="#14110A" stroke="#594717"/><text x="705" y="519" text-anchor="middle" font-family="monospace" font-size="16" font-weight="700" fill="#F5D77F">WAF/SIEM</text>
+
+  <!-- Radar & Escudo Direito -->
+  <circle cx="975" cy="330" r="185" fill="url(#aura)"/>
+  <circle cx="975" cy="330" r="160" stroke="#3D3112" stroke-width="1.5" stroke-dasharray="6 6"/>
+  <circle cx="975" cy="330" r="118" stroke="#594717" stroke-width="1.5"/>
+  <circle cx="975" cy="330" r="74" stroke="#3D3112" stroke-width="1.5"/>
+  <line x1="795" y1="330" x2="1155" y2="330" stroke="#29210D" stroke-width="1.5"/>
+  <line x1="975" y1="150" x2="975" y2="510" stroke="#29210D" stroke-width="1.5"/>
+
+  <path d="M 975 330 L 975 170 A 160 160 0 0 1 1112 246 Z" fill="#D4AF37" fill-opacity="0.18"/>
+  <line x1="975" y1="330" x2="975" y2="170" stroke="#F5D77F" stroke-width="2.5"/>
+
+  <circle cx="1035" cy="260" r="5" fill="#F5D77F"/>
+  <circle cx="905" cy="385" r="4.5" fill="#D4AF37"/>
+
+  <!-- Escudo Central -->
+  <path d="M975 248 L1038 274 V332 C1038 374 1011 405 975 420 C939 405 912 374 912 332 V274 L975 248 Z" fill="#0B0D12" stroke="url(#gold)" stroke-width="3.5"/>
+  <path d="M975 266 L1021 285 V330 C1021 363 1001 388 975 400 C949 388 929 363 929 330 V285 L975 266 Z" fill="#14110A" stroke="#6E5619" stroke-width="1.5"/>
+  <path d="M944 332 Q975 302 1006 332 Q975 362 944 332 Z" fill="none" stroke="#F5D77F" stroke-width="3"/>
+  <circle cx="975" cy="332" r="8" fill="#D4AF37"/>
+
+  <text x="975" y="532" text-anchor="middle" font-family="monospace" font-size="16" font-weight="700" fill="#D4AF37" letter-spacing="2">pendragon711.github.io</text>
+</svg>
