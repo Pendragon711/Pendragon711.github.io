@@ -12,7 +12,7 @@
   <meta property="og:description" content="Transformando telemetria bruta, tráfego e artefatos maliciosos em inteligência acionável e defesa proativa.">
   <meta property="og:image" content="assets/og-image.png">
 
-  <meta name="theme-color" content="#04070d">
+  <meta name="theme-color" content="#07080a">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -32,7 +32,7 @@
 <header class="nav">
   <a class="brand" href="#top">
     <span class="brand-dot"></span>
-    <span>DW // THREAT INTEL</span>
+    <span>OP-PENDRAGON // CTI DOSSIER</span>
   </a>
 
   <nav class="nav-links" aria-label="Seções">
@@ -51,55 +51,105 @@
   <!-- HERO -->
   <section class="hero">
 
-    <div class="tlp-bar">
-      <div class="tlp">
-        <span class="tlp-badge">TLP:CLEAR</span>
-        <span class="tlp-sep">·</span>
-        <span>CYBER THREAT INTELLIGENCE</span>
-        <span class="tlp-sep">·</span>
-        <span>THREAT HUNTING</span>
+    <div class="hero-grid">
+      <div>
+        <div class="tlp-bar">
+          <div class="tlp">
+            <span class="tlp-badge">CLASSIFIED // TOP SECRET</span>
+            <span class="tlp-sep">·</span>
+            <span>UNIT: PENDRAGON-711</span>
+          </div>
+          <div class="status-pill">
+            <span class="pulse-dot"></span>
+            <span>INTEL-DRIVEN DEFENSE</span>
+          </div>
+        </div>
+
+        <h1 class="hero-title">
+          Cyber Threat<br>
+          <span class="grad">Intelligence</span> ◈
+        </h1>
+
+        <p class="hero-sub">
+          <strong>Daniel Widal</strong> — Profissional de Segurança da Informação focado em
+          <strong>Cyber Threat Intelligence (CTI)</strong>, <strong>Threat Hunting</strong> e
+          <strong>Detection Engineering</strong>. Transformo telemetria bruta, tráfego de rede e
+          artefatos maliciosos em inteligência acionável para antecipar vetores de ataque.
+        </p>
+
+        <div class="hero-terminal" aria-label="Terminal CTI">
+          <span class="term-prompt">daniel@cti-ops:~/threat-intel$</span>
+          <div class="term-line">
+            <span>&gt;</span>
+            <span id="typedCmd">hunt.py --extract-iocs --mitre ATT&amp;CK --hunt</span>
+            <span class="term-cursor"></span>
+          </div>
+        </div>
+
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#projetos">
+            Explorar dossiês →
+          </a>
+
+          <a class="btn btn-ghost" href="#intel-hub">
+            Feed de IOCs & ATT&CK
+          </a>
+
+          <a class="btn btn-ghost"
+             href="https://github.com/Pendragon711"
+             target="_blank"
+             rel="noopener">
+            GitHub
+          </a>
+
+          <a class="btn btn-ghost"
+             href="https://www.linkedin.com/in/danielwidal"
+             target="_blank"
+             rel="noopener">
+            LinkedIn
+          </a>
+        </div>
       </div>
-      <div class="status-pill">
-        <span class="pulse-dot"></span>
-        <span>INTEL-DRIVEN DEFENSE</span>
+
+      <!-- RADAR & BRASÃO OPERACIONAL (COMBINANDO COM O README) -->
+      <div class="hero-radar" aria-hidden="true">
+        <svg class="radar-svg" viewBox="0 0 280 280" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="goldShield" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#F5D77F"/>
+              <stop offset="50%" stop-color="#D4AF37"/>
+              <stop offset="100%" stop-color="#8C6D1F"/>
+            </linearGradient>
+            <radialGradient id="radarAura" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#D4AF37" stop-opacity="0.22"/>
+              <stop offset="70%" stop-color="#D4AF37" stop-opacity="0.04"/>
+              <stop offset="100%" stop-color="#07080A" stop-opacity="0"/>
+            </radialGradient>
+          </defs>
+
+          <circle cx="140" cy="140" r="134" fill="url(#radarAura)"/>
+          <circle cx="140" cy="140" r="118" stroke="#3D3112" stroke-width="1" stroke-dasharray="4 4"/>
+          <circle cx="140" cy="140" r="88" stroke="#594717" stroke-width="1"/>
+          <circle cx="140" cy="140" r="56" stroke="#3D3112" stroke-width="1"/>
+          <line x1="16" y1="140" x2="264" y2="140" stroke="#29210D" stroke-width="1"/>
+          <line x1="140" y1="16" x2="140" y2="264" stroke="#29210D" stroke-width="1"/>
+
+          <g class="radar-sweep">
+            <path d="M 140 140 L 140 22 A 118 118 0 0 1 240 78 Z" fill="#D4AF37" fill-opacity="0.16"/>
+            <line x1="140" y1="140" x2="140" y2="22" stroke="#F5D77F" stroke-width="1.5"/>
+          </g>
+
+          <circle cx="182" cy="92" r="3.5" fill="#F5D77F"/>
+          <circle cx="92" cy="176" r="3" fill="#D4AF37"/>
+
+          <g class="radar-float">
+            <path d="M140 86 L184 104 V142 C184 171 165 192 140 202 C115 192 96 171 96 142 V104 L140 86 Z" fill="#0B0D12" stroke="url(#goldShield)" stroke-width="2.5"/>
+            <path d="M140 98 L172 111 V141 C172 163 158 180 140 188 C122 180 108 163 108 141 V111 L140 98 Z" fill="#14110A" stroke="#6E5619" stroke-width="1"/>
+            <path d="M119 142 Q140 122 161 142 Q140 162 119 142 Z" fill="none" stroke="#F5D77F" stroke-width="2"/>
+            <circle cx="140" cy="142" r="5.5" fill="#D4AF37"/>
+          </g>
+        </svg>
       </div>
-    </div>
-
-    <h1 class="hero-title">
-      Cyber Threat<br>
-      <span class="grad">Intelligence</span>
-    </h1>
-
-    <p class="hero-sub">
-      <strong>Daniel Widal</strong> — Profissional de Segurança da Informação focado em
-      <strong>Cyber Threat Intelligence (CTI)</strong>, <strong>Threat Hunting</strong> e
-      <strong>Detection Engineering</strong>. Transformo telemetria bruta, tráfego de rede e
-      artefatos maliciosos em inteligência acionável para antecipar vetores de ataque e
-      fortalecer detecções.
-    </p>
-
-    <div class="hero-actions">
-      <a class="btn btn-primary" href="#projetos">
-        Explorar investigações
-      </a>
-
-      <a class="btn btn-ghost" href="#intel-hub">
-        Feed de IOCs & ATT&CK
-      </a>
-
-      <a class="btn btn-ghost"
-         href="https://github.com/Pendragon711"
-         target="_blank"
-         rel="noopener">
-        GitHub
-      </a>
-
-      <a class="btn btn-ghost"
-         href="https://www.linkedin.com/in/danielwidal"
-         target="_blank"
-         rel="noopener">
-        LinkedIn
-      </a>
     </div>
 
     <div class="hero-stats">
@@ -129,7 +179,7 @@
   <section id="perfil" class="section reveal">
 
     <div class="section-head">
-      <span class="section-kicker">01 // Briefing Operacional</span>
+      <span class="section-kicker">SEC-01 // Briefing Operacional</span>
       <h2>Perfil Profissional</h2>
     </div>
 
@@ -180,7 +230,7 @@
   <section id="ciclo" class="section reveal">
 
     <div class="section-head">
-      <span class="section-kicker">02 // Intelligence-Driven Defense</span>
+      <span class="section-kicker">SEC-02 // Intelligence-Driven Defense</span>
       <h2>Ciclo de Inteligência Aplicada</h2>
       <p class="section-sub">
         Como converto telemetria bruta e artefatos de ameaças em regras de detecção e mitigação ativa.
@@ -220,7 +270,7 @@
   <section id="intel-hub" class="section reveal">
 
     <div class="section-head">
-      <span class="section-kicker">03 // Threat Telemetry & Mapping</span>
+      <span class="section-kicker">SEC-03 // Threat Telemetry & Mapping</span>
       <h2>Amostra de Inteligência & Matriz ATT&CK</h2>
       <p class="section-sub">
         Exemplos reais de indicadores extraídos em investigações técnicas e cobertura de técnicas adversárias.
@@ -233,7 +283,7 @@
       <div class="card intel-card">
         <div class="intel-card-head">
           <div>
-            <span class="tlp-mini">TLP:AMBER // EXTRACTED IOCS</span>
+            <span class="tlp-mini">CLASSIFIED // EXTRACTED IOCS</span>
             <h3>Indicadores de Comprometimento</h3>
           </div>
           <button id="defangToggle" class="defang-toggle" type="button" title="Alternar higienização de IOCs">
@@ -318,7 +368,7 @@
   <section id="projetos" class="section reveal">
 
     <div class="section-head">
-      <span class="section-kicker">04 // Threat Research & Labs</span>
+      <span class="section-kicker">SEC-04 // Active Case Files & Labs</span>
       <h2>Investigações & Engenharia de Detecção</h2>
       <p class="section-sub">
         Análises de campanhas maliciosas, extração de IOCs, reconhecimento de superfície e laboratórios de telemetria.
@@ -330,7 +380,7 @@
       <!-- DANABOT -->
       <article class="case">
         <div class="case-head">
-          <span class="case-id">CTI-CASE-01</span>
+          <span class="case-id">CASE FILE // DFIR-001</span>
           <span class="case-badge warn">Malware & C2</span>
         </div>
 
@@ -353,7 +403,7 @@
            href="https://github.com/Pendragon711/danabot-dfir-investigation"
            target="_blank"
            rel="noopener">
-          Ler relatório técnico →
+          ABRIR DOSSIÊ →
         </a>
       </article>
 
@@ -361,7 +411,7 @@
       <!-- XLMRAT -->
       <article class="case">
         <div class="case-head">
-          <span class="case-id">CTI-CASE-02</span>
+          <span class="case-id">CASE FILE // DFIR-002</span>
           <span class="case-badge warn">Kill Chain</span>
         </div>
 
@@ -384,7 +434,7 @@
            href="https://github.com/Pendragon711/xlmrat-dfir-investigation"
            target="_blank"
            rel="noopener">
-          Ler relatório técnico →
+          ABRIR DOSSIÊ →
         </a>
       </article>
 
@@ -392,7 +442,7 @@
       <!-- ODIN RECON -->
       <article class="case">
         <div class="case-head">
-          <span class="case-id">ASM-TOOL-01</span>
+          <span class="case-id">TOOLING // ASM-001</span>
           <span class="case-badge">Attack Surface</span>
         </div>
 
@@ -414,7 +464,7 @@
            href="https://github.com/Pendragon711/odin-recon"
            target="_blank"
            rel="noopener">
-          Acessar repositório →
+          VER REPOSITÓRIO →
         </a>
       </article>
 
@@ -422,7 +472,7 @@
       <!-- WAZUH -->
       <article class="case">
         <div class="case-head">
-          <span class="case-id">DET-LAB-01</span>
+          <span class="case-id">LAB // DET-001</span>
           <span class="case-badge">Detection Eng</span>
         </div>
 
@@ -445,7 +495,7 @@
            href="https://github.com/Pendragon711/soc-lab-wazuh"
            target="_blank"
            rel="noopener">
-          Acessar laboratório →
+          ACESSAR LAB →
         </a>
       </article>
 
@@ -453,8 +503,8 @@
       <!-- SIEM PRÓPRIO -->
       <article class="case">
         <div class="case-head">
-          <span class="case-id">TELEMETRY-01</span>
-          <span class="case-badge">R&D</span>
+          <span class="case-id">R&D // TELEMETRY-001</span>
+          <span class="case-badge">In Progress</span>
         </div>
 
         <h3>Motor de Ingestão & Detecção — Rust & Grafana</h3>
@@ -472,7 +522,7 @@
         </div>
 
         <span class="case-link muted-link">
-          Em desenvolvimento ativo
+          EM DESENVOLVIMENTO ATIVO
         </span>
       </article>
 
@@ -485,7 +535,7 @@
   <section id="experiencia" class="section reveal">
 
     <div class="section-head">
-      <span class="section-kicker">05 // Histórico Operacional</span>
+      <span class="section-kicker">SEC-05 // Histórico Operacional</span>
       <h2>Experiência Profissional</h2>
       <p class="section-sub">
         Atuação em inteligência de ameaças, segurança de aplicações (WAF), operações defensivas e redes.
@@ -557,7 +607,7 @@
   <section id="competencias" class="section reveal">
 
     <div class="section-head">
-      <span class="section-kicker">06 // Capacidades & Credenciais</span>
+      <span class="section-kicker">SEC-06 // Arsenal & Credenciais</span>
       <h2>Stack Técnica & Formação</h2>
     </div>
 
@@ -652,8 +702,8 @@
   <section id="contato" class="section reveal">
 
     <div class="section-head">
-      <span class="section-kicker">07 // Canal Direto</span>
-      <h2>Vamos conversar</h2>
+      <span class="section-kicker">SEC-07 // Encrypted Uplink</span>
+      <h2>Canais Seguros de Comunicação</h2>
       <p class="section-sub">
         Disponível para oportunidades e projetos em Cyber Threat Intelligence (CTI), Threat Hunting e Detection Engineering.
       </p>
@@ -687,10 +737,10 @@
 
 <footer class="footer">
   <p>
-    © <span id="year"></span> Daniel Widal · Cyber Threat Intelligence & Threat Hunting
+    ◈ "TURN RAW THREAT DATA INTO ACTIONABLE DEFENSE." ◈
   </p>
   <p class="muted small">
-    "Turn raw threat data into actionable defense."
+    © <span id="year"></span> OP-PENDRAGON // DANIEL WIDAL · ALL TELEMETRY LOGGED
   </p>
 </footer>
 

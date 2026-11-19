@@ -1,5 +1,5 @@
 // =========================================
-// DEEP INTEL — Threat Intel Mesh & UI
+// OP-PENDRAGON — Threat Intel Mesh & UI
 // =========================================
 
 const $ = (sel, ctx = document) => ctx.querySelector(sel);
@@ -9,7 +9,48 @@ const $$ = (sel, ctx = document) => [...ctx.querySelectorAll(sel)];
 const yearEl = $('#year');
 if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-// ---------- MALHA DE THREAT INTELLIGENCE (Canvas Leve) ----------
+// ---------- EFEITO DE DIGITAÇÃO NO TERMINAL DO HERO ----------
+(function initHeroTyping() {
+  const target = $('#typedCmd');
+  if (!target) return;
+
+  const commands = [
+    'hunt.py --extract-iocs --mitre ATT&CK --hunt',
+    'tshark -r danabot_capture.pcap -Y "http.request"',
+    'yara -r rules/xlmrat_dropper.yar /quarantine/',
+    'odin-recon -d target.io --waf-detect --silent'
+  ];
+
+  let cmdIdx = 0;
+  let charIdx = 0;
+  let deleting = false;
+
+  function tick() {
+    const current = commands[cmdIdx];
+    if (!deleting) {
+      target.textContent = current.slice(0, ++charIdx);
+      if (charIdx === current.length) {
+        deleting = true;
+        setTimeout(tick, 2400);
+        return;
+      }
+      setTimeout(tick, 45);
+    } else {
+      target.textContent = current.slice(0, --charIdx);
+      if (charIdx === 0) {
+        deleting = false;
+        cmdIdx = (cmdIdx + 1) % commands.length;
+        setTimeout(tick, 400);
+        return;
+      }
+      setTimeout(tick, 22);
+    }
+  }
+
+  tick();
+})();
+
+// ---------- MALHA DE THREAT INTELLIGENCE (Canvas Preto & Dourado) ----------
 (function initThreatMesh() {
   const canvas = document.getElementById('particles');
   if (!canvas) return;
@@ -59,7 +100,7 @@ if (yearEl) yearEl.textContent = new Date().getFullYear();
 
     nodes = Array.from({ length: count }, (_, idx) => {
       const isHub = idx < 8;
-      const isAmber = isHub ? idx % 2 === 0 : Math.random() < 0.22;
+      const isBrightGold = isHub ? idx % 2 === 0 : Math.random() < 0.25;
       return {
         x: Math.random() * w,
         y: Math.random() * h,
@@ -67,7 +108,7 @@ if (yearEl) yearEl.textContent = new Date().getFullYear();
         vy: (Math.random() - 0.5) * (isHub ? 0.1 : 0.18),
         r: isHub ? 3.2 : Math.random() * 1.3 + 1.1,
         isHub,
-        isAmber,
+        isBrightGold,
         tag: isHub ? INTEL_TAGS[idx % INTEL_TAGS.length] : null,
         ping: 0
       };
@@ -91,7 +132,7 @@ if (yearEl) yearEl.textContent = new Date().getFullYear();
             to: b,
             progress: 0,
             speed: 0.013 + Math.random() * 0.008,
-            isAmber: a.isAmber || b.isAmber
+            isBrightGold: a.isBrightGold || b.isBrightGold
           });
           lastPulseTime = now;
           return;
@@ -123,12 +164,12 @@ if (yearEl) yearEl.textContent = new Date().getFullYear();
 
         if (d2 < LINK_DIST_SQ) {
           const ratio = 1 - d2 / LINK_DIST_SQ;
-          const isThreatEdge = a.isAmber && b.isAmber;
-          const alpha = ratio * (isThreatEdge ? 0.34 : 0.25);
+          const isHotEdge = a.isBrightGold && b.isBrightGold;
+          const alpha = ratio * (isHotEdge ? 0.32 : 0.20);
 
-          ctx.strokeStyle = isThreatEdge
-            ? `rgba(245, 158, 11, ${alpha})`
-            : `rgba(34, 211, 238, ${alpha})`;
+          ctx.strokeStyle = isHotEdge
+            ? `rgba(245, 215, 127, ${alpha})`
+            : `rgba(212, 175, 55, ${alpha})`;
           ctx.lineWidth = (a.isHub || b.isHub) ? 1.0 : 0.7;
 
           ctx.beginPath();
@@ -143,8 +184,8 @@ if (yearEl) yearEl.textContent = new Date().getFullYear();
         const mdy = a.y - mouse.y;
         const md2 = mdx * mdx + mdy * mdy;
         if (md2 < 28000) {
-          const mAlpha = (1 - md2 / 28000) * 0.32;
-          ctx.strokeStyle = `rgba(34, 211, 238, ${mAlpha})`;
+          const mAlpha = (1 - md2 / 28000) * 0.34;
+          ctx.strokeStyle = `rgba(245, 215, 127, ${mAlpha})`;
           ctx.lineWidth = 0.85;
           ctx.beginPath();
           ctx.moveTo(a.x, a.y);
@@ -169,19 +210,19 @@ if (yearEl) yearEl.textContent = new Date().getFullYear();
       const py = p.from.y + (p.to.y - p.from.y) * p.progress;
 
       ctx.beginPath();
-      ctx.fillStyle = p.isAmber
-        ? 'rgba(245, 158, 11, 0.95)'
-        : 'rgba(34, 211, 238, 0.95)';
+      ctx.fillStyle = p.isBrightGold
+        ? 'rgba(245, 215, 127, 0.95)'
+        : 'rgba(212, 175, 55, 0.92)';
       ctx.arc(px, py, 2.5, 0, Math.PI * 2);
       ctx.fill();
     }
 
     for (const n of nodes) {
-      const rgb = n.isAmber ? '245, 158, 11' : '34, 211, 238';
+      const rgb = n.isBrightGold ? '245, 215, 127' : '212, 175, 55';
 
       if (n.isHub || n.ping > 0) {
         const ringRadius = n.r + 5 + n.ping * 5;
-        const ringAlpha = n.isHub ? 0.4 + n.ping * 0.4 : n.ping * 0.55;
+        const ringAlpha = n.isHub ? 0.38 + n.ping * 0.4 : n.ping * 0.55;
         ctx.beginPath();
         ctx.strokeStyle = `rgba(${rgb}, ${ringAlpha})`;
         ctx.lineWidth = 1.0;
@@ -190,12 +231,12 @@ if (yearEl) yearEl.textContent = new Date().getFullYear();
       }
 
       ctx.beginPath();
-      ctx.fillStyle = `rgba(${rgb}, ${n.isHub ? 0.92 : 0.68})`;
+      ctx.fillStyle = `rgba(${rgb}, ${n.isHub ? 0.92 : 0.65})`;
       ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
       ctx.fill();
 
       if (n.tag) {
-        ctx.fillStyle = `rgba(${rgb}, ${0.48 + n.ping * 0.4})`;
+        ctx.fillStyle = `rgba(${rgb}, ${0.52 + n.ping * 0.4})`;
         ctx.fillText(n.tag, n.x + 11, n.y);
       }
     }
@@ -258,9 +299,9 @@ if (defangBtn && iocList) {
   defangBtn.addEventListener('click', () => {
     defanged = !defanged;
     defangBtn.textContent = `Defang: ${defanged ? 'ON' : 'OFF'}`;
-    defangBtn.style.borderColor = defanged ? 'rgba(245, 158, 11, .35)' : 'rgba(244, 63, 94, .5)';
-    defangBtn.style.color = defanged ? 'var(--amber)' : 'var(--rose)';
-    defangBtn.style.background = defanged ? 'var(--amber-dim)' : 'rgba(244, 63, 94, .14)';
+    defangBtn.style.borderColor = defanged ? 'var(--border-2)' : 'rgba(244, 63, 94, 0.5)';
+    defangBtn.style.color = defanged ? 'var(--gold-hi)' : 'var(--rose)';
+    defangBtn.style.background = defanged ? 'var(--gold-dim)' : 'rgba(244, 63, 94, 0.14)';
     applyDefang();
   });
 }
